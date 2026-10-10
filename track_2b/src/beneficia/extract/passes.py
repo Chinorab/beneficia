@@ -166,6 +166,15 @@ class RawRow:
     line_id: str  # P<page>.L<line>
 
 
+def _quantity_on_line(doc: Document, line_id: str, units) -> bool:
+    m = re.match(r"P(\d+)\.L(\d+)$", line_id)
+    text = doc.line(int(m.group(1)), int(m.group(2))) if m else None
+    if not text or not isinstance(units, int):
+        return False
+    digits = re.findall(r"\d[\d'’]*", text)
+    return any(int(re.sub(r"\D", "", d)) == units for d in digits)
+
+
 def _wants(p: Pass, window_text: str) -> bool:
     if not p.keywords:
         return True
@@ -182,8 +191,9 @@ def run_passes(doc: Document, complete: Callable[..., dict],
             if p.line_filter is not None:
                 merged = merge_continuations(text.splitlines())
                 kept = [ln for ln in merged if p.line_filter(ln.split(" ", 1)[1] if " " in ln else "")]
-                if p.skip_covered:
-                    covered = {r.line_id for r in rows if r.pass_name.startswith("holdings")}
+                if p.skip_covered:  # a line counts as read only if the returned quantity is written on it
+                    covered = {r.line_id for r in rows if r.pass_name.startswith("holdings")
+                               and _quantity_on_line(doc, r.line_id, r.values[2])}
                     kept = [ln for ln in kept if ln.split(" ", 1)[0] not in covered]
                 if not kept:
                     continue

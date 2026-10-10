@@ -63,3 +63,11 @@ def test_total_must_be_on_a_capital_line_and_agreements_need_wording():
     r.add(row("agreements", ["other", "Petra Imhof", "Alpenblick Holding AG", None], "P1.L3"))
     res = r.finish()
     assert {d["reason"] for d in res.dropped} == {"total_not_on_capital_line", "no_agreement_wording"}
+
+
+def test_every_pass_has_a_resolver_handler():
+    from beneficia.extract.passes import PASSES
+    r = Resolver(docs(), None)
+    for p in PASSES:
+        values = [None] * len(p.columns)
+        r.add(RawRow(p.name, "D1", values, "P1.L1"))  # must not raise

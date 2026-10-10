@@ -124,7 +124,7 @@ class Resolver:
         if self.docs[ref.doc].line(ref.page, ref.line) is None:
             return self._drop(row, "line_not_found")
         ctx = self._context(ref)
-        handler = getattr(self, "_" + row.pass_name.removesuffix("_prose"))
+        handler = getattr(self, "_holdings" if row.pass_name.startswith("holdings") else "_" + row.pass_name)
         if handler(row, ref, ctx) is not False:
             self.accepted[row.pass_name] += 1
 
@@ -143,13 +143,19 @@ class Resolver:
         if seat:
             party.fields.setdefault("seat", Field(seat, ref))
         if total is not None:
-            line = self.docs[ref.doc].line(ref.page, ref.line) or ""
-            if total <= 0 or total not in numbers_on(line):
-                self._drop(row, "total_not_on_line")
-            elif not CAPITAL_LINE.search(line):
+            # the total must sit on a capital line: the cited one, or the line just after or before it
+            # (models often cite the heading that names the company); the citation moves to that line
+            doc = self.docs[ref.doc]
+            hit = None
+            for delta in (0, 1, -1):
+                line = doc.line(ref.page, ref.line + delta) or ""
+                if total > 0 and total in numbers_on(line) and CAPITAL_LINE.search(line):
+                    hit = LineRef(ref.doc, ref.page, ref.line + delta)
+                    break
+            if hit is None:
                 self._drop(row, "total_not_on_capital_line")  # e.g. a holding row read as the company's capital
             else:
-                self.totals.setdefault(party.id, []).append((total, kind or "shares", ref))
+                self.totals.setdefault(party.id, []).append((total, kind or "shares", hit))
 
     def _holdings(self, row, ref, ctx):
         holder, company, units, percent, held_for, basis = row.values
@@ -187,8 +193,16 @@ class Resolver:
         comp = self.reg.find(company) or self._target_alias(company)
         if comp is None:
             if not name_on(company, self._context(ref, 40)):
-                return self._drop(row, "company_not_in_document")
-            comp = self.reg.get_or_create(company, ref, "legal_entity")
+                # same holder and quantity already read on this very line: the company name was miscopied
+                hid = self.reg.find(holder)
+                same = next((x for x in self.holdings if hid and x.holder == hid.id and x.units_held == units
+                             and x.ref and (x.ref.doc, x.ref.page, x.ref.line) == (ref.doc, ref.page, ref.line)),
+                            None)
+                if same is None:
+                    return self._drop(row, "company_not_in_document")
+                comp = self.reg.parties[same.company]
+            else:
+                comp = self.reg.get_or_create(company, ref, "legal_entity")
         h = self.reg.get_or_create(holder, ref)
         principal = None
         if held_for:
@@ -239,6 +253,27 @@ class Resolver:
                 if name_on(val, ctx) or any(n in numbers_on(ctx) for n in numbers_on(val)):
                     p.fields[key] = Field(val, ref)
 
+    def _confirm_missing_totals(self, holdings: list[Holding]) -> None:
+        """Cross-check, not extraction: when the model gave no total for a company, accept the sum of the
+        holdings read for it only if that very number is written on a capital line of the same document."""
+        by_company: dict[str, list[Holding]] = {}
+        for h in holdings:
+            if h.units_held and h.basis in ("capital", "both"):
+                by_company.setdefault(h.company, []).append(h)
+        for comp, hs in by_company.items():
+            party = self.reg.parties[comp]
+            if party.total_capital is not None:
+                continue
+            total = sum(h.units_held for h in hs)
+            for doc_id in {h.ref.doc for h in hs if h.ref}:
+                doc = self.docs[doc_id]
+                hit = next((LineRef(doc_id, p.number, i) for p in doc.pages for i, line in enumerate(p.lines, 1)
+                            if CAPITAL_LINE.search(line) and total in numbers_on(line)), None)
+                if hit:
+                    party.total_capital, party.total_ref = total, hit
+                    self.accepted["total_confirmed_by_register_sum"] += 1
+                    break
+
     def finish(self) -> Resolution:
         target = None
         if self.target_name:
@@ -256,13 +291,17 @@ class Resolver:
             if votes:
                 party.total_votes = votes[0][0]
         # the same holding cited twice (register and agreement, or window overlap) is counted once
-        seen, unique = set(), []
+        # (the version that names a principal wins; identical lots on different lines are merged, see report)
+        merged: dict[tuple, Holding] = {}
         for h in self.holdings:
-            key = (h.holder, h.company, h.units_held, h.written_percent, h.basis, h.held_for)
-            if key in seen:
-                continue
-            seen.add(key)
-            unique.append(h)
+            key = (h.holder, h.company, h.units_held, h.written_percent)
+            kept = merged.get(key)
+            if kept is None:
+                merged[key] = h
+            elif h.held_for and not kept.held_for:
+                kept.held_for = h.held_for
+        unique = list(merged.values())
+        self._confirm_missing_totals(unique)
         # a voting agreement binds a shareholder; anything else is not a voting agreement we can use
         agreements = []
         for ag in self.agreements:
