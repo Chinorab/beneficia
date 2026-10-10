@@ -37,6 +37,7 @@ class Pass:
     example: tuple[str, str] | None = None  # invented one-shot example (user text, expected JSON)
     line_filter: Callable[[str], bool] | None = None  # send only matching lines of the window
     skip_covered: bool = False  # drop lines already cited by an earlier holdings pass
+    with_heading: bool = False  # prepend the first lines of the window as non citable context
 
     def schema(self, line_ids: list[str]) -> dict:
         row = {"type": "array", "prefixItems": [*self.columns, {"enum": line_ids}],
@@ -142,9 +143,24 @@ def _is_register_row(line: str) -> bool:
 
 
 _holdings = next(p for p in PASSES if p.name == "holdings")
-PASSES = PASSES[:2] + (
+RETRY_INSTRUCTION = (
+    "Each numbered line is one row of the share register of the company named in the context lines. For each "
+    "numbered line output {\"h\": [[holder, company, units_held, percent_written, held_for, basis, line_id], ...]}. "
+    "holder is the person or company named at the start of that line. units_held is the number of shares or "
+    "quotas on that line, never a postal code (4 digits before a town name), a year or an amount in francs.")
+CAPITAL = Pass(
+    "capital", "k",
+    "Each numbered line describes the capital of a company. Output {\"k\": [[company, total_units, unit_kind, "
+    "line_id], ...]}. company is the company whose capital it is, named on the line or in the context lines. "
+    "total_units is the number of shares, quotas or votes into which the capital is divided (for example "
+    "'divided into 1'000 registered shares' gives 1000), never an amount in francs.",
+    (NSTR, NINT, {"enum": ["shares", "quotas", "votes", None]}), (),
+    line_filter=lambda line: bool(CAPITAL_LINE.search(line)), with_heading=True)
+
+PASSES = PASSES[:1] + (CAPITAL,) + PASSES[1:2] + (
     replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding, example=PROSE_EXAMPLE),
-    replace(_holdings, name="holdings_retry", keywords=(), line_filter=_is_register_row, skip_covered=True),
+    replace(_holdings, name="holdings_retry", keywords=(), line_filter=_is_register_row, skip_covered=True,
+            with_heading=True, instruction=RETRY_INSTRUCTION),
 ) + PASSES[2:]
 
 
@@ -209,7 +225,7 @@ def run_passes(doc: Document, complete: Callable[..., dict],
                 if not kept:
                     continue
                 ids = [ln.split(" ", 1)[0] for ln in kept]
-                if p.skip_covered:  # give the register heading as context; only the kept lines can be cited
+                if p.with_heading:  # give the register heading as context; only the kept lines can be cited
                     head = [ln for ln in text.splitlines()[:3] if ln.split(" ", 1)[0] not in ids]
                     kept = [f"(context) {ln.split(' ', 1)[1]}" for ln in head if " " in ln] + kept
                 text = "\n".join(kept)

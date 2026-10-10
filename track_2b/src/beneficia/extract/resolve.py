@@ -167,19 +167,38 @@ class Resolver:
         if seat:
             party.fields.setdefault("seat", Field(seat, ref))
         if total is not None:
-            # the total must sit on a capital line: the cited one, or the line just after or before it
-            # (models often cite the heading that names the company); the citation moves to that line
-            doc = self.docs[ref.doc]
-            hit = None
-            for delta in (0, 1, -1):
-                line = doc.line(ref.page, ref.line + delta) or ""
-                if total > 0 and total in numbers_on(line) and CAPITAL_LINE.search(line):
-                    hit = LineRef(ref.doc, ref.page, ref.line + delta)
-                    break
-            if hit is None:
-                self._drop(row, "total_not_on_capital_line")  # e.g. a holding row read as the company's capital
-            else:
-                self.totals.setdefault(party.id, []).append((total, kind or "shares", hit))
+            self._add_total(party, total, kind, ref, row)
+
+    def _add_total(self, party, total, kind, ref, row) -> None:
+        # the total must sit on a capital line: the cited one, or the line just after or before it
+        # (models often cite the heading that names the company); the citation moves to that line
+        doc = self.docs[ref.doc]
+        hit = None
+        for delta in (0, 1, -1):
+            line = doc.line(ref.page, ref.line + delta) or ""
+            if total > 0 and total in numbers_on(line) and CAPITAL_LINE.search(line):
+                hit = LineRef(ref.doc, ref.page, ref.line + delta)
+                break
+        if hit is None:
+            self._drop(row, "total_not_on_capital_line")  # e.g. a holding row read as the company's capital
+        else:
+            self.totals.setdefault(party.id, []).append((total, kind or "shares", hit))
+
+    def _capital(self, row, ref, ctx):
+        company, total, kind = row.values
+        if total is None:
+            return self._drop(row, "total_missing")
+        line = self.docs[ref.doc].line(ref.page, ref.line) or ""
+        party = None
+        if company and (name_full_on(company, ctx) or name_full_on(company, register_owner(self.docs[ref.doc], ref) or "")):
+            party = self.reg.find(company) or self._target_alias(company)
+            if party is None and _entity(company):
+                party = self.reg.get_or_create(company, ref, "legal_entity")
+        if party is None:
+            party = self._party_named_in(line) or self._party_named_in(register_owner(self.docs[ref.doc], ref) or "")
+        if party is None:
+            return self._drop(row, "company_not_resolved")
+        self._add_total(party, total, kind, ref, row)
 
     def _holdings(self, row, ref, ctx):
         holder, company, units, percent, held_for, basis = row.values
