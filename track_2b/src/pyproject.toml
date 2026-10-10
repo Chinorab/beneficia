@@ -1,0 +1,10 @@
+[project]
+name = "beneficia"
+version = "0.1.0"
+description = "Offline draft of Swiss beneficial owner declarations (TJPG/TJPV) with Apertus"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
