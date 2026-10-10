@@ -1,0 +1,83 @@
+{
+ "case_id": "case12_scan_de",
+ "generated_at": "2026-10-10T17:06:24",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "garage_aaretal_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "aktienbuch_scan.jpg",
+   "kind": "image",
+   "language": "unknown",
+   "readable": false,
+   "error": "OCR engine not installed",
+   "pages": 0,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "garage_aaretal_ag",
+   "kind": "legal_entity",
+   "name": "Garage Aaretal AG",
+   "refs": [],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [],
+ "agreements": [],
+ "board": [],
+ "findings": [],
+ "review": [
+  {
+   "reason": "no_share_information",
+   "article": "TJPV art. 1",
+   "parties": [
+    "garage_aaretal_ag"
+   ],
+   "refs": [],
+   "detail": {}
+  },
+  {
+   "reason": "unreadable_document",
+   "article": "TJPG art. 7",
+   "parties": [],
+   "refs": [],
+   "detail": {
+    "doc": "aktienbuch_scan.jpg",
+    "error": "OCR engine not installed"
+   }
+  }
+ ],
+ "missing": [
+  {
+   "what": "share_register",
+   "about": "garage_aaretal_ag",
+   "reason": "no_share_information"
+  },
+  {
+   "what": "readable_copy",
+   "about": "D1",
+   "reason": "OCR engine not installed"
+  }
+ ],
+ "sources": {},
+ "dropped_items": {
+  "count": 0,
+  "items": [],
+  "accepted": {}
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {},
+  "total_s": 0.0,
+  "model_calls": 0,
+  "model_seconds": 0
+ },
+ "model_responses": []
+}

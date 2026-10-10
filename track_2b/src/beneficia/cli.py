@@ -28,7 +28,17 @@ def main(argv=None) -> int:
     e.add_argument("cases_dir", type=Path, nargs="?", default=config.CASES_DIR)
     e.add_argument("--out", type=Path, default=config.OUTPUT_DIR)
     e.add_argument("--only", nargs="*")
+    r = sub.add_parser("replay", help="re-run the rules on recorded model outputs, no model needed")
+    r.add_argument("recorded_dir", type=Path, help="an eval output folder with <case>/result.json")
+    r.add_argument("cases_dir", type=Path, nargs="?", default=config.CASES_DIR)
+    r.add_argument("--out", type=Path, default=config.OUTPUT_DIR / "replay")
     args = ap.parse_args(argv)
+
+    if args.cmd == "replay":
+        from beneficia.evaluate import replay_run
+        summary = replay_run(args.cases_dir, args.recorded_dir, args.out)
+        print(json.dumps(summary["totals"], indent=1))
+        return 0
 
     client = LLMClient()
     if not client.health():

@@ -1,0 +1,395 @@
+{
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "machine": {
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel"
+ },
+ "totals": {
+  "cases": 14,
+  "cases_correct": 13,
+  "owners_correct": 13,
+  "review_recall_complete": 14,
+  "silent_errors": 0,
+  "citation_validity": 1.0,
+  "holdings": {
+   "all": {
+    "precision": 0.978,
+    "recall": 0.936,
+    "tp": 44,
+    "predicted": 45,
+    "expected": 47
+   },
+   "de": {
+    "precision": 1.0,
+    "recall": 0.917,
+    "tp": 22,
+    "predicted": 22,
+    "expected": 24
+   },
+   "fr": {
+    "precision": 0.941,
+    "recall": 0.941,
+    "tp": 16,
+    "predicted": 17,
+    "expected": 17
+   },
+   "it": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "tp": 6,
+    "predicted": 6,
+    "expected": 6
+   }
+  },
+  "seconds_per_case_mean": 174.3,
+  "seconds_per_case_max": 316.8
+ },
+ "cases": [
+  {
+   "holdings": {
+    "tp": 3,
+    "predicted": 3,
+    "expected": 3,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 4,
+    "valid": 4
+   },
+   "case_correct": true,
+   "case": "case01_direct_de",
+   "language": "de",
+   "seconds": 173.8,
+   "documents": 1,
+   "model_calls": 5
+  },
+  {
+   "holdings": {
+    "tp": 4,
+    "predicted": 4,
+    "expected": 4,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 6,
+    "valid": 6
+   },
+   "case_correct": true,
+   "case": "case02_indirect_fr",
+   "language": "fr",
+   "seconds": 254.2,
+   "documents": 2,
+   "model_calls": 10
+  },
+  {
+   "holdings": {
+    "tp": 5,
+    "predicted": 5,
+    "expected": 5,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 8,
+    "valid": 8
+   },
+   "case_correct": true,
+   "case": "case03_two_level_de",
+   "language": "de",
+   "seconds": 316.8,
+   "documents": 3,
+   "model_calls": 15
+  },
+  {
+   "holdings": {
+    "tp": 3,
+    "predicted": 3,
+    "expected": 3,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 5,
+    "valid": 5
+   },
+   "case_correct": true,
+   "case": "case04_pact_de",
+   "language": "de",
+   "seconds": 204.2,
+   "documents": 2,
+   "model_calls": 9
+  },
+  {
+   "holdings": {
+    "tp": 2,
+    "predicted": 2,
+    "expected": 2,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 3,
+    "valid": 3
+   },
+   "case_correct": true,
+   "case": "case05_fiduciary_fr",
+   "language": "fr",
+   "seconds": 154.8,
+   "documents": 1,
+   "model_calls": 6
+  },
+  {
+   "holdings": {
+    "tp": 4,
+    "predicted": 4,
+    "expected": 4,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 5,
+    "valid": 5
+   },
+   "case_correct": true,
+   "case": "case06_below_it",
+   "language": "it",
+   "seconds": 139.7,
+   "documents": 1,
+   "model_calls": 4
+  },
+  {
+   "holdings": {
+    "tp": 5,
+    "predicted": 5,
+    "expected": 5,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 7,
+    "valid": 7
+   },
+   "case_correct": true,
+   "case": "case07_nobody_de",
+   "language": "de",
+   "seconds": 192.1,
+   "documents": 2,
+   "model_calls": 7
+  },
+  {
+   "holdings": {
+    "tp": 4,
+    "predicted": 4,
+    "expected": 4,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 7,
+    "valid": 7
+   },
+   "case_correct": true,
+   "case": "case08_trap_fr",
+   "language": "fr",
+   "seconds": 190.8,
+   "documents": 2,
+   "model_calls": 9
+  },
+  {
+   "holdings": {
+    "tp": 2,
+    "predicted": 2,
+    "expected": 2,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 3,
+    "valid": 3
+   },
+   "case_correct": true,
+   "case": "case09_inconsistent_de",
+   "language": "de",
+   "seconds": 97.6,
+   "documents": 1,
+   "model_calls": 4
+  },
+  {
+   "holdings": {
+    "tp": 2,
+    "predicted": 2,
+    "expected": 2,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 3,
+    "valid": 3
+   },
+   "case_correct": true,
+   "case": "case10_foreign_fr",
+   "language": "fr",
+   "seconds": 111.3,
+   "documents": 1,
+   "model_calls": 5
+  },
+  {
+   "holdings": {
+    "tp": 2,
+    "predicted": 2,
+    "expected": 2,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 4,
+    "valid": 4
+   },
+   "case_correct": true,
+   "case": "case11_docx_it",
+   "language": "it",
+   "seconds": 128.7,
+   "documents": 1,
+   "model_calls": 6
+  },
+  {
+   "holdings": {
+    "tp": 0,
+    "predicted": 0,
+    "expected": 2,
+    "false_positives": [],
+    "missed": [
+     "('monika wenger', 'aaretal garage', ('u', 30), None)",
+     "('thomas wenger', 'aaretal garage', ('u', 70), None)"
+    ]
+   },
+   "owners_correct": false,
+   "owner_errors": [
+    "missing Thomas Wenger",
+    "missing Monika Wenger"
+   ],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 0,
+    "valid": 0
+   },
+   "case_correct": false,
+   "case": "case12_scan_de",
+   "language": "de",
+   "seconds": 0.0,
+   "documents": 1,
+   "model_calls": 0
+  },
+  {
+   "holdings": {
+    "tp": 4,
+    "predicted": 4,
+    "expected": 4,
+    "false_positives": [],
+    "missed": []
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 6,
+    "valid": 6
+   },
+   "case_correct": true,
+   "case": "case13_chain_pact_de",
+   "language": "de",
+   "seconds": 205.8,
+   "documents": 1,
+   "model_calls": 7
+  },
+  {
+   "holdings": {
+    "tp": 4,
+    "predicted": 5,
+    "expected": 5,
+    "false_positives": [
+     "('berger thomas', 'jorat participations', ('u', 80), None)"
+    ],
+    "missed": [
+     "('fiduciaire leman', 'jorat participations', ('u', 80), 'berger thomas')"
+    ]
+   },
+   "owners_correct": true,
+   "owner_errors": [],
+   "review_recall_complete": true,
+   "missing_review_reasons": [],
+   "silent_errors": 0,
+   "citations": {
+    "total": 7,
+    "valid": 7
+   },
+   "case_correct": true,
+   "case": "case14_chain_fiduciary_fr",
+   "language": "fr",
+   "seconds": 269.8,
+   "documents": 1,
+   "model_calls": 8
+  }
+ ]
+}

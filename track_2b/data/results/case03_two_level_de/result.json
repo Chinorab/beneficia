@@ -1,0 +1,765 @@
+{
+ "case_id": "case03_two_level_de",
+ "generated_at": "2026-10-10T16:46:05",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "engelberg_bergbahnen_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "01_aktienbuch_bergbahnen.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D2",
+   "filename": "02_aktienbuch_titlis.txt",
+   "kind": "txt",
+   "language": "unknown",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D3",
+   "filename": "03_gesellschafter_alpina.pdf",
+   "kind": "pdf_text",
+   "language": "unknown",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "engelberg_bergbahnen_ag",
+   "kind": "legal_entity",
+   "name": "Engelberg Bergbahnen AG",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Engelberg",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 10000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "titlis_invest_ag",
+   "kind": "legal_entity",
+   "name": "Titlis Invest AG",
+   "refs": [
+    "D1.P1.L4",
+    "D2.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L4"
+    },
+    "seat": {
+     "value": "Engelberg",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D2.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "peter_amstutz",
+   "kind": "natural_person",
+   "name": "Peter Amstutz",
+   "refs": [
+    "D1.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "01.04.1960",
+     "ref": "D1.P1.L5"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L5"
+    },
+    "residence": {
+     "value": "Stans",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "alpina_familienholding_gmbh",
+   "kind": "legal_entity",
+   "name": "Alpina Familienholding GmbH",
+   "refs": [
+    "D2.P1.L4",
+    "D3.P1.L3",
+    "D3.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "GmbH",
+     "ref": "D2.P1.L4"
+    },
+    "seat": {
+     "value": "Engelberg",
+     "ref": "D2.P1.L4"
+    }
+   },
+   "total_capital": 200,
+   "total_votes": null,
+   "total_ref": "D3.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "karin_odermatt",
+   "kind": "natural_person",
+   "name": "Karin Odermatt",
+   "refs": [
+    "D2.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "12.12.1985",
+     "ref": "D2.P1.L5"
+    },
+    "nationality": {
+     "value": "Schweizerin",
+     "ref": "D2.P1.L5"
+    },
+    "residence": {
+     "value": "Luzern",
+     "ref": "D2.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "martin_odermatt",
+   "kind": "natural_person",
+   "name": "Martin Odermatt",
+   "refs": [
+    "D3.P1.L4"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "05.06.1958",
+     "ref": "D3.P1.L4"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D3.P1.L4"
+    },
+    "residence": {
+     "value": "Engelberg",
+     "ref": "D3.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "peter_amstutz",
+   "company": "engelberg_bergbahnen_ag",
+   "units_held": 2000,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "titlis_invest_ag",
+   "company": "engelberg_bergbahnen_ag",
+   "units_held": 8000,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 4,
+    "den": 5,
+    "percent": 80.0
+   },
+   "vote_share": {
+    "num": 4,
+    "den": 5,
+    "percent": 80.0
+   }
+  },
+  {
+   "holder": "karin_odermatt",
+   "company": "titlis_invest_ag",
+   "units_held": 350,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L5",
+   "capital_share": {
+    "num": 7,
+    "den": 20,
+    "percent": 35.0
+   },
+   "vote_share": {
+    "num": 7,
+    "den": 20,
+    "percent": 35.0
+   }
+  },
+  {
+   "holder": "alpina_familienholding_gmbh",
+   "company": "titlis_invest_ag",
+   "units_held": 650,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L4",
+   "capital_share": {
+    "num": 13,
+    "den": 20,
+    "percent": 65.0
+   },
+   "vote_share": {
+    "num": 13,
+    "den": 20,
+    "percent": 65.0
+   }
+  },
+  {
+   "holder": "martin_odermatt",
+   "company": "alpina_familienholding_gmbh",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D3.P1.L4",
+   "capital_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [],
+ "findings": [
+  {
+   "person": "martin_odermatt",
+   "basis": "indirect",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "indirect",
+    "holding_or_other": "holding"
+   },
+   "band": "75_100",
+   "chain": [
+    "martin_odermatt",
+    "alpina_familienholding_gmbh",
+    "titlis_invest_ag",
+    "engelberg_bergbahnen_ag"
+   ],
+   "chain_info_required": true,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 2",
+    "TJPV art. 12",
+    "TJPV art. 13",
+    "TJPV art. 13 para. 3",
+    "TJPV art. 15"
+   ],
+   "refs": [
+    "D3.P1.L4",
+    "D3.P1.L3",
+    "D2.P1.L4",
+    "D2.P1.L3",
+    "D1.P1.L4",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 4,
+    "den": 5,
+    "percent": 80.0
+   }
+  }
+ ],
+ "review": [],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "01_aktienbuch_bergbahnen.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Engelberg Bergbahnen AG"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "01_aktienbuch_bergbahnen.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Das Aktienkapital ist eingeteilt in 10'000 Namenaktien."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "01_aktienbuch_bergbahnen.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Titlis Invest AG, Engelberg 8'000 Aktien"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "01_aktienbuch_bergbahnen.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Peter Amstutz, geb. 01.04.1960, Schweizer, Stans 2'000 Aktien"
+  },
+  "D2.P1.L2": {
+   "doc": "D2",
+   "filename": "02_aktienbuch_titlis.txt",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Titlis Invest AG"
+  },
+  "D2.P1.L3": {
+   "doc": "D2",
+   "filename": "02_aktienbuch_titlis.txt",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital CHF 100'000, eingeteilt in 1'000 Namenaktien."
+  },
+  "D2.P1.L4": {
+   "doc": "D2",
+   "filename": "02_aktienbuch_titlis.txt",
+   "page": 1,
+   "line": 4,
+   "text": "Alpina Familienholding GmbH, Engelberg | 650"
+  },
+  "D2.P1.L5": {
+   "doc": "D2",
+   "filename": "02_aktienbuch_titlis.txt",
+   "page": 1,
+   "line": 5,
+   "text": "Karin Odermatt, geb. 12.12.1985, Schweizerin, Luzern | 350"
+  },
+  "D3.P1.L2": {
+   "doc": "D3",
+   "filename": "03_gesellschafter_alpina.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Gesellschafterliste der Alpina Familienholding GmbH"
+  },
+  "D3.P1.L3": {
+   "doc": "D3",
+   "filename": "03_gesellschafter_alpina.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Stammkapital CHF 20'000, eingeteilt in 200 Stammanteile."
+  },
+  "D3.P1.L4": {
+   "doc": "D3",
+   "filename": "03_gesellschafter_alpina.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Martin Odermatt, geb. 05.06.1958, Schweizer, Engelberg: 200 Stammanteile"
+  }
+ },
+ "dropped_items": {
+  "count": 3,
+  "items": [
+   {
+    "pass": "companies",
+    "ref": "D1.P1.L4",
+    "values": [
+     "Titlis Invest AG",
+     "AG",
+     "Engelberg",
+     8000,
+     "shares"
+    ],
+    "reason": "total_not_on_capital_line"
+   },
+   {
+    "pass": "companies",
+    "ref": "D2.P1.L4",
+    "values": [
+     "Alpina Familienholding GmbH",
+     "GmbH",
+     "Engelberg",
+     650,
+     "quotas"
+    ],
+    "reason": "total_not_on_capital_line"
+   },
+   {
+    "pass": "holdings_prose",
+    "ref": "D3.P1.L2",
+    "values": [
+     "Alpina Familienholding GmbH",
+     "Alpina Familienholding GmbH",
+     200,
+     null,
+     null,
+     "capital"
+    ],
+    "reason": "self_holding"
+   }
+  ],
+  "accepted": {
+   "companies": 5,
+   "capital": 3,
+   "holdings": 3,
+   "holdings_retry": 2,
+   "persons": 3,
+   "holdings_prose": 1
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 107.8,
+   "D2": 106.3,
+   "D3": 102.8
+  },
+  "total_s": 316.8,
+  "model_calls": 15,
+  "model_seconds": 316.8
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Engelberg Bergbahnen AG",
+      "AG",
+      "Engelberg",
+      10000,
+      "shares",
+      "P1.L2"
+     ],
+     [
+      "Titlis Invest AG",
+      "AG",
+      "Engelberg",
+      8000,
+      "shares",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Engelberg Bergbahnen AG",
+      10000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Peter Amstutz",
+      "Engelberg Bergbahnen AG",
+      2000,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Titlis Invest AG",
+      "Engelberg Bergbahnen AG",
+      8000,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Peter Amstutz",
+      "01.04.1960",
+      "Schweizer",
+      "Stans",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Titlis Invest AG",
+      "AG",
+      null,
+      1000,
+      "shares",
+      "P1.L2"
+     ],
+     [
+      "Alpina Familienholding GmbH",
+      "GmbH",
+      "Engelberg",
+      650,
+      "quotas",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Titlis Invest AG",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Karin Odermatt",
+      "Alpina Familienholding GmbH",
+      350,
+      null,
+      null,
+      null,
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Alpina Familienholding GmbH",
+      "Titlis Invest AG",
+      650,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Karin Odermatt",
+      "12.12.1985",
+      "Schweizerin",
+      "Luzern",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D3",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "c": [
+     [
+      "Alpina Familienholding GmbH",
+      "GmbH",
+      "null",
+      200,
+      "quotas",
+      "P1.L3"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D3",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Alpina Familienholding GmbH",
+      200,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D3",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Martin Odermatt",
+      "Alpina Familienholding GmbH",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D3",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "h": [
+     [
+      "Alpina Familienholding GmbH",
+      "Alpina Familienholding GmbH",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D3",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "p": [
+     [
+      "Martin Odermatt",
+      "05.06.1958",
+      "Schweizer",
+      "Engelberg",
+      "P1.L4"
+     ]
+    ]
+   }
+  }
+ ]
+}

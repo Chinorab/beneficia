@@ -1,0 +1,363 @@
+{
+ "case_id": "case10_foreign_fr",
+ "generated_at": "2026-10-10T17:04:15",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "montres_du_leman_sa",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "registre.pdf",
+   "kind": "pdf_text",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "montres_du_leman_sa",
+   "kind": "legal_entity",
+   "name": "Montres du Léman SA",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Genève",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "pacific_horizon_holdings_ltd",
+   "kind": "legal_entity",
+   "name": "Pacific Horizon Holdings Ltd",
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "Ltd",
+     "ref": "D1.P1.L4"
+    },
+    "seat": {
+     "value": "Singapour",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "claire_dubois",
+   "kind": "natural_person",
+   "name": "Claire Dubois",
+   "refs": [
+    "D1.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "13 avril 1980",
+     "ref": "D1.P1.L5"
+    },
+    "nationality": {
+     "value": "française",
+     "ref": "D1.P1.L5"
+    },
+    "residence": {
+     "value": "1204 Genève",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "claire_dubois",
+   "company": "montres_du_leman_sa",
+   "units_held": 300,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  },
+  {
+   "holder": "pacific_horizon_holdings_ltd",
+   "company": "montres_du_leman_sa",
+   "units_held": 700,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   },
+   "vote_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [],
+ "findings": [
+  {
+   "person": "claire_dubois",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "claire_dubois",
+    "montres_du_leman_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "review": [
+  {
+   "reason": "foreign_or_undocumented",
+   "article": "TJPV art. 2",
+   "parties": [
+    "pacific_horizon_holdings_ltd"
+   ],
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "detail": {
+    "foreign": false
+   }
+  }
+ ],
+ "missing": [
+  {
+   "what": "ownership_proof",
+   "about": "pacific_horizon_holdings_ltd",
+   "reason": "foreign_or_undocumented"
+  }
+ ],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "registre.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Registre des actions de Montres du Léman SA, Genève"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "registre.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Capital-actions divisé en 1'000 actions nominatives."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "registre.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Pacific Horizon Holdings Ltd, Singapour : 700 actions"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "registre.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Claire Dubois, née le 13 avril 1980, française, 1204 Genève : 300 actions"
+  }
+ },
+ "dropped_items": {
+  "count": 1,
+  "items": [
+   {
+    "pass": "companies",
+    "ref": "D1.P1.L4",
+    "values": [
+     "Pacific Horizon Holdings Ltd",
+     "Ltd",
+     "Singapour",
+     700,
+     "shares"
+    ],
+    "reason": "total_not_on_capital_line"
+   }
+  ],
+  "accepted": {
+   "companies": 2,
+   "capital": 1,
+   "holdings": 1,
+   "holdings_retry": 2,
+   "citation_reanchored": 1,
+   "persons": 1
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 111.3
+  },
+  "total_s": 111.3,
+  "model_calls": 5,
+  "model_seconds": 111.3
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Montres du Léman SA",
+      "SA",
+      "Genève",
+      null,
+      "shares",
+      "P1.L2"
+     ],
+     [
+      "Pacific Horizon Holdings Ltd",
+      "Ltd",
+      "Singapour",
+      700,
+      "shares",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Montres du Léman SA",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Claire Dubois",
+      "Montres du Léman SA",
+      300,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Pacific Horizon Holdings Ltd",
+      "Montres du Léman SA",
+      700,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ],
+     [
+      "Claire Dubois",
+      "Montres du Léman SA",
+      300,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Claire Dubois",
+      "13 avril 1980",
+      "française",
+      "1204 Genève",
+      "P1.L5"
+     ]
+    ]
+   }
+  }
+ ]
+}

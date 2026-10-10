@@ -1,0 +1,705 @@
+{
+ "case_id": "case14_chain_fiduciary_fr",
+ "generated_at": "2026-10-10T17:14:20",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "horlogerie_du_jorat_sa",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "registre.txt",
+   "kind": "txt",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 2,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "horlogerie_du_jorat_sa",
+   "kind": "legal_entity",
+   "name": "Horlogerie du Jorat SA",
+   "refs": [
+    "D1.P1.L3"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L3"
+    },
+    "seat": {
+     "value": "Lausanne",
+     "ref": "D1.P1.L3"
+    }
+   },
+   "total_capital": 2500,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "jorat_participations_sarl",
+   "kind": "legal_entity",
+   "name": "Jorat Participations Sàrl",
+   "refs": [
+    "D1.P2.L2",
+    "D1.P1.L5",
+    "D1.P2.L4"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "Sàrl",
+     "ref": "D1.P2.L2"
+    },
+    "seat": {
+     "value": "Lausanne",
+     "ref": "D1.P2.L2"
+    }
+   },
+   "total_capital": 200,
+   "total_votes": null,
+   "total_ref": "D1.P2.L2",
+   "special_kind": null
+  },
+  {
+   "id": "marc_dufour",
+   "kind": "natural_person",
+   "name": "Marc Dufour",
+   "refs": [
+    "D1.P1.L6",
+    "D1.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "4 juin 1968",
+     "ref": "D1.P1.L6"
+    },
+    "nationality": {
+     "value": "suisse",
+     "ref": "D1.P1.L6"
+    },
+    "residence": {
+     "value": "Lutry",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "elise_moret",
+   "kind": "natural_person",
+   "name": "Élise Moret",
+   "refs": [
+    "D1.P1.L7"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "21 août 1990",
+     "ref": "D1.P1.L7"
+    },
+    "nationality": {
+     "value": "française",
+     "ref": "D1.P1.L7"
+    },
+    "residence": {
+     "value": "Vevey",
+     "ref": "D1.P1.L7"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "anne_rochat",
+   "kind": "natural_person",
+   "name": "Anne Rochat",
+   "refs": [
+    "D1.P2.L3",
+    "D1.P2.L4"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Lausanne",
+     "ref": "D1.P2.L3"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "thomas_berger",
+   "kind": "natural_person",
+   "name": "Thomas Berger",
+   "refs": [
+    "D1.P2.L4",
+    "D1.P2.L3"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "jorat_participations_sarl",
+   "company": "horlogerie_du_jorat_sa",
+   "units_held": 1500,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   }
+  },
+  {
+   "holder": "marc_dufour",
+   "company": "horlogerie_du_jorat_sa",
+   "units_held": 600,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 6,
+    "den": 25,
+    "percent": 24.0
+   },
+   "vote_share": {
+    "num": 6,
+    "den": 25,
+    "percent": 24.0
+   }
+  },
+  {
+   "holder": "elise_moret",
+   "company": "horlogerie_du_jorat_sa",
+   "units_held": 400,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L7",
+   "capital_share": {
+    "num": 4,
+    "den": 25,
+    "percent": 16.0
+   },
+   "vote_share": {
+    "num": 4,
+    "den": 25,
+    "percent": 16.0
+   }
+  },
+  {
+   "holder": "anne_rochat",
+   "company": "jorat_participations_sarl",
+   "units_held": 120,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P2.L3",
+   "capital_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   }
+  },
+  {
+   "holder": "thomas_berger",
+   "company": "jorat_participations_sarl",
+   "units_held": 80,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P2.L4",
+   "capital_share": {
+    "num": 2,
+    "den": 5,
+    "percent": 40.0
+   },
+   "vote_share": {
+    "num": 2,
+    "den": 5,
+    "percent": 40.0
+   }
+  }
+ ],
+ "agreements": [
+  {
+   "kind": "fiduciary",
+   "controller": "anne_rochat",
+   "controlled": "anne_rochat",
+   "company": "jorat_participations_sarl",
+   "ref": "D1.P2.L3"
+  },
+  {
+   "kind": "fiduciary",
+   "controller": "thomas_berger",
+   "controlled": "thomas_berger",
+   "company": "jorat_participations_sarl",
+   "ref": "D1.P2.L4"
+  },
+  {
+   "kind": "fiduciary",
+   "controller": "anne_rochat",
+   "controlled": "anne_rochat",
+   "company": "jorat_participations_sarl",
+   "ref": "D1.P2.L3"
+  },
+  {
+   "kind": "fiduciary",
+   "controller": "thomas_berger",
+   "controlled": "thomas_berger",
+   "company": "jorat_participations_sarl",
+   "ref": "D1.P2.L3"
+  },
+  {
+   "kind": "fiduciary",
+   "controller": "anne_rochat",
+   "controlled": "jorat_participations_sarl",
+   "company": null,
+   "ref": "D1.P2.L4"
+  }
+ ],
+ "board": [
+  {
+   "person": "marc_dufour",
+   "company": "jorat_participations_sarl",
+   "role_raw": "Jorat Participations Sàrl | Rue du Lac 11, 1003 Lausanne | 1'500",
+   "role": "other",
+   "ref": "D1.P1.L5"
+  },
+  {
+   "person": "marc_dufour",
+   "company": "horlogerie_du_jorat_sa",
+   "role_raw": "Marc Dufour, né le 4 juin 1968, de nationalité suisse | Chemin des Vignes 3, 1095 Lutry | 600",
+   "role": "other",
+   "ref": "D1.P1.L6"
+  }
+ ],
+ "findings": [
+  {
+   "person": "anne_rochat",
+   "basis": "indirect",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "indirect",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "anne_rochat",
+    "jorat_participations_sarl",
+    "horlogerie_du_jorat_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 2",
+    "TJPV art. 12",
+    "TJPV art. 13",
+    "TJPV art. 13 para. 3"
+   ],
+   "refs": [
+    "D1.P2.L3",
+    "D1.P2.L2",
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   }
+  }
+ ],
+ "review": [
+  {
+   "reason": "fiduciary",
+   "article": "TJPV art. 3 para. 2 let. e",
+   "parties": [
+    "anne_rochat",
+    "anne_rochat"
+   ],
+   "refs": [
+    "D1.P2.L3"
+   ],
+   "detail": {}
+  },
+  {
+   "reason": "fiduciary",
+   "article": "TJPV art. 3 para. 2 let. e",
+   "parties": [
+    "thomas_berger",
+    "thomas_berger"
+   ],
+   "refs": [
+    "D1.P2.L4",
+    "D1.P2.L3"
+   ],
+   "detail": {}
+  },
+  {
+   "reason": "fiduciary",
+   "article": "TJPV art. 3 para. 2 let. e",
+   "parties": [
+    "anne_rochat",
+    "jorat_participations_sarl"
+   ],
+   "refs": [
+    "D1.P2.L4"
+   ],
+   "detail": {}
+  }
+ ],
+ "missing": [
+  {
+   "what": "identification",
+   "about": "anne_rochat",
+   "reason": "birth_date,nationality"
+  }
+ ],
+ "sources": {
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 1,
+   "line": 3,
+   "text": "Capital-actions : CHF 250'000, divisé en 2'500 actions nominatives de CHF 100."
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 1,
+   "line": 5,
+   "text": "Jorat Participations Sàrl | Rue du Lac 11, 1003 Lausanne | 1'500"
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 1,
+   "line": 6,
+   "text": "Marc Dufour, né le 4 juin 1968, de nationalité suisse | Chemin des Vignes 3, 1095 Lutry | 600"
+  },
+  "D1.P1.L7": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 1,
+   "line": 7,
+   "text": "Élise Moret, née le 21 août 1990, de nationalité française | Avenue de la Gare 8, 1800 Vevey | 400"
+  },
+  "D1.P2.L2": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 2,
+   "line": 2,
+   "text": "capital social de CHF 20'000, 200 parts sociales."
+  },
+  "D1.P2.L3": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 2,
+   "line": 3,
+   "text": "Anne Rochat, Lausanne : 120 parts. Fiduciaire Léman SA, à titre fiduciaire pour le compte de"
+  },
+  "D1.P2.L4": {
+   "doc": "D1",
+   "filename": "registre.txt",
+   "page": 2,
+   "line": 4,
+   "text": "Thomas Berger, Genève : 80 parts (convention de fiducie du 3 mars 2024)."
+  }
+ },
+ "dropped_items": {
+  "count": 1,
+  "items": [
+   {
+    "pass": "agreements",
+    "ref": "D1.P1.L6",
+    "values": [
+     "appointment",
+     "Marc Dufour",
+     "Horlogerie du Jorat SA",
+     "P2.L5"
+    ],
+    "reason": "no_agreement_wording"
+   }
+  ],
+  "accepted": {
+   "companies": 2,
+   "capital": 2,
+   "holdings": 5,
+   "citation_reanchored": 2,
+   "holdings_prose": 2,
+   "holdings_retry": 1,
+   "agreements": 2,
+   "board": 2,
+   "persons": 3
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 269.8
+  },
+  "total_s": 269.8,
+  "model_calls": 8,
+  "model_seconds": 269.8
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "c": [
+     [
+      "Horlogerie du Jorat SA",
+      "SA",
+      "Lausanne",
+      2500,
+      "shares",
+      "P1.L3"
+     ],
+     [
+      "Jorat Participations Sàrl",
+      "Sàrl",
+      "Lausanne",
+      200,
+      "quotas",
+      "P2.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P2.L2",
+   "output": {
+    "k": [
+     [
+      "Horlogerie du Jorat SA",
+      2500,
+      "shares",
+      "P1.L2"
+     ],
+     [
+      "",
+      200,
+      "quotas",
+      "P2.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "h": [
+     [
+      "Jorat Participations Sàrl",
+      "Horlogerie du Jorat SA",
+      1500,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ],
+     [
+      "Marc Dufour",
+      "Horlogerie du Jorat SA",
+      600,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ],
+     [
+      "Élise Moret",
+      "Horlogerie du Jorat SA",
+      400,
+      null,
+      null,
+      "capital",
+      "P1.L7"
+     ],
+     [
+      "Anne Rochat",
+      "Jorat Participations Sàrl",
+      120,
+      null,
+      "Fiduciaire Léman SA",
+      "capital",
+      "P2.L2"
+     ],
+     [
+      "Thomas Berger",
+      "Jorat Participations Sàrl",
+      80,
+      null,
+      "convention de fiducie du 3 mars 2024",
+      "capital",
+      "P2.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P2.L3",
+   "last_line": "P2.L3",
+   "output": {
+    "h": [
+     [
+      "Anne Rochat",
+      "Lausanne",
+      120,
+      null,
+      null,
+      "both",
+      "P2.L3"
+     ],
+     [
+      "Thomas Berger",
+      "Genève",
+      80,
+      null,
+      "Fiduciaire Léman SA",
+      "both",
+      "P2.L3"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Jorat Participations Sàrl",
+      "Horlogerie du Jorat SA",
+      1500,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "agreements",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "a": [
+     [
+      "fiduciary",
+      "Anne Rochat",
+      "Jorat Participations Sàrl",
+      "P2.L3",
+      "P2.L4"
+     ],
+     [
+      "appointment",
+      "Marc Dufour",
+      "Horlogerie du Jorat SA",
+      "P2.L5",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "board",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "b": [
+     [
+      "Marc Dufour",
+      "Horlogerie du Jorat SA",
+      "Präsident des Verwaltungsrates",
+      "P1.L5"
+     ],
+     [
+      "Marc Dufour",
+      "Horlogerie du Jorat SA",
+      "Präsident des Verwaltungsrates",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "p": [
+     [
+      "Marc Dufour",
+      "4 juin 1968",
+      "suisse",
+      "Lutry",
+      "P1.L6"
+     ],
+     [
+      "Élise Moret",
+      "21 août 1990",
+      "française",
+      "Vevey",
+      "P1.L7"
+     ],
+     [
+      "Anne Rochat",
+      "null",
+      "null",
+      "Lausanne",
+      "P2.L3"
+     ]
+    ]
+   }
+  }
+ ]
+}

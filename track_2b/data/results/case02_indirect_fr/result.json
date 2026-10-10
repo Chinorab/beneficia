@@ -1,0 +1,616 @@
+{
+ "case_id": "case02_indirect_fr",
+ "generated_at": "2026-10-10T16:40:48",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "boulangerie_des_alpes_sa",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "kind": "pdf_text",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D2",
+   "filename": "02_registre_holding.pdf",
+   "kind": "pdf_text",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "boulangerie_des_alpes_sa",
+   "kind": "legal_entity",
+   "name": "Boulangerie des Alpes SA",
+   "refs": [
+    "D1.P1.L3"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L3"
+    },
+    "seat": {
+     "value": "Bulle",
+     "ref": "D1.P1.L3"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "alpes_gourmet_holding_sa",
+   "kind": "legal_entity",
+   "name": "Alpes Gourmet Holding SA",
+   "refs": [
+    "D1.P1.L5",
+    "D2.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D2.P1.L2"
+    },
+    "seat": {
+     "value": "Bulle",
+     "ref": "D2.P1.L2"
+    }
+   },
+   "total_capital": 500,
+   "total_votes": null,
+   "total_ref": "D2.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "julien_perrin",
+   "kind": "natural_person",
+   "name": "Julien Perrin",
+   "refs": [
+    "D1.P1.L6"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "9 mai 1979",
+     "ref": "D1.P1.L6"
+    },
+    "nationality": {
+     "value": "suisse",
+     "ref": "D1.P1.L6"
+    },
+    "residence": {
+     "value": "Fribourg",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "valerie_chappuis",
+   "kind": "natural_person",
+   "name": "Valérie Chappuis",
+   "refs": [
+    "D2.P1.L4"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "2 mars 1972",
+     "ref": "D2.P1.L4"
+    },
+    "nationality": {
+     "value": "suisse",
+     "ref": "D2.P1.L4"
+    },
+    "residence": {
+     "value": "1630 Bulle",
+     "ref": "D2.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "nicolas_favre",
+   "kind": "natural_person",
+   "name": "Nicolas Favre",
+   "refs": [
+    "D2.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "18 octobre 1981",
+     "ref": "D2.P1.L5"
+    },
+    "nationality": {
+     "value": "suisse",
+     "ref": "D2.P1.L5"
+    },
+    "residence": {
+     "value": "1700 Fribourg",
+     "ref": "D2.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "alpes_gourmet_holding_sa",
+   "company": "boulangerie_des_alpes_sa",
+   "units_held": 700,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   },
+   "vote_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   }
+  },
+  {
+   "holder": "julien_perrin",
+   "company": "boulangerie_des_alpes_sa",
+   "units_held": 300,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  },
+  {
+   "holder": "valerie_chappuis",
+   "company": "alpes_gourmet_holding_sa",
+   "units_held": 260,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L4",
+   "capital_share": {
+    "num": 13,
+    "den": 25,
+    "percent": 52.0
+   },
+   "vote_share": {
+    "num": 13,
+    "den": 25,
+    "percent": 52.0
+   }
+  },
+  {
+   "holder": "nicolas_favre",
+   "company": "alpes_gourmet_holding_sa",
+   "units_held": 240,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L5",
+   "capital_share": {
+    "num": 12,
+    "den": 25,
+    "percent": 48.0
+   },
+   "vote_share": {
+    "num": 12,
+    "den": 25,
+    "percent": 48.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [],
+ "findings": [
+  {
+   "person": "valerie_chappuis",
+   "basis": "indirect",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "indirect",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "valerie_chappuis",
+    "alpes_gourmet_holding_sa",
+    "boulangerie_des_alpes_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 2",
+    "TJPV art. 12",
+    "TJPV art. 13",
+    "TJPV art. 13 para. 3"
+   ],
+   "refs": [
+    "D2.P1.L4",
+    "D2.P1.L3",
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   }
+  },
+  {
+   "person": "julien_perrin",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "julien_perrin",
+    "boulangerie_des_alpes_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L6",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "review": [],
+ "missing": [],
+ "sources": {
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Capital-actions de CHF 100'000, divisé en 1'000 actions nominatives de CHF 100."
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Alpes Gourmet Holding SA 1630 Bulle 700"
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Julien Perrin, né le 9 mai 1979, suisse 1700 Fribourg 300"
+  },
+  "D2.P1.L2": {
+   "doc": "D2",
+   "filename": "02_registre_holding.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Registre des actions de Alpes Gourmet Holding SA, Bulle"
+  },
+  "D2.P1.L3": {
+   "doc": "D2",
+   "filename": "02_registre_holding.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Capital-actions de CHF 50'000, divisé en 500 actions nominatives."
+  },
+  "D2.P1.L4": {
+   "doc": "D2",
+   "filename": "02_registre_holding.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Valérie Chappuis, née le 2 mars 1972, suisse, 1630 Bulle : 260 actions"
+  },
+  "D2.P1.L5": {
+   "doc": "D2",
+   "filename": "02_registre_holding.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Nicolas Favre, né le 18 octobre 1981, suisse, 1700 Fribourg : 240 actions"
+  }
+ },
+ "dropped_items": {
+  "count": 2,
+  "items": [
+   {
+    "pass": "holdings",
+    "ref": "D1.P1.L5",
+    "values": [
+     "Alpes Gourmet Holding SA",
+     "Boulangerie des Alpes SA",
+     1630,
+     null,
+     null,
+     null
+    ],
+    "reason": "units_is_postal_code"
+   },
+   {
+    "pass": "holdings_prose",
+    "ref": "D1.P1.L4",
+    "values": [
+     "Alpes Gourmet Holding SA",
+     "Alpes Gourmet Holding SA",
+     1630,
+     null,
+     null,
+     "both"
+    ],
+    "reason": "units_is_postal_code"
+   }
+  ],
+  "accepted": {
+   "companies": 2,
+   "capital": 2,
+   "holdings": 3,
+   "holdings_prose": 1,
+   "citation_reanchored": 1,
+   "holdings_retry": 2,
+   "persons": 3
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 159.9,
+   "D2": 94.3
+  },
+  "total_s": 254.2,
+  "model_calls": 10,
+  "model_seconds": 254.2
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "c": [
+     [
+      "Boulangerie des Alpes SA",
+      "SA",
+      "Bulle",
+      1000,
+      "shares",
+      "P1.L3"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Boulangerie des Alpes SA",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "h": [
+     [
+      "Alpes Gourmet Holding SA",
+      "Boulangerie des Alpes SA",
+      1630,
+      null,
+      null,
+      null,
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Alpes Gourmet Holding SA",
+      "Alpes Gourmet Holding SA",
+      1630,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L6",
+   "output": {
+    "h": [
+     [
+      "Alpes Gourmet Holding SA",
+      "Boulangerie des Alpes SA",
+      700,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ],
+     [
+      "Julien Perrin",
+      "Boulangerie des Alpes SA",
+      300,
+      null,
+      null,
+      "both",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "p": [
+     [
+      "Julien Perrin",
+      "9 mai 1979",
+      "suisse",
+      "Fribourg",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Alpes Gourmet Holding SA",
+      "SA",
+      "Bulle",
+      500,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Alpes Gourmet Holding SA",
+      500,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Valérie Chappuis",
+      "Alpes Gourmet Holding SA",
+      260,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Nicolas Favre",
+      "Alpes Gourmet Holding SA",
+      240,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Valérie Chappuis",
+      "2 mars 1972",
+      "suisse",
+      "1630 Bulle",
+      "P1.L4"
+     ],
+     [
+      "Nicolas Favre",
+      "18 octobre 1981",
+      "suisse",
+      "1700 Fribourg",
+      "P1.L5"
+     ]
+    ]
+   }
+  }
+ ]
+}

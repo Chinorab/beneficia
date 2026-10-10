@@ -24,9 +24,10 @@ tested code applies the law. Everything the law does not settle is sent to a hum
 ## How it works
 
 ```
-case folder ──► numbered lines ──► Apertus: 7 narrow extraction passes ──► code checks every citation
- (PDF, scan,     (OCR for scans,    companies, holdings (table, prose,      (name and number must be on
-  DOCX, TXT)      Tesseract)        retry), agreements, board, persons      the cited line, or dropped)
+case folder ──► numbered lines ──► Apertus: 8 narrow extraction passes ──► code checks every citation
+ (PDF, scan,     (OCR for scans,    companies, capital, holdings (table,    (name and number must be on
+  DOCX, TXT)      Tesseract)        prose, retry), agreements, board,       the cited line, or dropped)
+                                    persons
                                                                                      │
 draft + diagram + note + review list ◄── rules engine (TJPG art. 4, TJPV art. 1 to 4, 12, 13, 15) ◄┘
 ```

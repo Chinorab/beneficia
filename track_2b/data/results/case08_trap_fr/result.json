@@ -1,0 +1,570 @@
+{
+ "case_id": "case08_trap_fr",
+ "generated_at": "2026-10-10T17:00:47",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "transports_jura_sa",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "01_registre_transports.pdf",
+   "kind": "pdf_text",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "kind": "pdf_text",
+   "language": "fr",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "transports_jura_sa",
+   "kind": "legal_entity",
+   "name": "Transports Jura SA",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Delémont",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "jura_logistique_sa",
+   "kind": "legal_entity",
+   "name": "Jura Logistique SA",
+   "refs": [
+    "D1.P1.L4",
+    "D2.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L4"
+    },
+    "seat": {
+     "value": "Delémont",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "pierre_monnier",
+   "kind": "natural_person",
+   "name": "Pierre Monnier",
+   "refs": [
+    "D1.P1.L5",
+    "D2.P1.L4"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "6 août 1962",
+     "ref": "D1.P1.L5"
+    },
+    "nationality": {
+     "value": "suisse",
+     "ref": "D1.P1.L5"
+    },
+    "residence": {
+     "value": "Delémont",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "helene_monnier",
+   "kind": "natural_person",
+   "name": "Hélène Monnier",
+   "refs": [
+    "D2.P1.L5"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "paul_monnier",
+   "kind": "natural_person",
+   "name": "Paul Monnier",
+   "refs": [
+    "D2.P1.L6"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "jura_logistique_sa",
+   "company": "transports_jura_sa",
+   "units_held": 1000,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   }
+  },
+  {
+   "holder": "pierre_monnier",
+   "company": "jura_logistique_sa",
+   "units_held": 40,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L4",
+   "capital_share": {
+    "num": 1,
+    "den": 25,
+    "percent": 4.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 25,
+    "percent": 4.0
+   }
+  },
+  {
+   "holder": "helene_monnier",
+   "company": "jura_logistique_sa",
+   "units_held": 30,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L5",
+   "capital_share": {
+    "num": 3,
+    "den": 100,
+    "percent": 3.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 100,
+    "percent": 3.0
+   }
+  },
+  {
+   "holder": "paul_monnier",
+   "company": "jura_logistique_sa",
+   "units_held": 30,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D2.P1.L6",
+   "capital_share": {
+    "num": 3,
+    "den": 100,
+    "percent": 3.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 100,
+    "percent": 3.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [
+  {
+   "person": "pierre_monnier",
+   "company": "transports_jura_sa",
+   "role_raw": "Président du conseil d'administration : Pierre Monnier, né le 6 août 1962, suisse, Delémont",
+   "role": "chair",
+   "ref": "D1.P1.L5"
+  }
+ ],
+ "findings": [
+  {
+   "person": "pierre_monnier",
+   "basis": "default_manager",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "other"
+   },
+   "band": null,
+   "chain": [
+    "pierre_monnier",
+    "transports_jura_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 2"
+   ],
+   "refs": [
+    "D1.P1.L5"
+   ],
+   "status": "pending_review",
+   "share": null
+  }
+ ],
+ "review": [
+  {
+   "reason": "default_manager",
+   "article": "TJPG art. 4 para. 2",
+   "parties": [
+    "pierre_monnier"
+   ],
+   "refs": [
+    "D1.P1.L5"
+   ],
+   "detail": {}
+  },
+  {
+   "reason": "inconsistent_figures",
+   "article": "TJPV art. 13",
+   "parties": [
+    "jura_logistique_sa"
+   ],
+   "refs": [
+    "D1.P1.L3",
+    "D2.P1.L3",
+    "D2.P1.L3",
+    "D2.P1.L4",
+    "D2.P1.L5",
+    "D2.P1.L6"
+   ],
+   "detail": {
+    "check": "conflicting_totals",
+    "values": [
+     100,
+     1000
+    ]
+   }
+  }
+ ],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "01_registre_transports.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Registre des actions de Transports Jura SA, Delémont"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "01_registre_transports.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Le capital-actions est divisé en 1'000 actions nominatives."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "01_registre_transports.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Jura Logistique SA, Delémont : 1'000 actions"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "01_registre_transports.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Président du conseil d'administration : Pierre Monnier, né le 6 août 1962, suisse, Delémont"
+  },
+  "D2.P1.L2": {
+   "doc": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Registre des actions de Jura Logistique SA, Delémont"
+  },
+  "D2.P1.L3": {
+   "doc": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Capital-actions divisé en 100 actions nominatives."
+  },
+  "D2.P1.L4": {
+   "doc": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Pierre Monnier, Delémont : 40 actions"
+  },
+  "D2.P1.L5": {
+   "doc": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Hélène Monnier, Porrentruy : 30 actions"
+  },
+  "D2.P1.L6": {
+   "doc": "D2",
+   "filename": "02_registre_logistique.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Paul Monnier, Moutier : 30 actions"
+  }
+ },
+ "dropped_items": {
+  "count": 1,
+  "items": [
+   {
+    "pass": "holdings",
+    "ref": "D1.P1.L4",
+    "values": [
+     "Pierre Monnier",
+     "Jura Logistique SA",
+     1000,
+     null,
+     null,
+     "capital"
+    ],
+    "reason": "holder_or_units_not_on_line"
+   }
+  ],
+  "accepted": {
+   "companies": 3,
+   "capital": 2,
+   "holdings": 4,
+   "holdings_retry": 1,
+   "board": 1,
+   "persons": 1
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 115.5,
+   "D2": 75.3
+  },
+  "total_s": 190.8,
+  "model_calls": 9,
+  "model_seconds": 190.8
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Transports Jura SA",
+      "SA",
+      "Delémont",
+      1000,
+      "shares",
+      "P1.L2"
+     ],
+     [
+      "Jura Logistique SA",
+      "SA",
+      "Delémont",
+      1000,
+      "shares",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Transports Jura SA",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Pierre Monnier",
+      "Jura Logistique SA",
+      1000,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Jura Logistique SA",
+      "Transports Jura SA",
+      1000,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "board",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "b": [
+     [
+      "Pierre Monnier",
+      "Jura Logistique SA",
+      "Präsident des Verwaltungsrates",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Pierre Monnier",
+      "6 août 1962",
+      "suisse",
+      "Delémont",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "c": [
+     [
+      "Jura Logistique SA",
+      "SA",
+      "Delémont",
+      100,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Jura Logistique SA",
+      100,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "h": [
+     [
+      "Pierre Monnier",
+      "Jura Logistique SA",
+      40,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Hélène Monnier",
+      "Jura Logistique SA",
+      30,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ],
+     [
+      "Paul Monnier",
+      "Jura Logistique SA",
+      30,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ]
+    ]
+   }
+  }
+ ]
+}

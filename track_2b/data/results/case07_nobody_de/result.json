@@ -1,0 +1,627 @@
+{
+ "case_id": "case07_nobody_de",
+ "generated_at": "2026-10-10T16:57:36",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "software_kollektiv_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D2",
+   "filename": "02_handelsregisterauszug.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "software_kollektiv_ag",
+   "kind": "legal_entity",
+   "name": "Software Kollektiv AG",
+   "refs": [
+    "D1.P1.L2",
+    "D2.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Winterthur",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "lea_bachmann",
+   "kind": "natural_person",
+   "name": "Lea Bachmann",
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Winterthur",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "jonas_keller",
+   "kind": "natural_person",
+   "name": "Jonas Keller",
+   "refs": [
+    "D1.P1.L5",
+    "D2.P1.L4"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Zürich",
+     "ref": "D1.P1.L5"
+    },
+    "birth_date": {
+     "value": "08.03.1988",
+     "ref": "D2.P1.L4"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D2.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "mira_steiner",
+   "kind": "natural_person",
+   "name": "Mira Steiner",
+   "refs": [
+    "D1.P1.L6"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Uster",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "david_huber",
+   "kind": "natural_person",
+   "name": "David Huber",
+   "refs": [
+    "D1.P1.L7"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Wil",
+     "ref": "D1.P1.L7"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "sara_frei",
+   "kind": "natural_person",
+   "name": "Sara Frei",
+   "refs": [
+    "D1.P1.L8"
+   ],
+   "fields": {
+    "residence": {
+     "value": "Frauenfeld",
+     "ref": "D1.P1.L8"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "nadine_schmid",
+   "kind": "natural_person",
+   "name": "Nadine Schmid",
+   "refs": [
+    "D2.P1.L3"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "21.06.1974",
+     "ref": "D2.P1.L3"
+    },
+    "nationality": {
+     "value": "Schweizerin",
+     "ref": "D2.P1.L3"
+    },
+    "residence": {
+     "value": "Winterthur",
+     "ref": "D2.P1.L3"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "lea_bachmann",
+   "company": "software_kollektiv_ag",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "jonas_keller",
+   "company": "software_kollektiv_ag",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "mira_steiner",
+   "company": "software_kollektiv_ag",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "david_huber",
+   "company": "software_kollektiv_ag",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L7",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "sara_frei",
+   "company": "software_kollektiv_ag",
+   "units_held": 200,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L8",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [
+  {
+   "person": "nadine_schmid",
+   "company": "software_kollektiv_ag",
+   "role_raw": "Präsidentin des Verwaltungsrates",
+   "role": "chair",
+   "ref": "D2.P1.L3"
+  },
+  {
+   "person": "jonas_keller",
+   "company": "software_kollektiv_ag",
+   "role_raw": "Mitglied des Verwaltungsrates",
+   "role": "member",
+   "ref": "D2.P1.L4"
+  }
+ ],
+ "findings": [
+  {
+   "person": "nadine_schmid",
+   "basis": "default_manager",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "other"
+   },
+   "band": null,
+   "chain": [
+    "nadine_schmid",
+    "software_kollektiv_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 2"
+   ],
+   "refs": [
+    "D2.P1.L3"
+   ],
+   "status": "pending_review",
+   "share": null
+  }
+ ],
+ "review": [
+  {
+   "reason": "default_manager",
+   "article": "TJPG art. 4 para. 2",
+   "parties": [
+    "nadine_schmid"
+   ],
+   "refs": [
+    "D2.P1.L3"
+   ],
+   "detail": {}
+  }
+ ],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Software Kollektiv AG, Winterthur"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital eingeteilt in 1'000 Namenaktien."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Lea Bachmann, Winterthur 200 Aktien"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Jonas Keller, Zürich 200 Aktien"
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Mira Steiner, Uster 200 Aktien"
+  },
+  "D1.P1.L7": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 7,
+   "text": "David Huber, Wil 200 Aktien"
+  },
+  "D1.P1.L8": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 8,
+   "text": "Sara Frei, Frauenfeld 200 Aktien"
+  },
+  "D2.P1.L2": {
+   "doc": "D2",
+   "filename": "02_handelsregisterauszug.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Auszug Verwaltungsrat der Software Kollektiv AG"
+  },
+  "D2.P1.L3": {
+   "doc": "D2",
+   "filename": "02_handelsregisterauszug.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Nadine Schmid, geb. 21.06.1974, Schweizerin, in Winterthur, Präsidentin des Verwaltungsrates"
+  },
+  "D2.P1.L4": {
+   "doc": "D2",
+   "filename": "02_handelsregisterauszug.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Jonas Keller, geb. 08.03.1988, Schweizer, in Zürich, Mitglied des Verwaltungsrates"
+  }
+ },
+ "dropped_items": {
+  "count": 0,
+  "items": [],
+  "accepted": {
+   "companies": 2,
+   "capital": 1,
+   "holdings": 5,
+   "persons": 7,
+   "board": 2
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 127.3,
+   "D2": 64.8
+  },
+  "total_s": 192.1,
+  "model_calls": 7,
+  "model_seconds": 192.1
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "c": [
+     [
+      "Software Kollektiv AG",
+      "AG",
+      "Winterthur",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Software Kollektiv AG",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "h": [
+     [
+      "Lea Bachmann",
+      "Software Kollektiv AG",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Jonas Keller",
+      "Software Kollektiv AG",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ],
+     [
+      "Mira Steiner",
+      "Software Kollektiv AG",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ],
+     [
+      "David Huber",
+      "Software Kollektiv AG",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L7"
+     ],
+     [
+      "Sara Frei",
+      "Software Kollektiv AG",
+      200,
+      null,
+      null,
+      "capital",
+      "P1.L8"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "p": [
+     [
+      "Lea Bachmann",
+      null,
+      null,
+      "Winterthur",
+      "P1.L4"
+     ],
+     [
+      "Jonas Keller",
+      null,
+      null,
+      "Zürich",
+      "P1.L5"
+     ],
+     [
+      "Mira Steiner",
+      null,
+      null,
+      "Uster",
+      "P1.L6"
+     ],
+     [
+      "David Huber",
+      null,
+      null,
+      "Wil",
+      "P1.L7"
+     ],
+     [
+      "Sara Frei",
+      null,
+      null,
+      "Frauenfeld",
+      "P1.L8"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "c": [
+     [
+      "Software Kollektiv AG",
+      "AG",
+      "Zürich",
+      null,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "board",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "b": [
+     [
+      "Nadine Schmid",
+      "Software Kollektiv AG",
+      "Präsidentin des Verwaltungsrates",
+      "P1.L3"
+     ],
+     [
+      "Jonas Keller",
+      "Software Kollektiv AG",
+      "Mitglied des Verwaltungsrates",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L4",
+   "output": {
+    "p": [
+     [
+      "Nadine Schmid",
+      "21.06.1974",
+      "Schweizerin",
+      "Winterthur",
+      "P1.L3"
+     ],
+     [
+      "Jonas Keller",
+      "08.03.1988",
+      "Schweizer",
+      "Zürich",
+      "P1.L4"
+     ]
+    ]
+   }
+  }
+ ]
+}

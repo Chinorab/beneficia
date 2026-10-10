@@ -1,0 +1,389 @@
+{
+ "case_id": "case11_docx_it",
+ "generated_at": "2026-10-10T17:06:24",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "costruzioni_ticino_sa",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "libro_azioni.docx",
+   "kind": "docx",
+   "language": "it",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "costruzioni_ticino_sa",
+   "kind": "legal_entity",
+   "name": "Costruzioni Ticino SA",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "SA",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "paolo_conti",
+   "kind": "natural_person",
+   "name": "Paolo Conti",
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L7"
+   ],
+   "fields": {
+    "residence": {
+     "value": "6500 Bellinzona",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "sara_conti",
+   "kind": "natural_person",
+   "name": "Sara Conti",
+   "refs": [
+    "D1.P1.L6"
+   ],
+   "fields": {
+    "residence": {
+     "value": "6512 Giubiasco",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "paolo_conti",
+   "company": "costruzioni_ticino_sa",
+   "units_held": 550,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   },
+   "vote_share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   }
+  },
+  {
+   "holder": "sara_conti",
+   "company": "costruzioni_ticino_sa",
+   "units_held": 450,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 9,
+    "den": 20,
+    "percent": 45.0
+   },
+   "vote_share": {
+    "num": 9,
+    "den": 20,
+    "percent": 45.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [
+  {
+   "person": "paolo_conti",
+   "company": "costruzioni_ticino_sa",
+   "role_raw": "Presidente del consiglio di amministrazione",
+   "role": "chair",
+   "ref": "D1.P1.L7"
+  }
+ ],
+ "findings": [
+  {
+   "person": "paolo_conti",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "paolo_conti",
+    "costruzioni_ticino_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   }
+  },
+  {
+   "person": "sara_conti",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "sara_conti",
+    "costruzioni_ticino_sa"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L6",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 9,
+    "den": 20,
+    "percent": 45.0
+   }
+  }
+ ],
+ "review": [],
+ "missing": [
+  {
+   "what": "identification",
+   "about": "paolo_conti",
+   "reason": "birth_date,nationality"
+  },
+  {
+   "what": "identification",
+   "about": "sara_conti",
+   "reason": "birth_date,nationality"
+  }
+ ],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "libro_azioni.docx",
+   "page": 1,
+   "line": 2,
+   "text": "Libro delle azioni della Costruzioni Ticino SA"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "libro_azioni.docx",
+   "page": 1,
+   "line": 3,
+   "text": "Capitale azionario suddiviso in 1'000 azioni nominative."
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "libro_azioni.docx",
+   "page": 1,
+   "line": 5,
+   "text": "Paolo Conti | 6500 Bellinzona | 550"
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "libro_azioni.docx",
+   "page": 1,
+   "line": 6,
+   "text": "Sara Conti | 6512 Giubiasco | 450"
+  },
+  "D1.P1.L7": {
+   "doc": "D1",
+   "filename": "libro_azioni.docx",
+   "page": 1,
+   "line": 7,
+   "text": "Presidente del consiglio di amministrazione: Paolo Conti."
+  }
+ },
+ "dropped_items": {
+  "count": 0,
+  "items": [],
+  "accepted": {
+   "companies": 1,
+   "capital": 1,
+   "holdings": 2,
+   "citation_reanchored": 1,
+   "holdings_retry": 1,
+   "board": 1,
+   "persons": 2
+  }
+ },
+ "timings": {
+  "ingest_s": 0.2,
+  "extract_per_doc_s": {
+   "D1": 128.5
+  },
+  "total_s": 128.7,
+  "model_calls": 6,
+  "model_seconds": 128.5
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L7",
+   "output": {
+    "c": [
+     [
+      "Costruzioni Ticino SA",
+      "SA",
+      "null",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Costruzioni Ticino SA",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L7",
+   "output": {
+    "h": [
+     [
+      "Paolo Conti",
+      "Costruzioni Ticino SA",
+      550,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ],
+     [
+      "Sara Conti",
+      "Costruzioni Ticino SA",
+      450,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": [
+     [
+      "Paolo Conti",
+      "Costruzioni Ticino SA",
+      550,
+      null,
+      null,
+      "both",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "board",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L7",
+   "output": {
+    "b": [
+     [
+      "Paolo Conti",
+      "Costruzioni Ticino SA",
+      "Presidente del consiglio di amministrazione",
+      "P1.L7"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L7",
+   "output": {
+    "p": [
+     [
+      "Paolo Conti",
+      null,
+      null,
+      "6500 Bellinzona",
+      "P1.L5"
+     ],
+     [
+      "Sara Conti",
+      null,
+      null,
+      "6512 Giubiasco",
+      "P1.L6"
+     ]
+    ]
+   }
+  }
+ ]
+}

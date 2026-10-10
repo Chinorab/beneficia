@@ -112,6 +112,26 @@ def run_eval(cases_dir: Path, out_dir: Path, only: Optional[list[str]] = None, c
     return _write_summary(rows, out_dir, client.model)
 
 
+def replay_run(cases_dir: Path, recorded_dir: Path, out_dir: Path) -> dict:
+    """Re-run ingestion, citation checks and rules on the model outputs recorded in an earlier run.
+
+    Lets anyone reproduce the scores without the model, and check a code change in seconds."""
+    from beneficia.extract.client import ReplayClient
+
+    out_dir = Path(out_dir)
+    for rec in sorted(Path(recorded_dir).glob("*/result.json")):
+        case = Path(cases_dir) / rec.parent.name
+        if not (case / "expected.json").exists():
+            continue
+        old = json.loads(rec.read_text(encoding="utf-8"))
+        result = analyse_case(case, ReplayClient(old.get("model_responses", []), old.get("model", "replay")))
+        result["timings"] = old["timings"]  # keep the measured times of the recorded run
+        (out_dir / case.name).mkdir(parents=True, exist_ok=True)
+        (out_dir / case.name / "result.json").write_text(json.dumps(result, ensure_ascii=False, indent=1),
+                                                         encoding="utf-8")
+    return rescore(cases_dir, out_dir)
+
+
 def rescore(cases_dir: Path, out_dir: Path) -> dict:
     """Rebuild summary.json from result.json files already written (no model needed)."""
     rows, model = [], "unknown"

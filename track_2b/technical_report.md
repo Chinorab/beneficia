@@ -20,7 +20,7 @@ id of the line it comes from. Deterministic, unit-tested Python checks every cit
 ownership graph and applies the law. Anything the text does not settle goes to a review list. The tool
 never files anything.
 
-**Headline result:** `HEADLINE_RESULT`
+**Headline result:** on 14 fictitious cases in German, French and Italian, the final pipeline identifies exactly the expected beneficial owners and review points in 13 cases. It produced **zero silent errors**: no wrong beneficial owner was ever marked as settled, in any run. **100 %** of the references shown resolve to a source line, and holdings extraction reaches 98 % precision and 94 % recall. The one failure is the scanned case, which needs the container's OCR.
 
 ## 2. Architecture
 
@@ -28,7 +28,7 @@ never files anything.
 Docker container, no network at runtime
   web UI (FastAPI, DE/FR) or CLI (analyze, eval)
     1 ingest     PDF text layer, Tesseract OCR (deu, fra, ita), DOCX, TXT -> numbered lines D1.P1.L7
-    2 extract    7 narrow passes -> llama-server on 127.0.0.1, Apertus v1.5 8B Q4_K_M, JSON schema grammar
+    2 extract    8 narrow passes -> llama-server on 127.0.0.1, Apertus v1.5 8B Q4_K_M, JSON schema grammar
     3 resolve    every name and number checked on its cited line, otherwise dropped
     4 validate   totals, sums, duplicates
     5 rules      TJPG art. 4, TJPV art. 1 to 4, 12, 13, 15
@@ -80,8 +80,9 @@ That configuration was not tested.
 
 **Prompting.**
 - Each document is cut into windows of 60 numbered lines.
-- Seven passes each ask one narrow question:
-  - companies and their total capital;
+- Eight passes each ask one narrow question:
+  - companies;
+  - total capital, read only from capital lines;
   - holdings in tables;
   - holdings written as sentences (one invented example, wrapped lines joined);
   - a retry on register-like lines that produced no holding;
@@ -139,12 +140,39 @@ That configuration was not tested.
 
 **Baseline.** A first full design used one large extraction schema with verbatim quotes. On one-page
 excerpts it took 511 to 1151 s per document on the development CPU and confused fields. The table below
-compares the first working pipeline (v1, run stopped after 7 cases) with the final one.
+compares the first working pipeline (v1, run stopped after 6 complete cases), two intermediate runs and the
+final one. Only the code changed between runs: same cases, same model file, temperature 0.
 
-`EVAL_TABLE`
+| Metric | v1 | v2 | v3 | final |
+|---|---|---|---|---|
+| Cases | 6 | 14 | 14 | 14 |
+| Cases fully correct (owners and review) | 1 / 6 | 6 / 14 | 7 / 14 | 13 / 14 |
+| Beneficial owners exactly right | 1 / 6 | 6 / 14 | 8 / 14 | 13 / 14 |
+| Expected review reasons all raised | 6 / 6 | 12 / 14 | 11 / 14 | 14 / 14 |
+| Silent errors (settled and wrong) | 0 | 0 | 0 | 0 |
+| Citation validity | 100 % | 100 % | 100 % | 100 % |
+| Holdings precision (all) | 84 % | 86 % | 95 % | 98 % |
+| Holdings recall (all) | 76 % | 79 % | 81 % | 94 % |
+| Holdings recall (DE) | 82 % | 83 % | 83 % | 92 % |
+| Holdings recall (FR) | 67 % | 71 % | 71 % | 94 % |
+| Holdings recall (IT) | 75 % | 83 % | 100 % | 100 % |
+| Seconds per case, mean | 124.9 | 110.5 | 148.5 | 174.3 |
+| Seconds per case, max | 148.7 | 226.8 | 238.8 | 316.8 |
 
-**Error analysis.** See `docs/evaluation.md` for every failure, its cause and the fix or the reason it was
-left.
+**Reading these numbers.**
+- *Tuned on the same cases.* Every error was diagnosed on these 14 cases and fixed in code, so the final
+  figures describe a pipeline tuned on the cases it is scored on. A held-out set, ideally real anonymised
+  folders, is the next step (section 8). The two properties that do not depend on tuning held in every
+  run: zero silent errors and 100 % citation validity.
+- *Errors left.* case12 (the scan) fails in these native runs, because Tesseract was not installed on the
+  host. case14 has one wrong holding, which the checks routed to review without affecting the owner.
+- *Times.* Measured natively on a desktop that was also in use, after hours of continuous load. Generation
+  fell from about 5 to about 4 tokens per second as the CPU heated up, so these times are pessimistic.
+- *Replay.* `make replay` recomputes every score from the recorded model outputs in `data/results/`, in
+  seconds and without the model.
+
+**Error analysis.** `docs/evaluation.md` lists each iteration, the failure it removed, and examples of
+model errors caught by the checks.
 
 **Role of other models.** No other model is used, neither at run time nor for evaluation. Scoring is
 fully deterministic against hand-written expected answers.
@@ -153,8 +181,8 @@ fully deterministic against hand-written expected answers.
 
 - **Small set.** 14 fictitious cases, written by the developer. Real share registers are messier
   (multi-page tables, handwritten annotations, several share classes).
-- **CPU speed.** About 5 tokens per second on a 6-core desktop CPU. A case of a few short documents
-  takes minutes, and long documents scale linearly.
+- **CPU speed.** 4 to 5 tokens per second on a 6-core desktop CPU. A case of 1 to 3 short documents took 98
+  to 317 s, and time grows linearly with the number of pages. Each document needs about 6 model calls.
 - **Duplicate merging.** Two identical lots held by the same person in the same company are merged into
   one, to avoid double counting the same row read by two passes.
 - **Not decided automatically.**
@@ -176,7 +204,7 @@ fully deterministic against hand-written expected answers.
 - **Numbers:** `make eval` reproduces the evaluation, and `make offline-test` proves the air gap.
 - **Determinism:** temperature 0 and the llama.cpp grammar. Small numeric differences across CPUs are
   possible.
-- **Hardware used for the reported numbers:** `HARDWARE`.
+- **Hardware used for the reported numbers:** Intel Core i5-8400 (6 cores, AVX2), 32 GB RAM, no GPU, Windows 11, native llama.cpp b10549 with the container's model file and flags (container timings to be added).
 
 ## 8. Next steps
 

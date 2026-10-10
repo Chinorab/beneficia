@@ -1,0 +1,567 @@
+{
+ "case_id": "case04_pact_de",
+ "generated_at": "2026-10-10T16:49:29",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "zurichsee_werft_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  },
+  {
+   "id": "D2",
+   "filename": "02_aktionaerbindungsvertrag.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "zurichsee_werft_ag",
+   "kind": "legal_entity",
+   "name": "Zürichsee Werft AG",
+   "refs": [
+    "D1.P1.L2",
+    "D2.P1.L3"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Wädenswil",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 500,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "beat_kalin",
+   "kind": "natural_person",
+   "name": "Beat Kälin",
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "30.08.1966",
+     "ref": "D1.P1.L4"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L4"
+    },
+    "residence": {
+     "value": "Wädenswil",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "andrea_brunner",
+   "kind": "natural_person",
+   "name": "Andrea Brunner",
+   "refs": [
+    "D1.P1.L5",
+    "D2.P1.L6",
+    "D2.P1.L3"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "17.01.1979",
+     "ref": "D1.P1.L5"
+    },
+    "nationality": {
+     "value": "Schweizerin",
+     "ref": "D1.P1.L5"
+    },
+    "residence": {
+     "value": "Horgen",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "felix_brunner",
+   "kind": "natural_person",
+   "name": "Felix Brunner",
+   "refs": [
+    "D1.P1.L6",
+    "D2.P1.L6",
+    "D2.P1.L3"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "09.09.1982",
+     "ref": "D1.P1.L6"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L6"
+    },
+    "residence": {
+     "value": "Thalwil",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "beat_kalin",
+   "company": "zurichsee_werft_ag",
+   "units_held": 325,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 13,
+    "den": 20,
+    "percent": 65.0
+   },
+   "vote_share": {
+    "num": 13,
+    "den": 20,
+    "percent": 65.0
+   }
+  },
+  {
+   "holder": "andrea_brunner",
+   "company": "zurichsee_werft_ag",
+   "units_held": 100,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 5,
+    "percent": 20.0
+   }
+  },
+  {
+   "holder": "felix_brunner",
+   "company": "zurichsee_werft_ag",
+   "units_held": 75,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 3,
+    "den": 20,
+    "percent": 15.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 20,
+    "percent": 15.0
+   }
+  }
+ ],
+ "agreements": [
+  {
+   "kind": "voting",
+   "controller": "andrea_brunner",
+   "controlled": "felix_brunner",
+   "company": "zurichsee_werft_ag",
+   "ref": "D2.P1.L6"
+  }
+ ],
+ "board": [],
+ "findings": [
+  {
+   "person": "beat_kalin",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "beat_kalin",
+    "zurichsee_werft_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L4",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 13,
+    "den": 20,
+    "percent": 65.0
+   }
+  },
+  {
+   "person": "andrea_brunner",
+   "basis": "other_means",
+   "control_type": {
+    "alone_or_concert": "concert",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "other"
+   },
+   "band": "25_50",
+   "chain": [
+    "andrea_brunner",
+    "zurichsee_werft_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 3 para. 2 let. a",
+    "TJPV art. 4",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D2.P1.L6"
+   ],
+   "status": "pending_review",
+   "share": {
+    "num": 7,
+    "den": 20,
+    "percent": 35.0
+   }
+  }
+ ],
+ "review": [
+  {
+   "reason": "concert",
+   "article": "TJPV art. 4",
+   "parties": [
+    "andrea_brunner",
+    "felix_brunner"
+   ],
+   "refs": [
+    "D2.P1.L6"
+   ],
+   "detail": {}
+  }
+ ],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Zürichsee Werft AG, Wädenswil"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital eingeteilt in 500 Namenaktien."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Beat Kälin, geb. 30.08.1966, Schweizer, Wädenswil 325 Aktien"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Andrea Brunner, geb. 17.01.1979, Schweizerin, Horgen 100 Aktien"
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "01_aktienbuch.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Felix Brunner, geb. 09.09.1982, Schweizer, Thalwil 75 Aktien"
+  },
+  "D2.P1.L3": {
+   "doc": "D2",
+   "filename": "02_aktionaerbindungsvertrag.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "zwischen Andrea Brunner und Felix Brunner betreffend die Zürichsee Werft AG"
+  },
+  "D2.P1.L6": {
+   "doc": "D2",
+   "filename": "02_aktionaerbindungsvertrag.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Zürichsee Werft AG stets nach den Weisungen von Andrea Brunner aus."
+  }
+ },
+ "dropped_items": {
+  "count": 1,
+  "items": [
+   {
+    "pass": "holdings",
+    "ref": "D2.P1.L6",
+    "values": [
+     "Andrea Brunner",
+     "Zürichsee Werft AG",
+     null,
+     null,
+     null,
+     null
+    ],
+    "reason": "units_missing"
+   }
+  ],
+  "accepted": {
+   "companies": 2,
+   "capital": 1,
+   "holdings": 4,
+   "persons": 5,
+   "agreements": 1
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 116.2,
+   "D2": 88.0
+  },
+  "total_s": 204.2,
+  "model_calls": 9,
+  "model_seconds": 204.2
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "c": [
+     [
+      "Zürichsee Werft AG",
+      "AG",
+      "Wädenswil",
+      500,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Zürichsee Werft AG",
+      500,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "h": [
+     [
+      "Beat Kälin",
+      "Zürichsee Werft AG",
+      325,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Andrea Brunner",
+      "Zürichsee Werft AG",
+      100,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ],
+     [
+      "Felix Brunner",
+      "Zürichsee Werft AG",
+      75,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "p": [
+     [
+      "Beat Kälin",
+      "30.08.1966",
+      "Schweizer",
+      "Wädenswil",
+      "P1.L4"
+     ],
+     [
+      "Andrea Brunner",
+      "17.01.1979",
+      "Schweizerin",
+      "Horgen",
+      "P1.L5"
+     ],
+     [
+      "Felix Brunner",
+      "09.09.1982",
+      "Schweizer",
+      "Thalwil",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "c": [
+     [
+      "Zürichsee Werft AG",
+      "AG",
+      null,
+      null,
+      "votes",
+      "P1.L3"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "h": [
+     [
+      "Andrea Brunner",
+      "Zürichsee Werft AG",
+      null,
+      null,
+      null,
+      null,
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "h": []
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "agreements",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "a": [
+     [
+      "voting",
+      "Andrea Brunner",
+      "Felix Brunner",
+      "Zürichsee Werft AG",
+      "P1.L6"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D2",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L6",
+   "output": {
+    "p": [
+     [
+      "Andrea Brunner",
+      null,
+      null,
+      null,
+      "P1.L3"
+     ],
+     [
+      "Felix Brunner",
+      null,
+      null,
+      null,
+      "P1.L3"
+     ]
+    ]
+   }
+  }
+ ]
+}

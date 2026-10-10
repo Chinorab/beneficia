@@ -4,6 +4,7 @@
 #   eval           batch evaluation of /data/cases (or the built-in fictitious cases)
 #   offline-check  eval, then fail unless every case produced a result and no network interface is up
 #   test           unit and integration tests (no model needed)
+#   replay         recompute the reported scores from data/results (no model needed)
 set -eu
 
 MODE="${1:-web}"
@@ -11,6 +12,9 @@ PY=/opt/venv/bin/python
 
 if [ "$MODE" = "test" ]; then
   exec "$PY" -m pytest -q /opt/beneficia/src/tests
+fi
+if [ "$MODE" = "replay" ]; then  # recorded model outputs, no model needed
+  exec "$PY" -m beneficia.cli replay /data/results /data/cases --out /data/output/replay
 fi
 
 # Use the fictitious evaluation cases shipped in the image when no case folder is mounted.

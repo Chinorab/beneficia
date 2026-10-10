@@ -1,0 +1,356 @@
+{
+ "case_id": "case09_inconsistent_de",
+ "generated_at": "2026-10-10T17:02:24",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "holzbau_emmental_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "aktienbuch.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "holzbau_emmental_ag",
+   "kind": "legal_entity",
+   "name": "Holzbau Emmental AG",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Langnau",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "urs_lehmann",
+   "kind": "natural_person",
+   "name": "Urs Lehmann",
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "19.10.1963",
+     "ref": "D1.P1.L4"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L4"
+    },
+    "residence": {
+     "value": "Langnau",
+     "ref": "D1.P1.L4"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "erika_lehmann",
+   "kind": "natural_person",
+   "name": "Erika Lehmann",
+   "refs": [
+    "D1.P1.L5"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "07.05.1966",
+     "ref": "D1.P1.L5"
+    },
+    "nationality": {
+     "value": "Schweizerin",
+     "ref": "D1.P1.L5"
+    },
+    "residence": {
+     "value": "Langnau",
+     "ref": "D1.P1.L5"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "urs_lehmann",
+   "company": "holzbau_emmental_ag",
+   "units_held": 600,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   }
+  },
+  {
+   "holder": "erika_lehmann",
+   "company": "holzbau_emmental_ag",
+   "units_held": 300,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [],
+ "findings": [
+  {
+   "person": "urs_lehmann",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "urs_lehmann",
+    "holzbau_emmental_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L4",
+    "D1.P1.L3"
+   ],
+   "status": "pending_review",
+   "share": {
+    "num": 3,
+    "den": 5,
+    "percent": 60.0
+   }
+  },
+  {
+   "person": "erika_lehmann",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "erika_lehmann",
+    "holzbau_emmental_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "pending_review",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "review": [
+  {
+   "reason": "inconsistent_figures",
+   "article": "TJPV art. 13",
+   "parties": [
+    "holzbau_emmental_ag"
+   ],
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L3",
+    "D1.P1.L4"
+   ],
+   "detail": {}
+  }
+ ],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Holzbau Emmental AG, Langnau"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital eingeteilt in 1'000 Namenaktien."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Urs Lehmann, geb. 19.10.1963, Schweizer, Langnau 600 Aktien"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 5,
+   "text": "Erika Lehmann, geb. 07.05.1966, Schweizerin, Langnau 300 Aktien"
+  }
+ },
+ "dropped_items": {
+  "count": 0,
+  "items": [],
+  "accepted": {
+   "companies": 1,
+   "capital": 1,
+   "holdings": 2,
+   "persons": 2
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 97.6
+  },
+  "total_s": 97.6,
+  "model_calls": 4,
+  "model_seconds": 97.6
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Holzbau Emmental AG",
+      "AG",
+      "Langnau",
+      null,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Holzbau Emmental AG",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Urs Lehmann",
+      "Holzbau Emmental AG",
+      600,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Erika Lehmann",
+      "Holzbau Emmental AG",
+      300,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "p": [
+     [
+      "Urs Lehmann",
+      "19.10.1963",
+      "Schweizer",
+      "Langnau",
+      "P1.L4"
+     ],
+     [
+      "Erika Lehmann",
+      "07.05.1966",
+      "Schweizerin",
+      "Langnau",
+      "P1.L5"
+     ]
+    ]
+   }
+  }
+ ]
+}

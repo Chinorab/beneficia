@@ -1,0 +1,419 @@
+{
+ "case_id": "case01_direct_de",
+ "generated_at": "2026-10-10T16:36:34",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "rigiblick_immobilien_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "aktienbuch.pdf",
+   "kind": "pdf_text",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "rigiblick_immobilien_ag",
+   "kind": "legal_entity",
+   "name": "Rigiblick Immobilien AG",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Arth",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 2000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "reto_fankhauser",
+   "kind": "natural_person",
+   "name": "Reto Fankhauser",
+   "refs": [
+    "D1.P1.L6"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "14.02.1968",
+     "ref": "D1.P1.L6"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L6"
+    },
+    "residence": {
+     "value": "3000 Bern",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "claudia_wyss",
+   "kind": "natural_person",
+   "name": "Claudia Wyss",
+   "refs": [
+    "D1.P1.L7"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "03.07.1975",
+     "ref": "D1.P1.L7"
+    },
+    "nationality": {
+     "value": "Schweizerin",
+     "ref": "D1.P1.L7"
+    },
+    "residence": {
+     "value": "6300 Zug",
+     "ref": "D1.P1.L7"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "simon_gerber",
+   "kind": "natural_person",
+   "name": "Simon Gerber",
+   "refs": [
+    "D1.P1.L8"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "22.11.1990",
+     "ref": "D1.P1.L8"
+    },
+    "nationality": {
+     "value": "Schweizer",
+     "ref": "D1.P1.L8"
+    },
+    "residence": {
+     "value": "6410 Goldau",
+     "ref": "D1.P1.L8"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "reto_fankhauser",
+   "company": "rigiblick_immobilien_ag",
+   "units_held": 1100,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   },
+   "vote_share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   }
+  },
+  {
+   "holder": "claudia_wyss",
+   "company": "rigiblick_immobilien_ag",
+   "units_held": 600,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L7",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  },
+  {
+   "holder": "simon_gerber",
+   "company": "rigiblick_immobilien_ag",
+   "units_held": 300,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L8",
+   "capital_share": {
+    "num": 3,
+    "den": 20,
+    "percent": 15.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 20,
+    "percent": 15.0
+   }
+  }
+ ],
+ "agreements": [],
+ "board": [],
+ "findings": [
+  {
+   "person": "reto_fankhauser",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "reto_fankhauser",
+    "rigiblick_immobilien_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L6",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 11,
+    "den": 20,
+    "percent": 55.0
+   }
+  },
+  {
+   "person": "claudia_wyss",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "claudia_wyss",
+    "rigiblick_immobilien_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L7",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "review": [],
+ "missing": [],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Rigiblick Immobilien AG, Arth"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital CHF 200'000, eingeteilt in 2'000 Namenaktien zu je CHF 100."
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 6,
+   "text": "Reto Fankhauser, geb. 14.02.1968, Schweizer 3000 Bern 1'100"
+  },
+  "D1.P1.L7": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 7,
+   "text": "Claudia Wyss, geb. 03.07.1975, Schweizerin 6300 Zug 600"
+  },
+  "D1.P1.L8": {
+   "doc": "D1",
+   "filename": "aktienbuch.pdf",
+   "page": 1,
+   "line": 8,
+   "text": "Simon Gerber, geb. 22.11.1990, Schweizer 6410 Goldau 300"
+  }
+ },
+ "dropped_items": {
+  "count": 0,
+  "items": [],
+  "accepted": {
+   "companies": 1,
+   "capital": 1,
+   "holdings": 3,
+   "persons": 3
+  }
+ },
+ "timings": {
+  "ingest_s": 0.3,
+  "extract_per_doc_s": {
+   "D1": 173.5
+  },
+  "total_s": 173.8,
+  "model_calls": 5,
+  "model_seconds": 173.5
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "c": [
+     [
+      "Rigiblick Immobilien AG",
+      "AG",
+      "Arth",
+      2000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Rigiblick Immobilien AG",
+      2000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "h": [
+     [
+      "Reto Fankhauser",
+      "Rigiblick Immobilien AG",
+      1100,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ],
+     [
+      "Claudia Wyss",
+      "Rigiblick Immobilien AG",
+      600,
+      null,
+      null,
+      "capital",
+      "P1.L7"
+     ],
+     [
+      "Simon Gerber",
+      "Rigiblick Immobilien AG",
+      300,
+      null,
+      null,
+      "capital",
+      "P1.L8"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "h": []
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L8",
+   "output": {
+    "p": [
+     [
+      "Reto Fankhauser",
+      "14.02.1968",
+      "Schweizer",
+      "3000 Bern",
+      "P1.L6"
+     ],
+     [
+      "Claudia Wyss",
+      "03.07.1975",
+      "Schweizerin",
+      "6300 Zug",
+      "P1.L7"
+     ],
+     [
+      "Simon Gerber",
+      "22.11.1990",
+      "Schweizer",
+      "6410 Goldau",
+      "P1.L8"
+     ]
+    ]
+   }
+  }
+ ]
+}

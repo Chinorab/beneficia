@@ -1,0 +1,563 @@
+{
+ "case_id": "case13_chain_pact_de",
+ "generated_at": "2026-10-10T17:09:50",
+ "model": "apertus-v1.5-8b-text-q4_k_m",
+ "draft_label": "Draft for verification, not filed",
+ "target": "alpenblick_holding_ag",
+ "documents": [
+  {
+   "id": "D1",
+   "filename": "aktienbuch.txt",
+   "kind": "txt",
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 2,
+   "min_ocr_confidence": null
+  }
+ ],
+ "parties": [
+  {
+   "id": "alpenblick_holding_ag",
+   "kind": "legal_entity",
+   "name": "Alpenblick Holding AG",
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Luzern",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 1000,
+   "total_votes": null,
+   "total_ref": "D1.P1.L4",
+   "special_kind": null
+  },
+  {
+   "id": "petra_imhof",
+   "kind": "natural_person",
+   "name": "Petra Imhof",
+   "refs": [
+    "D1.P1.L6",
+    "D1.P2.L3"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "12.03.1971",
+     "ref": "D1.P1.L6"
+    },
+    "nationality": {
+     "value": "Schweizer Bürgerin",
+     "ref": "D1.P1.L6"
+    },
+    "residence": {
+     "value": "Luzern",
+     "ref": "D1.P1.L6"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "bergkristall_beteiligungen_gmbh",
+   "kind": "legal_entity",
+   "name": "Bergkristall Beteiligungen GmbH",
+   "refs": [
+    "D1.P1.L7"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "lukas_ammann",
+   "kind": "natural_person",
+   "name": "Lukas Ammann",
+   "refs": [
+    "D1.P1.L8",
+    "D1.P2.L3"
+   ],
+   "fields": {
+    "birth_date": {
+     "value": "02.11.1985",
+     "ref": "D1.P1.L8"
+    },
+    "nationality": {
+     "value": "Schweizer Bürger",
+     "ref": "D1.P1.L8"
+    },
+    "residence": {
+     "value": "Kriens",
+     "ref": "D1.P1.L8"
+    }
+   },
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "sandra_keller",
+   "kind": "natural_person",
+   "name": "Frau Sandra Keller",
+   "refs": [
+    "D1.P2.L4"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "petra_imhof",
+   "company": "alpenblick_holding_ag",
+   "units_held": 520,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L6",
+   "capital_share": {
+    "num": 13,
+    "den": 25,
+    "percent": 52.0
+   },
+   "vote_share": {
+    "num": 13,
+    "den": 25,
+    "percent": 52.0
+   }
+  },
+  {
+   "holder": "bergkristall_beteiligungen_gmbh",
+   "company": "alpenblick_holding_ag",
+   "units_held": 300,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L7",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  },
+  {
+   "holder": "lukas_ammann",
+   "company": "alpenblick_holding_ag",
+   "units_held": 180,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L8",
+   "capital_share": {
+    "num": 9,
+    "den": 50,
+    "percent": 18.0
+   },
+   "vote_share": {
+    "num": 9,
+    "den": 50,
+    "percent": 18.0
+   }
+  },
+  {
+   "holder": "sandra_keller",
+   "company": "bergkristall_beteiligungen_gmbh",
+   "units_held": 0,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P2.L4",
+   "capital_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   },
+   "vote_share": {
+    "num": 1,
+    "den": 1,
+    "percent": 100.0
+   }
+  }
+ ],
+ "agreements": [
+  {
+   "kind": "voting",
+   "controller": "petra_imhof",
+   "controlled": "lukas_ammann",
+   "company": "alpenblick_holding_ag",
+   "ref": "D1.P2.L3"
+  }
+ ],
+ "board": [],
+ "findings": [
+  {
+   "person": "petra_imhof",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "petra_imhof",
+    "alpenblick_holding_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L6",
+    "D1.P1.L4"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 13,
+    "den": 25,
+    "percent": 52.0
+   }
+  },
+  {
+   "person": "sandra_keller",
+   "basis": "indirect",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "indirect",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "sandra_keller",
+    "bergkristall_beteiligungen_gmbh",
+    "alpenblick_holding_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 2",
+    "TJPV art. 12",
+    "TJPV art. 13",
+    "TJPV art. 13 para. 3"
+   ],
+   "refs": [
+    "D1.P2.L4",
+    "D1.P1.L7",
+    "D1.P1.L4"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
+  }
+ ],
+ "review": [
+  {
+   "reason": "concert",
+   "article": "TJPV art. 4",
+   "parties": [
+    "petra_imhof",
+    "lukas_ammann"
+   ],
+   "refs": [
+    "D1.P2.L3"
+   ],
+   "detail": {}
+  }
+ ],
+ "missing": [
+  {
+   "what": "identification",
+   "about": "sandra_keller",
+   "reason": "birth_date,nationality,residence"
+  }
+ ],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 1,
+   "line": 2,
+   "text": "AKTIENBUCH der Alpenblick Holding AG, mit Sitz in Luzern"
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 1,
+   "line": 4,
+   "text": "Aktienkapital: CHF 100'000, eingeteilt in 1'000 Namenaktien zu nominal CHF 100."
+  },
+  "D1.P1.L6": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 1,
+   "line": 6,
+   "text": "1 | Petra Imhof, geb. 12.03.1971, Schweizer Bürgerin | Seestrasse 4, 6006 Luzern | 520 | 1 bis 520"
+  },
+  "D1.P1.L7": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 1,
+   "line": 7,
+   "text": "2 | Bergkristall Beteiligungen GmbH | Bahnhofplatz 2, 6300 Zug | 300 | 521 bis 820"
+  },
+  "D1.P1.L8": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 1,
+   "line": 8,
+   "text": "3 | Lukas Ammann, geb. 02.11.1985, Schweizer Bürger | Dorfweg 9, 6010 Kriens | 180 | 821 bis 1000"
+  },
+  "D1.P2.L3": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 2,
+   "line": 3,
+   "text": "Generalversammlungen gemäss den Weisungen von Petra Imhof auszuüben."
+  },
+  "D1.P2.L4": {
+   "doc": "D1",
+   "filename": "aktienbuch.txt",
+   "page": 2,
+   "line": 4,
+   "text": "Die Gesellschafterin der Bergkristall Beteiligungen GmbH ist zu 100 % Frau Sandra Keller,"
+  }
+ },
+ "dropped_items": {
+  "count": 2,
+  "items": [
+   {
+    "pass": "companies",
+    "ref": "D1.P1.L2",
+    "values": [
+     "Alpenblick Holding AG",
+     "AG",
+     "Luzern",
+     1000,
+     "shares"
+    ],
+    "reason": "total_not_on_capital_line"
+   },
+   {
+    "pass": "holdings_retry",
+    "ref": "D1.P1.L2",
+    "values": [
+     "Alpenblick Holding AG",
+     "Alpenblick Holding AG",
+     520,
+     null,
+     null,
+     "both"
+    ],
+    "reason": "holder_or_units_not_on_line"
+   }
+  ],
+  "accepted": {
+   "companies": 1,
+   "capital": 1,
+   "holdings": 3,
+   "holdings_prose": 1,
+   "holdings_retry": 2,
+   "citation_reanchored": 1,
+   "agreements": 1,
+   "persons": 2
+  }
+ },
+ "timings": {
+  "ingest_s": 0.0,
+  "extract_per_doc_s": {
+   "D1": 205.8
+  },
+  "total_s": 205.8,
+  "model_calls": 7,
+  "model_seconds": 205.8
+ },
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "c": [
+     [
+      "Alpenblick Holding AG",
+      "AG",
+      "Luzern",
+      1000,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L4",
+   "last_line": "P1.L4",
+   "output": {
+    "k": [
+     [
+      "Alpenblick Holding AG",
+      1000,
+      "shares",
+      "P1.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "h": [
+     [
+      "Petra Imhof",
+      "Alpenblick Holding AG",
+      520,
+      null,
+      null,
+      "capital",
+      "P1.L6"
+     ],
+     [
+      "Bergkristall Beteiligungen GmbH",
+      "Alpenblick Holding AG",
+      300,
+      null,
+      null,
+      "capital",
+      "P1.L7"
+     ],
+     [
+      "Lukas Ammann",
+      "Alpenblick Holding AG",
+      180,
+      null,
+      null,
+      "capital",
+      "P1.L8"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_prose",
+   "window": 1,
+   "first_line": "P2.L1",
+   "last_line": "P2.L4",
+   "output": {
+    "h": [
+     [
+      "Frau Sandra Keller",
+      "Bergkristall Beteiligungen GmbH",
+      null,
+      100,
+      null,
+      "both",
+      "P2.L4"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings_retry",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Alpenblick Holding AG",
+      "Alpenblick Holding AG",
+      520,
+      null,
+      null,
+      "both",
+      "P1.L2"
+     ],
+     [
+      "Petra Imhof",
+      "Alpenblick Holding AG",
+      520,
+      null,
+      null,
+      "both",
+      "P1.L5"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "agreements",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "a": [
+     [
+      "voting",
+      "Petra Imhof",
+      "Lukas Ammann",
+      "Alpenblick Holding AG",
+      "P2.L3"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "persons",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P2.L5",
+   "output": {
+    "p": [
+     [
+      "Petra Imhof",
+      "12.03.1971",
+      "Schweizer Bürgerin",
+      "Luzern",
+      "P1.L6"
+     ],
+     [
+      "Lukas Ammann",
+      "02.11.1985",
+      "Schweizer Bürger",
+      "Kriens",
+      "P1.L8"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-.PHONY: run build test eval offline-test stop clean
+.PHONY: run build test eval offline-test replay stop clean
 
 IMAGE ?= beneficia:latest
 NAME  ?= beneficia
@@ -28,6 +28,10 @@ eval: build
 # Air-gap proof: the whole pipeline runs in a container without any network interface.
 offline-test: build
 	docker run --rm --network none -v "$(DATA):/data" $(IMAGE) offline-check $(ONLY)
+
+# Reproduce the reported scores in seconds from the recorded model outputs in data/results (no model, no network).
+replay: build
+	docker run --rm --network none -v "$(DATA):/data" $(IMAGE) replay
 
 stop:
 	-docker stop $(NAME)
