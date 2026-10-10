@@ -46,3 +46,20 @@ def test_resolver_builds_cited_facts_and_drops_hallucinations():
     berg = next(p for p in f.parties.values() if p.name.startswith("Bergkristall"))
     assert berg.kind == "legal_entity"
     assert all(str(h.ref).startswith("D1.P1.L") for h in f.holdings)
+
+
+def test_register_row_detection():
+    from beneficia.extract.passes import _is_register_row as f
+    assert f("Julien Perrin, né le 9 mai 1979, suisse 1700 Fribourg 300")
+    assert f("Titlis Invest AG, Engelberg 8'000 Aktien")
+    assert not f("Aktienkapital CHF 200'000, eingeteilt in 2'000 Namenaktien zu je CHF 100.")
+    assert not f("Stand per 30. September 2026")
+    assert not f("Aktionär Wohnsitz Anzahl Aktien")
+
+
+def test_total_must_be_on_a_capital_line_and_agreements_need_wording():
+    r = Resolver(docs(), "Alpenblick Holding AG")
+    r.add(row("companies", ["Bergkristall Beteiligungen GmbH", "GmbH", "Zug", 300, "shares"], "P1.L4"))
+    r.add(row("agreements", ["other", "Petra Imhof", "Alpenblick Holding AG", None], "P1.L3"))
+    res = r.finish()
+    assert {d["reason"] for d in res.dropped} == {"total_not_on_capital_line", "no_agreement_wording"}

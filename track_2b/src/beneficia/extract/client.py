@@ -63,10 +63,16 @@ class LLMClient:
 
 
 class ReplayClient:
-    """Replays recorded model outputs in call order (integration tests, fast iteration on code)."""
+    """Replays recorded model outputs per pass, in call order (integration tests, fast iteration on code).
+
+    Responses are matched to the pass whose system prompt is used, so adding or removing a pass does not
+    shift the other answers. A pass without a recorded answer returns an empty result."""
 
     def __init__(self, model_responses: list[dict], model: str = "replay"):
-        self.queue = [m["output"] for m in model_responses]
+        from collections import defaultdict, deque
+        self.queues = defaultdict(deque)
+        for m in model_responses:
+            self.queues[m["pass"]].append(m["output"])
         self.model = model
         self.calls: list[dict] = []
 
@@ -74,5 +80,8 @@ class ReplayClient:
         return True
 
     def complete_json(self, system, user, schema, max_tokens=600, example=None) -> dict:
+        from beneficia.extract.passes import PASSES
         self.calls.append({"seconds": 0.0})
-        return self.queue.pop(0) if self.queue else {}
+        name = next((p.name for p in PASSES if p.system() == system and (p.example == example)), None)
+        q = self.queues.get(name)
+        return q.popleft() if q else {}

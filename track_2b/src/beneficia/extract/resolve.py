@@ -7,7 +7,14 @@ from fractions import Fraction
 from dataclasses import dataclass, field
 from typing import Optional
 
-from beneficia.extract.passes import RawRow
+from beneficia.extract.passes import CAPITAL_LINE, RawRow
+
+# words that show an agreement or control clause is really written near the cited line (accents folded)
+AGREEMENT_EVIDENCE = re.compile(
+    r"(stimmbind|bindungsvertrag|aktionarbindung|weisung|treuhand|fiduci|pacte|convention de vote|"
+    r"convention d'actionnaires|instructions? de|patto|parasocial|istruzion|veto|ernenn|abberuf|nommer|"
+    r"revoquer|nominare|revocare|stimmrecht.*aus|droit de vote.*selon|for the account|on behalf|"
+    r"pour le compte|per conto|im auftrag|auf rechnung)")
 from beneficia.model import BoardRole, CaseFacts, ControlAgreement, Document, Field, Holding, LineRef
 from beneficia.parties import PartyRegistry, fold, normalise
 from beneficia.rules.fallback import normalise_role
@@ -136,8 +143,11 @@ class Resolver:
         if seat:
             party.fields.setdefault("seat", Field(seat, ref))
         if total is not None:
-            if total <= 0 or total not in numbers_on(ctx):
+            line = self.docs[ref.doc].line(ref.page, ref.line) or ""
+            if total <= 0 or total not in numbers_on(line):
                 self._drop(row, "total_not_on_line")
+            elif not CAPITAL_LINE.search(line):
+                self._drop(row, "total_not_on_capital_line")  # e.g. a holding row read as the company's capital
             else:
                 self.totals.setdefault(party.id, []).append((total, kind or "shares", ref))
 
@@ -145,9 +155,14 @@ class Resolver:
         holder, company, units, percent, held_for, basis = row.values
         if not holder or not company:
             return self._drop(row, "missing_party")
-        if units is not None and percent_on(units, ctx) and units not in numbers_on(PERCENT_RE.sub(" ", fold(ctx))):
+        # numbers must be on the cited line itself; the prose pass merged a wrapped line with the next one
+        doc = self.docs[ref.doc]
+        own = " ".join(x for x in (doc.line(ref.page, ref.line),
+                                   doc.line(ref.page, ref.line + 1) if row.pass_name == "holdings_prose" else None)
+                       if x)
+        if units is not None and percent_on(units, own) and units not in numbers_on(PERCENT_RE.sub(" ", fold(own))):
             units, percent = None, units  # the number is only written as a percentage on the line
-        if units is not None and (units <= 0 or units not in numbers_on(ctx)):
+        if units is not None and (units <= 0 or units not in numbers_on(own)):
             return self._drop(row, "units_not_on_line")
         written = None
         if units is None:
@@ -194,6 +209,8 @@ class Resolver:
     def _agreements(self, row, ref, ctx):
         kind, controller, controlled, company = row.values
         wide = self._context(ref, 2)
+        if not AGREEMENT_EVIDENCE.search(fold(wide)):
+            return self._drop(row, "no_agreement_wording")
         if not controller or not name_on(controller, wide):
             return self._drop(row, "controller_not_on_line")
         if not controlled or not name_on(controlled, wide):

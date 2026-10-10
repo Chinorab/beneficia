@@ -36,6 +36,7 @@ class Pass:
     max_tokens: int = 500
     example: tuple[str, str] | None = None  # invented one-shot example (user text, expected JSON)
     line_filter: Callable[[str], bool] | None = None  # send only matching lines of the window
+    skip_covered: bool = False  # drop lines already cited by an earlier holdings pass
 
     def schema(self, line_ids: list[str]) -> dict:
         row = {"type": "array", "prefixItems": [*self.columns, {"enum": line_ids}],
@@ -77,7 +78,7 @@ PASSES: tuple[Pass, ...] = (
          "other. controller is the person who gains control, controlled is the party bound by it.",
          ({"enum": ["voting", "fiduciary", "veto", "appointment", "other"]}, STR, STR, NSTR),
          ("stimm", "vote", "voto", "bindung", "pacte", "patto", "convention", "vertrag", "accord", "treuh",
-          "fiduci", "veto", "ernenn", "nomm", "nomin", "weisung", "instruction", "istruzion", "abberuf",
+          "fiduci", "veto", "ernenn", "nommer", "nominare", "weisung", "instruction", "istruzion", "abberuf",
           "révoqu", "revoc")),
     Pass("board", "b",
          "List members of the board of directors or the management of each company. Output {\"b\": [[person, "
@@ -116,9 +117,27 @@ PROSE_EXAMPLE = (
     '["Treuhand Muster AG", "Holz Invest GmbH", 20, null, "Lea Fiktiv", "both", "P1.L5"], '
     '["Nora Exempel", "Muster Beispiel AG", null, 35, null, "both", "P1.L7"]]}')
 
+UNIT_WORDS = r"(aktien|namenaktien|stammanteile?|anteile?|actions?|parts?(?: sociales)?|azioni|quote|shares|quotas)"
+REGISTER_ROW = re.compile(r"(\d[\d'’ ]*\s*" + UNIT_WORDS + r"\b|\d[\d'’]*\s*$)", re.IGNORECASE)
+CAPITAL_LINE = re.compile(r"(eingeteilt|aktienkapital|stammkapital|divis|capital|suddivis|capitale|insgesamt|total)",
+                          re.IGNORECASE)
+ENDS_WITH_YEAR = re.compile(r"\b(19|20)\d{2}\.?\s*$")
+
+
+def _is_register_row(line: str) -> bool:
+    """A line that looks like 'name ... number [units]' but is not the total capital or a date."""
+    if CAPITAL_LINE.search(line) or not REGISTER_ROW.search(line):
+        return False
+    if ENDS_WITH_YEAR.search(line) and not re.search(UNIT_WORDS, line, re.IGNORECASE):
+        return False  # 'Stand per 30. September 2026'
+    return bool(re.search(r"[A-Za-zÀ-ÿ]{3,}", line))
+
+
 _holdings = next(p for p in PASSES if p.name == "holdings")
-PASSES = PASSES[:2] + (replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding,
-                               example=PROSE_EXAMPLE),) + PASSES[2:]
+PASSES = PASSES[:2] + (
+    replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding, example=PROSE_EXAMPLE),
+    replace(_holdings, name="holdings_retry", keywords=(), line_filter=_is_register_row, skip_covered=True),
+) + PASSES[2:]
 
 
 def merge_continuations(numbered: list[str]) -> list[str]:
@@ -163,6 +182,9 @@ def run_passes(doc: Document, complete: Callable[..., dict],
             if p.line_filter is not None:
                 merged = merge_continuations(text.splitlines())
                 kept = [ln for ln in merged if p.line_filter(ln.split(" ", 1)[1] if " " in ln else "")]
+                if p.skip_covered:
+                    covered = {r.line_id for r in rows if r.pass_name.startswith("holdings")}
+                    kept = [ln for ln in kept if ln.split(" ", 1)[0] not in covered]
                 if not kept:
                     continue
                 text, ids = "\n".join(kept), [ln.split(" ", 1)[0] for ln in kept]
