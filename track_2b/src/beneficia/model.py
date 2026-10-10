@@ -139,3 +139,4 @@ class CaseFacts:
     agreements: list[ControlAgreement] = field(default_factory=list)
     board: list[BoardRole] = field(default_factory=list)
     low_confidence_refs: list[LineRef] = field(default_factory=list)
+    inconsistent: set[str] = field(default_factory=set)  # companies whose figures do not add up

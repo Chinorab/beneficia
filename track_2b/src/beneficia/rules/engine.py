@@ -149,6 +149,10 @@ def _qualify(g: OwnershipGraph, person: str, target: str, result: AnalysisResult
         status = "pending_review"
         nominees = [n for e in fiduciary for n in g.fiduciary_edges[e]]
         result.add_review(ReviewItem("fiduciary", A.TJPV_3_2_E, [person, *nominees], list(refs)))
+    shaky = [c for c in chain[1:] if c in g.facts.inconsistent]
+    if shaky:
+        status = "pending_review"
+        result.add_review(ReviewItem("inconsistent_figures", A.TJPV_13, shaky, list(refs)))
     unstated = [c for c in chain[1:] if c in g.total_from_register_sum]
     if unstated:
         status = "pending_review"

@@ -1,0 +1,122 @@
+[
+ {
+  "doc": "D1",
+  "pass": "companies",
+  "window": 1,
+  "first_line": "P1.L1",
+  "last_line": "P2.L5",
+  "output": {
+   "c": [
+    [
+     "Alpenblick Holding",
+     "AG",
+     "Luzern",
+     1000,
+     "shares",
+     "P1.L4"
+    ]
+   ]
+  }
+ },
+ {
+  "doc": "D1",
+  "pass": "holdings",
+  "window": 1,
+  "first_line": "P1.L1",
+  "last_line": "P2.L5",
+  "output": {
+   "h": [
+    [
+     "Petra Imhof",
+     "Alpenblick Holding AG",
+     520,
+     null,
+     null,
+     "both",
+     "P1.L6"
+    ],
+    [
+     "Bergkristall Beteiligungen GmbH",
+     "Alpenblick Holding AG",
+     300,
+     null,
+     null,
+     "both",
+     "P1.L7"
+    ],
+    [
+     "Lukas Ammann",
+     "Alpenblick Holding AG",
+     180,
+     null,
+     null,
+     "both",
+     "P1.L8"
+    ]
+   ]
+  }
+ },
+ {
+  "doc": "D1",
+  "pass": "holdings_prose",
+  "window": 1,
+  "first_line": "P2.L1",
+  "last_line": "P2.L4",
+  "output": {
+   "h": [
+    [
+     "Frau Sandra Keller",
+     "Bergkristall Beteiligungen GmbH",
+     100,
+     100,
+     null,
+     "capital",
+     "P2.L4"
+    ]
+   ]
+  }
+ },
+ {
+  "doc": "D1",
+  "pass": "agreements",
+  "window": 1,
+  "first_line": "P1.L1",
+  "last_line": "P2.L5",
+  "output": {
+   "a": [
+    [
+     "voting",
+     "Petra Imhof",
+     "Lukas Ammann",
+     "Alpenblick Holding AG",
+     "P2.L3"
+    ]
+   ]
+  }
+ },
+ {
+  "doc": "D1",
+  "pass": "persons",
+  "window": 1,
+  "first_line": "P1.L1",
+  "last_line": "P2.L5",
+  "output": {
+   "p": [
+    [
+     "Petra Imhof",
+     "12.03.1971",
+     "Schweizer",
+     "Luzern",
+     "P1.L6"
+    ],
+    [
+     "Lukas Ammann",
+     "02.11.1985",
+     "Schweizer",
+     "Kriens",
+     "P1.L8"
+    ]
+   ]
+  }
+ }
+]

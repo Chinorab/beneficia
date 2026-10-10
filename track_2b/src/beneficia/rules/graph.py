@@ -17,6 +17,7 @@ class OwnershipGraph:
         self.edge_refs: dict[tuple[str, str], list[LineRef]] = defaultdict(list)
         self.fiduciary_edges: dict[tuple[str, str], list[str]] = {}  # (principal, company) -> nominees
         self.total_from_register_sum: set[str] = set()
+        self.percent: dict[tuple[str, str], Fraction] = defaultdict(Fraction)  # written percent, no units
         has_vote_lines: set[str] = set()
 
         for h in facts.holdings:
@@ -26,6 +27,9 @@ class OwnershipGraph:
                 self.fiduciary_edges.setdefault(key, []).append(h.holder)
             if h.ref:
                 self.edge_refs[key].append(h.ref)
+            if not h.units_held and h.written_percent:
+                self.percent[key] += h.written_percent
+                continue
             if h.basis in ("capital", "both"):
                 self.units[(owner, h.company, "capital")] += h.units_held
             if h.basis == "votes":
@@ -57,15 +61,16 @@ class OwnershipGraph:
     def share(self, owner: str, company: str, basis: str) -> Fraction:
         total = self.totals.get((company, basis))
         n = self.units.get((owner, company, basis), 0)
-        if not total or not n:
-            return Fraction(0)
-        return Fraction(n, total)
+        if total and n:
+            return Fraction(n, total)
+        return self.percent.get((owner, company), Fraction(0))
 
     def holders_of(self, company: str) -> set[str]:
-        return {o for (o, c, _), n in self.units.items() if c == company and n > 0}
+        return ({o for (o, c, _), n in self.units.items() if c == company and n > 0}
+                | {o for (o, c), x in self.percent.items() if c == company and x > 0})
 
     def companies(self) -> set[str]:
-        return {c for (_, c, _) in self.units}
+        return {c for (_, c, _) in self.units} | {c for (_, c) in self.percent}
 
     def is_entity(self, pid: str) -> bool:
         p = self.parties.get(pid)
@@ -80,6 +85,9 @@ class OwnershipGraph:
         adj: dict[str, set[str]] = defaultdict(set)
         for (o, c, _), n in self.units.items():
             if n and self.is_entity(o):
+                adj[o].add(c)
+        for (o, c), x in self.percent.items():
+            if x and self.is_entity(o):
                 adj[o].add(c)
         found, seen_keys = [], set()
         state: dict[str, int] = {}

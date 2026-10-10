@@ -46,3 +46,13 @@ def test_cycle_detection():
     f = facts("t", [company("t"), company("x"), company("y")],
               [("x", "t", 50), ("y", "x", 60), ("x", "y", 60)])
     assert OwnershipGraph(f).cycles()
+
+
+def test_written_percentage_without_units_is_used_as_share():
+    from fractions import Fraction as F
+    from beneficia.model import Holding, LineRef
+    f = facts("t", [company("t"), company("x", None), person("a"), person("k")], [("x", "t", 30), ("a", "t", 70)])
+    f.holdings.append(Holding("k", "x", 0, "both", None, F(1), LineRef("D1", 2, 5)))
+    g = OwnershipGraph(f)
+    assert g.share("k", "x", "capital") == 1
+    assert "k" in g.holders_of("x")
