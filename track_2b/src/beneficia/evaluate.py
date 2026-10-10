@@ -109,6 +109,28 @@ def run_eval(cases_dir: Path, out_dir: Path, only: Optional[list[str]] = None, c
               f"{score['holdings']['expected']} ({score['holdings']['predicted']} predicted) {seconds}s "
               f"{'; '.join(score['owner_errors'] + score['missing_review_reasons'])}", flush=True)
 
+    return _write_summary(rows, out_dir, client.model)
+
+
+def rescore(cases_dir: Path, out_dir: Path) -> dict:
+    """Rebuild summary.json from result.json files already written (no model needed)."""
+    rows, model = [], "unknown"
+    for res_file in sorted(Path(out_dir).glob("*/result.json")):
+        case = Path(cases_dir) / res_file.parent.name
+        if not (case / "expected.json").exists():
+            continue
+        result = json.loads(res_file.read_text(encoding="utf-8"))
+        expected = json.loads((case / "expected.json").read_text(encoding="utf-8"))
+        model = result.get("model", model)
+        score = score_case(result, expected)
+        score.update({"case": case.name, "language": expected.get("language", "unknown"),
+                      "seconds": result["timings"]["total_s"], "documents": len(result["documents"]),
+                      "model_calls": result["timings"]["model_calls"]})
+        rows.append(score)
+    return _write_summary(rows, Path(out_dir), model)
+
+
+def _write_summary(rows: list[dict], out_dir: Path, model: str) -> dict:
     by_lang = defaultdict(lambda: {"tp": 0, "predicted": 0, "expected": 0})
     for r in rows:
         for k in ("tp", "predicted", "expected"):
@@ -127,7 +149,7 @@ def run_eval(cases_dir: Path, out_dir: Path, only: Optional[list[str]] = None, c
         "seconds_per_case_mean": round(sum(r["seconds"] for r in rows) / len(rows), 1) if rows else None,
         "seconds_per_case_max": max((r["seconds"] for r in rows), default=None),
     }
-    summary = {"model": client.model, "machine": {"platform": platform.platform(), "processor": platform.processor()},
+    summary = {"model": model, "machine": {"platform": platform.platform(), "processor": platform.processor()},
                "totals": totals, "cases": rows}
     (out_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
     return summary

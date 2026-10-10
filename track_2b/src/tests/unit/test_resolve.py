@@ -40,7 +40,7 @@ def test_resolver_builds_cited_facts_and_drops_hallucinations():
     target = f.parties[f.target]
     assert target.total_capital == 1000
     assert sorted(h.units_held for h in f.holdings) == [180, 300, 520]
-    assert {d["reason"] for d in res.dropped} == {"units_not_on_line", "holder_not_on_line", "line_not_found"}
+    assert {d["reason"] for d in res.dropped} == {"holder_or_units_not_on_line", "line_not_found"}
     imhof = next(p for p in f.parties.values() if p.name == "Petra Imhof")
     assert imhof.kind == "natural_person" and imhof.fields["birth_date"].value == "12.03.1971"
     berg = next(p for p in f.parties.values() if p.name.startswith("Bergkristall"))

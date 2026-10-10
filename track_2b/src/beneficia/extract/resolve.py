@@ -183,13 +183,29 @@ class Resolver:
 
     def _holdings(self, row, ref, ctx):
         holder, company, units, percent, held_for, basis = row.values
-        if not holder or not company:
+        if not holder:
             return self._drop(row, "missing_party")
-        # numbers must be on the cited line itself; the prose pass merged a wrapped line with the next one
+        # holder and quantity must be on the cited line itself (the prose pass merged a wrapped line with the
+        # next one). A citation off by one line is re-anchored to the neighbour that carries both, never widened.
         doc = self.docs[ref.doc]
-        own = " ".join(x for x in (doc.line(ref.page, ref.line),
-                                   doc.line(ref.page, ref.line + 1) if row.pass_name == "holdings_prose" else None)
-                       if x)
+
+        def own_text(r: LineRef) -> str:
+            nxt = doc.line(r.page, r.line + 1) if row.pass_name == "holdings_prose" else None
+            return " ".join(x for x in (doc.line(r.page, r.line), nxt) if x)
+
+        anchor = None
+        for delta in (0, 1, -1):
+            cand = LineRef(ref.doc, ref.page, ref.line + delta)
+            text = own_text(cand)
+            if text and name_on(holder, text) and (units is None or units in numbers_on(text)):
+                anchor = cand
+                break
+        if anchor is None:
+            return self._drop(row, "holder_or_units_not_on_line")
+        if anchor != ref:
+            self.accepted["citation_reanchored"] += 1
+            ref, ctx = anchor, self._context(anchor)
+        own = own_text(ref)
         if units is not None and percent_on(units, own) and units not in numbers_on(PERCENT_RE.sub(" ", fold(own))):
             units, percent = None, units  # the number is only written as a percentage on the line
         if units is not None and (units <= 0 or units not in numbers_on(own)):
@@ -212,27 +228,13 @@ class Resolver:
                     return self._drop(row, "units_missing")
             else:
                 written = Fraction(str(percent)) / 100
-        if not name_on(holder, ctx):
+        if not name_on(holder, own):
             return self._drop(row, "holder_not_on_line")
         if units is not None and units in postal_codes(own):
             return self._drop(row, "units_is_postal_code")  # '1700 Fribourg' is an address, not 1700 shares
-        if not name_full_on(company, own):
-            owner = register_owner(doc, ref)
-            if owner is not None and not name_full_on(company, owner):
-                return self._drop(row, "company_not_register_owner")
-        comp = self.reg.find(company) or self._target_alias(company)
+        comp = self._resolve_company(company, holder, units, ref, own)
         if comp is None:
-            if not name_on(company, self._context(ref, 40)):
-                # same holder and quantity already read on this very line: the company name was miscopied
-                hid = self.reg.find(holder)
-                same = next((x for x in self.holdings if hid and x.holder == hid.id and x.units_held == units
-                             and x.ref and (x.ref.doc, x.ref.page, x.ref.line) == (ref.doc, ref.page, ref.line)),
-                            None)
-                if same is None:
-                    return self._drop(row, "company_not_in_document")
-                comp = self.reg.parties[same.company]
-            else:
-                comp = self.reg.get_or_create(company, ref, "legal_entity")
+            return self._drop(row, "company_not_resolved")
         h = self.reg.get_or_create(holder, ref)
         principal = None
         if held_for:
@@ -244,6 +246,30 @@ class Resolver:
             return self._drop(row, "self_holding")
         self.holdings.append(Holding(h.id, comp.id, int(units) if units is not None else 0, basis or "both",
                                      principal, written, ref))
+
+    def _party_named_in(self, line: str):
+        names = [p for p in self.reg.parties.values() if p.kind == "legal_entity" and name_full_on(p.name, line)]
+        return max(names, key=lambda p: len(p.name)) if names else None
+
+    def _resolve_company(self, company, holder, units, ref, own):
+        """Which company a holding row is about: the model's answer when the text supports it, otherwise the
+        holding already read on the same line, otherwise the company named at the head of the register."""
+        doc = self.docs[ref.doc]
+        owner_line = register_owner(doc, ref)
+        if company:
+            credible = name_full_on(company, own) or owner_line is None or name_full_on(company, owner_line)
+            if credible:
+                comp = self.reg.find(company) or self._target_alias(company)
+                if comp is not None:
+                    return comp
+                if _entity(company) and name_full_on(company, self._context(ref, 40)):
+                    return self.reg.get_or_create(company, ref, "legal_entity")
+        hid = self.reg.find(holder)
+        same = next((x for x in self.holdings if hid and x.holder == hid.id and x.units_held == units
+                     and x.ref and (x.ref.doc, x.ref.page, x.ref.line) == (ref.doc, ref.page, ref.line)), None)
+        if same is not None:
+            return self.reg.parties[same.company]
+        return self._party_named_in(owner_line) if owner_line else None
 
     def _target_alias(self, name: str):
         if self.target_name and normalise(name) and normalise(name) in normalise(self.target_name):
@@ -269,9 +295,17 @@ class Resolver:
         if not person or not name_on(person, ctx):
             return self._drop(row, "person_not_on_line")
         p = self.reg.get_or_create(person, ref, "natural_person")
-        comp = (self.reg.find(company) or self._target_alias(company)) if company else None
-        self.board.append(BoardRole(p.id, comp.id if comp else None, role_raw or "", normalise_role(role_raw or ""),
-                                    ref))
+        line = self.docs[ref.doc].line(ref.page, ref.line) or ""
+        # company: only if written next to the role; a role line without a company refers to the document's company
+        comp = None
+        if company and name_full_on(company, ctx):
+            comp = self.reg.find(company) or self._target_alias(company)
+        if comp is None:
+            comp = self._party_named_in(line)
+        # role: as written on the line; a translated or invented role is replaced by the line's own wording
+        if not role_raw or not name_on(role_raw, ctx):
+            role_raw = line
+        self.board.append(BoardRole(p.id, comp.id if comp else None, role_raw, normalise_role(role_raw), ref))
 
     def _persons(self, row, ref, ctx):
         name, birth, nationality, residence = row.values

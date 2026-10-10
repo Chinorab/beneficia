@@ -45,7 +45,14 @@ class Pass:
                 "required": [self.key], "additionalProperties": False}
 
     def system(self) -> str:
-        return COMMON + " " + self.instruction
+        # identical for every pass, so llama.cpp can reuse the cached document prefix across passes
+        return COMMON
+
+    def user(self, lines: str) -> str:
+        return "Document lines:" + chr(10) + lines + chr(10) + chr(10) + "Task: " + self.instruction
+
+    def shot(self) -> tuple[str, str] | None:
+        return (self.user(self.example[0]), self.example[1]) if self.example else None
 
 
 SHARE_WORDS = ("aktie", "stammanteil", "anteil", "stimmrecht", "kapital", "action", "part", "capital",
@@ -68,7 +75,8 @@ PASSES: tuple[Pass, ...] = (
          "null. held_for is the person on whose behalf the units are held (fiduciary, nominee), else null. "
          "basis is capital, votes or both (both when shares carry one vote each or nothing else is said). "
          "Sentences also count, for example 'the sole shareholder of Y is X', 'Y belongs 100 % to X', "
-         "'X detient 40 % de Y'. Do not list the total share capital, addresses or board roles as holdings.",
+         "'X detient 40 % de Y'. Do not list the total share capital, addresses or board roles as holdings. "
+         "A 4 digit number before a town name is a postal code, never a quantity.",
          (STR, STR, NINT, NNUM, NSTR, {"enum": ["capital", "votes", "both", None]}), SHARE_WORDS),
     Pass("agreements", "a",
          "List agreements or clauses that give a person control over a company other than by holding "
@@ -166,10 +174,13 @@ class RawRow:
     line_id: str  # P<page>.L<line>
 
 
-def _quantity_on_line(doc: Document, line_id: str, units) -> bool:
+def _quantity_on_line(doc: Document, line_id: str, units, holder) -> bool:
     m = re.match(r"P(\d+)\.L(\d+)$", line_id)
     text = doc.line(int(m.group(1)), int(m.group(2))) if m else None
-    if not text or not isinstance(units, int):
+    if not text or not isinstance(units, int) or not isinstance(holder, str):
+        return False
+    words = [w for w in re.findall(r"\w{3,}", holder.lower())]
+    if words and not any(w in text.lower() for w in words):
         return False
     digits = re.findall(r"\d[\d'’]*", text)
     return any(int(re.sub(r"\D", "", d)) == units for d in digits)
@@ -193,7 +204,7 @@ def run_passes(doc: Document, complete: Callable[..., dict],
                 kept = [ln for ln in merged if p.line_filter(ln.split(" ", 1)[1] if " " in ln else "")]
                 if p.skip_covered:  # a line counts as read only if the returned quantity is written on it
                     covered = {r.line_id for r in rows if r.pass_name.startswith("holdings")
-                               and _quantity_on_line(doc, r.line_id, r.values[2])}
+                               and _quantity_on_line(doc, r.line_id, r.values[2], r.values[0])}
                     kept = [ln for ln in kept if ln.split(" ", 1)[0] not in covered]
                 if not kept:
                     continue
@@ -206,7 +217,7 @@ def run_passes(doc: Document, complete: Callable[..., dict],
                 continue
             if progress:
                 progress(f"{doc.id}:{p.name}:{wi + 1}/{len(windows)}")
-            out = complete(p.system(), text, p.schema(ids), p.max_tokens, p.example, tag=f"{doc.id}:{p.name}")
+            out = complete(p.system(), p.user(text), p.schema(ids), p.max_tokens, p.shot(), tag=f"{doc.id}:{p.name}")
             if log is not None:
                 log.append({"doc": doc.id, "pass": p.name, "window": wi + 1, "first_line": ids[0],
                             "last_line": ids[-1], "output": out})
