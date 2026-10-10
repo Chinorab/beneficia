@@ -31,7 +31,7 @@ class LLMClient:
             return False
 
     def complete_json(self, system: str, user: str, schema: dict, max_tokens: int = 600,
-                      example: tuple[str, str] | None = None) -> dict:
+                      example: tuple[str, str] | None = None, tag: str | None = None) -> dict:
         messages = [{"role": "system", "content": system}]
         if example:
             messages += [{"role": "user", "content": example[0]}, {"role": "assistant", "content": example[1]}]
@@ -63,25 +63,23 @@ class LLMClient:
 
 
 class ReplayClient:
-    """Replays recorded model outputs per pass, in call order (integration tests, fast iteration on code).
+    """Replays recorded model outputs (integration tests, fast iteration on deterministic code).
 
-    Responses are matched to the pass whose system prompt is used, so adding or removing a pass does not
-    shift the other answers. A pass without a recorded answer returns an empty result."""
+    Answers are matched by document and pass, in call order, so adding or removing a pass does not shift
+    the other answers. A call without a recorded answer returns an empty result."""
 
     def __init__(self, model_responses: list[dict], model: str = "replay"):
         from collections import defaultdict, deque
         self.queues = defaultdict(deque)
         for m in model_responses:
-            self.queues[m["pass"]].append(m["output"])
+            self.queues[f"{m['doc']}:{m['pass']}"].append(m["output"])
         self.model = model
         self.calls: list[dict] = []
 
     def health(self) -> bool:
         return True
 
-    def complete_json(self, system, user, schema, max_tokens=600, example=None) -> dict:
-        from beneficia.extract.passes import PASSES
+    def complete_json(self, system, user, schema, max_tokens=600, example=None, tag=None) -> dict:
         self.calls.append({"seconds": 0.0})
-        name = next((p.name for p in PASSES if p.system() == system and (p.example == example)), None)
-        q = self.queues.get(name)
+        q = self.queues.get(tag or "")
         return q.popleft() if q else {}

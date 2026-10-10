@@ -41,8 +41,12 @@ def normalise(name: str) -> str:
 
 
 def match_key(name: str) -> str:
-    """Order-insensitive key so 'Imhof Petra' and 'Petra Imhof' match."""
-    return " ".join(sorted(normalise(name).split()))
+    """Order-insensitive key so 'Imhof Petra' and 'Petra Imhof' match, and 'X Holding' matches 'X Holding SA'."""
+    words = [w for w in normalise(name).split() if w not in FORM_WORDS]
+    return " ".join(sorted(words or normalise(name).split()))
+
+
+FORM_WORDS = {"sa", "ag", "gmbh", "sarl", "sagl", "srl", "spa", "ltd", "inc"}
 
 
 def looks_like_entity(name: str) -> bool:

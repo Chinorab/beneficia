@@ -197,12 +197,16 @@ def run_passes(doc: Document, complete: Callable[..., dict],
                     kept = [ln for ln in kept if ln.split(" ", 1)[0] not in covered]
                 if not kept:
                     continue
-                text, ids = "\n".join(kept), [ln.split(" ", 1)[0] for ln in kept]
+                ids = [ln.split(" ", 1)[0] for ln in kept]
+                if p.skip_covered:  # give the register heading as context; only the kept lines can be cited
+                    head = [ln for ln in text.splitlines()[:3] if ln.split(" ", 1)[0] not in ids]
+                    kept = [f"(context) {ln.split(' ', 1)[1]}" for ln in head if " " in ln] + kept
+                text = "\n".join(kept)
             if not _wants(p, text):
                 continue
             if progress:
                 progress(f"{doc.id}:{p.name}:{wi + 1}/{len(windows)}")
-            out = complete(p.system(), text, p.schema(ids), p.max_tokens, p.example)
+            out = complete(p.system(), text, p.schema(ids), p.max_tokens, p.example, tag=f"{doc.id}:{p.name}")
             if log is not None:
                 log.append({"doc": doc.id, "pass": p.name, "window": wi + 1, "first_line": ids[0],
                             "last_line": ids[-1], "output": out})

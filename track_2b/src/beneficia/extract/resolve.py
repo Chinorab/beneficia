@@ -79,6 +79,30 @@ def quantity_after(name: str, text: str) -> Optional[int]:
     return int(re.sub(r"[^\d]", "", m.group(1)))
 
 
+POSTAL = re.compile(r"\b(\d{4})\s+[A-ZÄÖÜÉÈ][a-zäöüéèàç]")
+REGISTER_TITLE = re.compile(r"(aktienbuch|anteilbuch|gesellschafterliste|registre|libro (delle )?(azioni|quote)|"
+                            r"register)", re.IGNORECASE)
+
+
+def postal_codes(text: str) -> set[int]:
+    return {int(m.group(1)) for m in POSTAL.finditer(text)}
+
+
+def name_full_on(name: str, text: str) -> bool:
+    toks = _tokens(name)
+    hay = normalise(text)
+    return bool(toks) and all(t in hay for t in toks)
+
+
+def register_owner(doc, ref) -> Optional[str]:
+    """The nearest line above the cited one, on the same page, that titles a register or states a capital."""
+    for n in range(ref.line - 1, 0, -1):
+        line = doc.line(ref.page, n)
+        if line and (REGISTER_TITLE.search(line) or CAPITAL_LINE.search(line)) and _entity(line):
+            return line
+    return None
+
+
 def _tokens(name: str) -> list[str]:
     return [w for w in normalise(name).split() if len(w) >= 3 and w not in STOP]
 
@@ -190,6 +214,12 @@ class Resolver:
                 written = Fraction(str(percent)) / 100
         if not name_on(holder, ctx):
             return self._drop(row, "holder_not_on_line")
+        if units is not None and units in postal_codes(own):
+            return self._drop(row, "units_is_postal_code")  # '1700 Fribourg' is an address, not 1700 shares
+        if not name_full_on(company, own):
+            owner = register_owner(doc, ref)
+            if owner is not None and not name_full_on(company, owner):
+                return self._drop(row, "company_not_register_owner")
         comp = self.reg.find(company) or self._target_alias(company)
         if comp is None:
             if not name_on(company, self._context(ref, 40)):
