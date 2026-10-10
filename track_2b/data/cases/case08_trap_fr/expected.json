@@ -1,0 +1,48 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Transports Jura SA",
+ "language": "fr",
+ "beneficial_owners": [
+  {
+   "name": "Pierre Monnier",
+   "basis": "default_manager",
+   "band": null,
+   "status": "pending_review"
+  }
+ ],
+ "review_reasons": [
+  "default_manager"
+ ],
+ "holdings": [
+  {
+   "holder": "Jura Logistique SA",
+   "company": "Transports Jura SA",
+   "units_held": 1000,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Pierre Monnier",
+   "company": "Jura Logistique SA",
+   "units_held": 40,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Hélène Monnier",
+   "company": "Jura Logistique SA",
+   "units_held": 30,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Paul Monnier",
+   "company": "Jura Logistique SA",
+   "units_held": 30,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "40 % of a 100 % holding: product 40 % but no control of the intermediate (TJPV art. 2)."
+}

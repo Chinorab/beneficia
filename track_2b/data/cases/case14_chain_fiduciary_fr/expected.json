@@ -1,0 +1,55 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Horlogerie du Jorat SA",
+ "language": "fr",
+ "beneficial_owners": [
+  {
+   "name": "Anne Rochat",
+   "basis": "indirect",
+   "band": "50_75",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [
+  "fiduciary"
+ ],
+ "holdings": [
+  {
+   "holder": "Jorat Participations Sàrl",
+   "company": "Horlogerie du Jorat SA",
+   "units_held": 1500,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Marc Dufour",
+   "company": "Horlogerie du Jorat SA",
+   "units_held": 600,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Élise Moret",
+   "company": "Horlogerie du Jorat SA",
+   "units_held": 400,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Anne Rochat",
+   "company": "Jorat Participations Sàrl",
+   "units_held": 120,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Fiduciaire Léman SA",
+   "company": "Jorat Participations Sàrl",
+   "units_held": 80,
+   "percent": null,
+   "held_for": "Thomas Berger"
+  }
+ ],
+ "notes": "Wrapped sentence; fiduciary holding without control; Dufour at 24 % is not an owner."
+}

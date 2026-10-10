@@ -1,0 +1,40 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Cave du Lavaux Sàrl",
+ "language": "fr",
+ "beneficial_owners": [
+  {
+   "name": "Laurent Rey",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  },
+  {
+   "name": "Sophie Bonvin",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "pending_review"
+  }
+ ],
+ "review_reasons": [
+  "fiduciary"
+ ],
+ "holdings": [
+  {
+   "holder": "Laurent Rey",
+   "company": "Cave du Lavaux Sàrl",
+   "units_held": 40,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Fiduciaire Rhône SA",
+   "company": "Cave du Lavaux Sàrl",
+   "units_held": 60,
+   "percent": null,
+   "held_for": "Sophie Bonvin"
+  }
+ ],
+ "notes": "Nominee never proposed; principal pending review (TJPV art. 3 para. 2 let. e)."
+}

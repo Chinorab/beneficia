@@ -1,0 +1,52 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Boulangerie des Alpes SA",
+ "language": "fr",
+ "beneficial_owners": [
+  {
+   "name": "Julien Perrin",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  },
+  {
+   "name": "Valérie Chappuis",
+   "basis": "indirect",
+   "band": "50_75",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Alpes Gourmet Holding SA",
+   "company": "Boulangerie des Alpes SA",
+   "units_held": 700,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Julien Perrin",
+   "company": "Boulangerie des Alpes SA",
+   "units_held": 300,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Valérie Chappuis",
+   "company": "Alpes Gourmet Holding SA",
+   "units_held": 260,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Nicolas Favre",
+   "company": "Alpes Gourmet Holding SA",
+   "units_held": 240,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Indirect control: 52 % of a holding that owns 70 %. Band from the holding's 70 %."
+}

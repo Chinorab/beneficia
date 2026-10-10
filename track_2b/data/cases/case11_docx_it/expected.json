@@ -1,0 +1,38 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Costruzioni Ticino SA",
+ "language": "it",
+ "beneficial_owners": [
+  {
+   "name": "Paolo Conti",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "settled"
+  },
+  {
+   "name": "Sara Conti",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Paolo Conti",
+   "company": "Costruzioni Ticino SA",
+   "units_held": 550,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Sara Conti",
+   "company": "Costruzioni Ticino SA",
+   "units_held": 450,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Share register as a DOCX table."
+}

@@ -205,4 +205,5 @@ def analyse(facts: CaseFacts) -> AnalysisResult:
 
     review_rules.check_low_confidence(facts, result)
     missing_rules.identification(facts, result)
+    result.findings.sort(key=lambda f: (f.status != "settled", -(f.share or 0), f.person))
     return result

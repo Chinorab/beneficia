@@ -1,0 +1,54 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Engelberg Bergbahnen AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Martin Odermatt",
+   "basis": "indirect",
+   "band": "75_100",
+   "status": "settled",
+   "chain_info_required": true
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Titlis Invest AG",
+   "company": "Engelberg Bergbahnen AG",
+   "units_held": 8000,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Peter Amstutz",
+   "company": "Engelberg Bergbahnen AG",
+   "units_held": 2000,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Alpina Familienholding GmbH",
+   "company": "Titlis Invest AG",
+   "units_held": 650,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Karin Odermatt",
+   "company": "Titlis Invest AG",
+   "units_held": 350,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Martin Odermatt",
+   "company": "Alpina Familienholding GmbH",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Chain of two intermediaries; TJPV art. 15 chain information required."
+}

@@ -1,0 +1,40 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Holzbau Emmental AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Urs Lehmann",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "pending_review"
+  },
+  {
+   "name": "Erika Lehmann",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "pending_review"
+  }
+ ],
+ "review_reasons": [
+  "inconsistent_figures"
+ ],
+ "holdings": [
+  {
+   "holder": "Urs Lehmann",
+   "company": "Holzbau Emmental AG",
+   "units_held": 600,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Erika Lehmann",
+   "company": "Holzbau Emmental AG",
+   "units_held": 300,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Holdings add up to 900 of 1'000 shares."
+}

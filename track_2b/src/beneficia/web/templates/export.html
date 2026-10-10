@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ names[result.target].name if result.target in names else case_id }} | {{ s.draft_label }}</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body class="print">
+<main class="page">
+  <header class="print-head">
+    <p class="draft">{{ icon("info") }}{{ s.draft_label }}</p>
+    <h1>{{ names[result.target].name if result.target in names else case_id }}</h1>
+    <p class="meta">{{ s.app_tagline }}. {{ s.generated }} {{ result.generated_at.replace("T", " ") }}.</p>
+  </header>
+  {% include "_result.html" %}
+  <section class="block">
+    <h2>{{ s.f_sources }}</h2>
+    <table class="table sources">
+      <tbody>
+      {% for ref, src in result.sources.items() %}
+        <tr><td class="mono">{{ ref }}</td><td>{{ src.filename }}, {{ s.source_page }} {{ src.page }}, {{ s.source_line }} {{ src.line }}</td><td>{{ src.text }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>
+</html>

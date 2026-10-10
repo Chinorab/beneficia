@@ -1,0 +1,46 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Pasticceria Ceresio SA",
+ "language": "it",
+ "beneficial_owners": [
+  {
+   "name": "Marco Bernasconi",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Marco Bernasconi",
+   "company": "Pasticceria Ceresio SA",
+   "units_held": 400,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Giulia Rossi",
+   "company": "Pasticceria Ceresio SA",
+   "units_held": 240,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Luca Ferrari",
+   "company": "Pasticceria Ceresio SA",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Anna Galli",
+   "company": "Pasticceria Ceresio SA",
+   "units_held": 160,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Giulia Rossi holds 24 %: not a beneficial owner."
+}

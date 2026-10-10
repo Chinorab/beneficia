@@ -1,0 +1,47 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Zürichsee Werft AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Beat Kälin",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "settled"
+  },
+  {
+   "name": "Andrea Brunner",
+   "basis": "other_means",
+   "band": "25_50",
+   "status": "pending_review"
+  }
+ ],
+ "review_reasons": [
+  "concert"
+ ],
+ "holdings": [
+  {
+   "holder": "Beat Kälin",
+   "company": "Zürichsee Werft AG",
+   "units_held": 325,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Andrea Brunner",
+   "company": "Zürichsee Werft AG",
+   "units_held": 100,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Felix Brunner",
+   "company": "Zürichsee Werft AG",
+   "units_held": 75,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "20 % plus 15 % bound by a voting agreement: candidate pending review (TJPV art. 3, 4)."
+}

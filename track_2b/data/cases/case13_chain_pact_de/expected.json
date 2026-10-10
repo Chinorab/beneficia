@@ -1,0 +1,54 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Alpenblick Holding AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Petra Imhof",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "settled"
+  },
+  {
+   "name": "Sandra Keller",
+   "basis": "indirect",
+   "band": "25_50",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [
+  "concert"
+ ],
+ "holdings": [
+  {
+   "holder": "Petra Imhof",
+   "company": "Alpenblick Holding AG",
+   "units_held": 520,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Bergkristall Beteiligungen GmbH",
+   "company": "Alpenblick Holding AG",
+   "units_held": 300,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Lukas Ammann",
+   "company": "Alpenblick Holding AG",
+   "units_held": 180,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Sandra Keller",
+   "company": "Bergkristall Beteiligungen GmbH",
+   "units_held": null,
+   "percent": 100,
+   "held_for": null
+  }
+ ],
+ "notes": "Table plus prose: 100 % written as a percentage; voting agreement on a settled owner."
+}

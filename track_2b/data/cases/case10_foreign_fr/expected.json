@@ -1,0 +1,40 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Montres du Léman SA",
+ "language": "fr",
+ "beneficial_owners": [
+  {
+   "name": "Claire Dubois",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [
+  "foreign_or_undocumented"
+ ],
+ "missing": [
+  {
+   "what": "ownership_proof",
+   "about": "Pacific Horizon Holdings Ltd"
+  }
+ ],
+ "holdings": [
+  {
+   "holder": "Pacific Horizon Holdings Ltd",
+   "company": "Montres du Léman SA",
+   "units_held": 700,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Claire Dubois",
+   "company": "Montres du Léman SA",
+   "units_held": 300,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Owners of the foreign holding unknown: request documents."
+}

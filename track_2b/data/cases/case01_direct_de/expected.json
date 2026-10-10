@@ -1,0 +1,45 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Rigiblick Immobilien AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Reto Fankhauser",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "settled"
+  },
+  {
+   "name": "Claudia Wyss",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "settled"
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Reto Fankhauser",
+   "company": "Rigiblick Immobilien AG",
+   "units_held": 1100,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Claudia Wyss",
+   "company": "Rigiblick Immobilien AG",
+   "units_held": 600,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Simon Gerber",
+   "company": "Rigiblick Immobilien AG",
+   "units_held": 300,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Two direct holders above 25 %, one below."
+}

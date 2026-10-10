@@ -1,0 +1,55 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Software Kollektiv AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Nadine Schmid",
+   "basis": "default_manager",
+   "band": null,
+   "status": "pending_review"
+  }
+ ],
+ "review_reasons": [
+  "default_manager"
+ ],
+ "holdings": [
+  {
+   "holder": "Lea Bachmann",
+   "company": "Software Kollektiv AG",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Jonas Keller",
+   "company": "Software Kollektiv AG",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Mira Steiner",
+   "company": "Software Kollektiv AG",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "David Huber",
+   "company": "Software Kollektiv AG",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Sara Frei",
+   "company": "Software Kollektiv AG",
+   "units_held": 200,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Five holders at 20 %: TJPG art. 4 para. 2, chair of the board."
+}

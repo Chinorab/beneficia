@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ s.app_name }}{% endblock %}</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">{{ icon("tree-structure", "brand-mark") }}<span>{{ s.app_name }}</span></a>
+    <nav class="nav" aria-label="{{ s.nav_cases }}">
+      <a href="/" {% if request.url.path == "/" %}aria-current="page"{% endif %}>{{ s.nav_cases }}</a>
+      <a href="/privacy" {% if request.url.path == "/privacy" %}aria-current="page"{% endif %}>{{ s.nav_privacy }}</a>
+      <a class="lang" href="?lang={{ other_lang }}" hreflang="{{ other_lang }}">{{ icon("translate") }}{{ s.lang_switch }}</a>
+    </nav>
+  </div>
+</header>
+<main class="page">
+{% block content %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="foot-inner">
+    <span>{{ s.app_tagline }}</span>
+    <a href="/privacy">{{ icon("shield-check") }}{{ s.nav_privacy }}</a>
+  </div>
+</footer>
+<script src="/static/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{# Result body shared by the case page and the printable export. Needs: result, names, svg, note, s, lang #}
+{% macro refs(list) -%}
+  {%- for r in list %}<button type="button" class="ref" data-ref="{{ r }}" title="{{ result.sources[r].filename if r in result.sources else r }}">{{ r }}</button>{% endfor -%}
+{%- endmacro %}
+{% macro field(party, key, label) -%}
+  <div class="kv"><dt>{{ label }}</dt><dd>
+  {%- if party and key in party.fields %}{{ party.fields[key].value }} {{ refs([party.fields[key].ref]) }}
+  {%- else %}<span class="muted">{{ s.not_found }}</span>{% endif %}</dd></div>
+{%- endmacro %}
+
+<section class="block">
+  <h2>{{ s.owners_title }}</h2>
+  {% if result.findings %}
+  <div class="owners">
+  {% for f in result.findings %}
+    {% set p = names.get(f.person) %}
+    <article class="owner owner-{{ f.status }}">
+      <header class="owner-head">
+        <h3>{{ icon("user") }}{{ p.name if p else f.person }}</h3>
+        <span class="tag tag-{{ f.status }}">{% if f.status == "settled" %}{{ icon("check-circle") }}{% else %}{{ icon("warning") }}{% endif %}{{ s["status_" + f.status] }}</span>
+      </header>
+      <p class="basis">{{ s["basis_" + f.basis] }}</p>
+      <dl class="kvs">
+        {{ field(p, "birth_date", s.f_birth_date) }}
+        {{ field(p, "nationality", s.f_nationality) }}
+        {{ field(p, "residence", s.f_residence) }}
+        <div class="kv"><dt>{{ s.f_control_type }}</dt><dd>{{ s["ct_" + f.control_type.alone_or_concert] }}, {{ s["ct_" + f.control_type.direct_or_indirect] }}, {{ s["ct_" + f.control_type.holding_or_other] }}</dd></div>
+        <div class="kv"><dt>{{ s.f_band }}</dt><dd>{{ s["band_" + f.band] if f.band else s.band_none }}</dd></div>
+        {% if f.chain|length > 2 %}
+        <div class="kv"><dt>{{ s.f_chain }}</dt><dd>{% for n in f.chain %}{{ names[n].name if n in names else n }}{% if not loop.last %} {{ icon("arrow-right", "icon-inline") }} {% endif %}{% endfor %}
+          {% if f.chain_info_required %}<span class="note-inline">{{ s.chain_info }}</span>{% endif %}</dd></div>
+        {% endif %}
+        <div class="kv"><dt>{{ s.f_sources }}</dt><dd class="refs">{{ refs(f.refs) }}</dd></div>
+      </dl>
+      <p class="articles">{% for a in f.articles %}<span>{{ article(a, lang) }}</span>{% endfor %}</p>
+    </article>
+  {% endfor %}
+  </div>
+  {% else %}
+  <p class="muted">{{ s.owners_none }}</p>
+  {% endif %}
+</section>
+
+{% if svg %}
+<section class="block">
+  <h2>{{ s.diagram_title }}</h2>
+  <p class="help">{{ s.diagram_help }}</p>
+  <div class="diagram">{{ svg }}</div>
+</section>
+{% endif %}
+
+<div class="two">
+<section class="block">
+  <h2>{{ s.review_title }}</h2>
+  {% if result.review %}
+  <ul class="items">
+  {% for r in result.review %}
+    <li>{{ icon("warning", "icon item-icon warn") }}<div>
+      <p class="item-title">{{ s["reason_" + r.reason] }}</p>
+      {% if r.parties %}<p class="item-sub">{% for x in r.parties %}{{ names[x].name if x in names else x }}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+      <p class="item-meta"><span>{{ article(r.article, lang) }}</span> {{ refs(r.refs) }}</p>
+    </div></li>
+  {% endfor %}
+  </ul>
+  {% else %}<p class="muted">{{ s.review_none }}</p>{% endif %}
+</section>
+
+<section class="block">
+  <h2>{{ s.missing_title }}</h2>
+  {% if result.missing %}
+  <ul class="items">
+  {% for m in result.missing %}
+    <li>{{ icon("file-text", "icon item-icon") }}<div>
+      <p class="item-title">{{ s["what_" + m.what] }}</p>
+      <p class="item-sub">{{ names[m.about].name if m.about in names else m.about }}{% if m.what == "identification" %}: {% for k in m.reason.split(",") %}{{ s["f_" + k] }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+    </div></li>
+  {% endfor %}
+  </ul>
+  {% else %}<p class="muted">{{ s.missing_none }}</p>{% endif %}
+</section>
+</div>
+
+<section class="block">
+  <h2>{{ s.note_title }}</h2>
+  <ol class="note">
+  {% for n in note %}
+    <li class="note-{{ n.kind }}"><p>{{ n.text }}</p>
+      <p class="item-meta">{% for a in n.articles %}<span>{{ a }}</span>{% endfor %} {{ refs(n.refs) }}</p></li>
+  {% endfor %}
+  </ol>
+</section>
+
+<section class="block">
+  <h2>{{ s.documents_title }}</h2>
+  <table class="table">
+    <tbody>
+    {% for d in result.documents %}
+      <tr><td class="mono">{{ d.id }}</td><td>{{ d.filename }}</td><td>{{ d.language|upper }}</td>
+        <td class="num">{{ d.pages }}</td>
+        <td>{% if not d.readable %}<span class="state state-failed">{{ icon("x-circle") }}{{ s.doc_unreadable }}</span>{% elif d.min_ocr_confidence is not none %}{{ s.doc_ocr }} {{ d.min_ocr_confidence|round|int }}{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="help">{{ s.dropped }}: {{ result.dropped_items.count }}. {{ s.timing }}: {{ result.timings.total_s|round|int }} {{ s.seconds }}.</p>
+</section>

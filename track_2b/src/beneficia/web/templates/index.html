@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="split">
+  <section class="cases">
+    <h1>{{ s.cases_title }}</h1>
+    <p class="lead">{{ s.cases_intro }}</p>
+    {% if cases %}
+    <table class="table">
+      <thead><tr><th>{{ s.col_case }}</th><th>{{ s.col_company }}</th><th class="num">{{ s.col_documents }}</th><th>{{ s.col_status }}</th><th></th></tr></thead>
+      <tbody>
+      {% for c in cases %}
+        <tr>
+          <td class="mono">{{ c.id }}</td>
+          <td>{{ c.target }}</td>
+          <td class="num">{{ c.documents }}</td>
+          <td><span class="state state-{{ c.status }}">
+            {% if c.status == "done" %}{{ icon("check-circle") }}{% elif c.status == "running" %}{{ icon("clock") }}{% elif c.status == "failed" %}{{ icon("x-circle") }}{% else %}{{ icon("folder-simple") }}{% endif %}
+            {{ s["status_" + c.status] }}</span></td>
+          <td class="actions"><a class="btn btn-ghost" href="/cases/{{ c.id }}">{{ s.open }}</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty">{{ icon("folder-simple", "icon-lg") }}<p>{{ s.empty_cases }}</p></div>
+    {% endif %}
+  </section>
+
+  <aside class="panel">
+    <h2>{{ s.upload_title }}</h2>
+    <form class="form" method="post" action="/cases" enctype="multipart/form-data">
+      <div class="field">
+        <label for="name">{{ s.upload_name }}</label>
+        <input id="name" name="name" required maxlength="60" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="target">{{ s.upload_target }}</label>
+        <input id="target" name="target" required maxlength="160" autocomplete="off" aria-describedby="target-help">
+        <p class="help" id="target-help">{{ s.upload_target_help }}</p>
+      </div>
+      <div class="field">
+        <label for="files">{{ s.upload_files }}</label>
+        <input id="files" name="files" type="file" multiple required accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.tif,.tiff" aria-describedby="files-help">
+        <p class="help" id="files-help">{{ s.upload_files_help }}</p>
+      </div>
+      <button class="btn btn-primary" type="submit">{{ icon("upload-simple") }}{{ s.upload_submit }}</button>
+    </form>
+  </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ meta.target or case_id }} | {{ s.app_name }}{% endblock %}
+{% block content %}
+<a class="back" href="/">{{ icon("arrow-left") }}{{ s.back }}</a>
+<div class="case-head">
+  <div>
+    <h1>{{ meta.target or case_id }}</h1>
+    <p class="meta"><span class="mono">{{ case_id }}</span>
+      {% if result %}<span class="draft">{{ icon("info") }}{{ s.draft_label }}</span><span>{{ s.generated }} {{ result.generated_at.replace("T", " ") }}</span>{% endif %}</p>
+  </div>
+  <div class="case-actions">
+    {% if result %}
+      <a class="btn btn-ghost" href="/cases/{{ case_id }}/export.html" target="_blank" rel="noopener">{{ icon("printer") }}{{ s.export_print }}</a>
+      <a class="btn btn-ghost" href="/cases/{{ case_id }}/export.json">{{ icon("download-simple") }}{{ s.export_json }}</a>
+    {% endif %}
+    {% if status != "running" %}
+    <form method="post" action="/cases/{{ case_id }}/analyze">
+      <button class="btn btn-primary" type="submit">{% if result %}{{ icon("arrows-clockwise") }}{{ s.reanalyze }}{% else %}{{ icon("play") }}{{ s.analyze }}{% endif %}</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% if status == "running" %}
+<section class="block running" data-poll="/cases/{{ case_id }}/status">
+  <h2>{{ icon("clock") }}{{ s.running_title }}</h2>
+  <p>{{ s.running_text }}</p>
+  <p class="help">{{ s.running_step }}: <span class="mono" data-step>{{ job.step }}</span></p>
+  <div class="skeleton"><span></span><span></span><span></span></div>
+</section>
+{% elif status == "failed" %}
+<section class="block alert">
+  <h2>{{ icon("x-circle") }}{{ s.failed_title }}</h2>
+  <p>{{ s.model_unreachable if job.error == "model_unreachable" else s.status_failed }}</p>
+</section>
+{% endif %}
+
+{% if result %}
+<div class="workspace">
+  <div class="work-main">
+    {% include "_result.html" %}
+  </div>
+  <aside class="source" aria-live="polite" data-case="{{ case_id }}">
+    <h2>{{ icon("file-text") }}{{ s.source_title }}</h2>
+    <div class="source-body"><p class="muted">{{ s.source_empty }}</p></div>
+    <template id="source-labels"><span data-doc="{{ s.source_doc }}" data-page="{{ s.source_page }}" data-line="{{ s.source_line }}"></span></template>
+  </aside>
+</div>
+{% elif status == "new" %}
+<section class="block">
+  <h2>{{ s.documents_title }}</h2>
+  <ul class="items">{% for d in docs %}<li>{{ icon("file-text", "icon item-icon") }}<div><p class="item-title">{{ d }}</p></div></li>{% endfor %}</ul>
+</section>
+{% endif %}
+{% endblock %}

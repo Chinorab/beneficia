@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}{{ s.privacy_title }} | {{ s.app_name }}{% endblock %}
+{% block content %}
+<section class="prose">
+  <h1>{{ icon("shield-check", "icon-lg") }}{{ s.privacy_title }}</h1>
+  {% for p in s.privacy_body %}<p>{{ p }}</p>{% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{
+ "fictitious": true,
+ "licence": "CC-BY-4.0",
+ "target": "Garage Aaretal AG",
+ "language": "de",
+ "beneficial_owners": [
+  {
+   "name": "Thomas Wenger",
+   "basis": "direct",
+   "band": "50_75",
+   "status": "any"
+  },
+  {
+   "name": "Monika Wenger",
+   "basis": "direct",
+   "band": "25_50",
+   "status": "any"
+  }
+ ],
+ "review_reasons": [],
+ "holdings": [
+  {
+   "holder": "Thomas Wenger",
+   "company": "Garage Aaretal AG",
+   "units_held": 70,
+   "percent": null,
+   "held_for": null
+  },
+  {
+   "holder": "Monika Wenger",
+   "company": "Garage Aaretal AG",
+   "units_held": 30,
+   "percent": null,
+   "held_for": null
+  }
+ ],
+ "notes": "Degraded scan (blur, rotation, noise); status may be pending if OCR confidence is low."
+}
