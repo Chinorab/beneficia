@@ -77,7 +77,8 @@ PASSES: tuple[Pass, ...] = (
          "basis is capital, votes or both (both when shares carry one vote each or nothing else is said). "
          "Sentences also count, for example 'the sole shareholder of Y is X', 'Y belongs 100 % to X', "
          "'X detient 40 % de Y'. Do not list the total share capital, addresses or board roles as holdings. "
-         "A 4 digit number before a town name is a postal code, never a quantity.",
+         "A 4 digit number before a town name is a postal code, never a quantity. In a register row the "
+         "number of shares is usually the last number of the line.",
          (STR, STR, NINT, NNUM, NSTR, {"enum": ["capital", "votes", "both", None]}), SHARE_WORDS),
     Pass("agreements", "a",
          "List agreements or clauses that give a person control over a company other than by holding "
@@ -147,7 +148,17 @@ RETRY_INSTRUCTION = (
     "Each numbered line is one row of the share register of the company named in the context lines. For each "
     "numbered line output {\"h\": [[holder, company, units_held, percent_written, held_for, basis, line_id], ...]}. "
     "holder is the person or company named at the start of that line. units_held is the number of shares or "
-    "quotas on that line, never a postal code (4 digits before a town name), a year or an amount in francs.")
+    "quotas on that line, never a postal code (4 digits before a town name), a year or an amount in francs. "
+    "In a register row the number of shares is usually the last number of the line.")
+RETRY_EXAMPLE = (  # invented names; teaches company holders and postal codes
+    "\n".join([
+        "(context) Aktienbuch der Muster Beispiel AG",
+        "(context) Aktienkapital eingeteilt in 400 Namenaktien.",
+        "P1.L3 Holz Invest GmbH, 4051 Basel | 300",
+        "P1.L4 Anna Probe, geb. 01.02.1980, 3011 Bern : 100 Aktien"]),
+    '{"h": [["Holz Invest GmbH", "Muster Beispiel AG", 300, null, null, "both", "P1.L3"], '
+    '["Anna Probe", "Muster Beispiel AG", 100, null, null, "both", "P1.L4"]]}')
+
 CAPITAL = Pass(
     "capital", "k",
     "Each numbered line describes the capital of a company. Output {\"k\": [[company, total_units, unit_kind, "
@@ -160,7 +171,7 @@ CAPITAL = Pass(
 PASSES = PASSES[:1] + (CAPITAL,) + PASSES[1:2] + (
     replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding, example=PROSE_EXAMPLE),
     replace(_holdings, name="holdings_retry", keywords=(), line_filter=_is_register_row, skip_covered=True,
-            with_heading=True, instruction=RETRY_INSTRUCTION),
+            with_heading=True, instruction=RETRY_INSTRUCTION, example=RETRY_EXAMPLE),
 ) + PASSES[2:]
 
 

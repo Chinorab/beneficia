@@ -79,6 +79,28 @@ def quantity_after(name: str, text: str) -> Optional[int]:
     return int(re.sub(r"[^\d]", "", m.group(1)))
 
 
+FIDUCIARY_WORDS = re.compile(r"(fiduci|treuhand|treuhander|nominee|pour le compte|fur rechnung|"
+                             r"auf rechnung|per conto|on behalf|im auftrag)")
+FORMULA = re.compile(r"(pour le compte de|au nom et pour le compte de|fur rechnung von|auf rechnung von|"
+                     r"fur rechnung|auf rechnung|treuhanderisch fur|im auftrag von|per conto di|per conto|"
+                     r"on behalf of|for the account of|fur)\s+(?:m\.|mme|herrn?|frau|sig\.?|signora)?\s*$")
+
+
+def principal_follows_formula(name: str, text: str) -> bool:
+    """True if the name is written right after 'pour le compte de', 'für Rechnung von', 'per conto di'..."""
+    toks = _tokens(name)
+    if not toks:
+        return False
+    hay = fold(text)
+    pos = hay.find(toks[0])
+    while pos >= 0:
+        if FORMULA.search(hay[max(0, pos - 40):pos]):
+            return True
+        pos = hay.find(toks[0], pos + 1)
+    return False
+
+
+VOTE_WORDS = re.compile(r"(stimm|vote|voix|voti|droit de vote|diritt)")
 POSTAL = re.compile(r"\b(\d{4})\s+[A-ZÄÖÜÉÈ][a-zäöüéèàç]")
 REGISTER_TITLE = re.compile(r"(aktienbuch|anteilbuch|gesellschafterliste|registre|libro (delle )?(azioni|quote)|"
                             r"register)", re.IGNORECASE)
@@ -256,13 +278,18 @@ class Resolver:
             return self._drop(row, "company_not_resolved")
         h = self.reg.get_or_create(holder, ref)
         principal = None
+        if held_for and not principal_follows_formula(held_for, ctx):
+            held_for = None  # a principal is only taken from 'pour le compte de X' style wording
         if held_for:
-            if not name_on(held_for, ctx):
-                return self._drop(row, "principal_not_on_line")
             principal = self.reg.get_or_create(held_for, ref, "natural_person"
                                                if not _entity(held_for) else "legal_entity").id
+        elif FIDUCIARY_WORDS.search(fold(own)):
+            # fiduciary wording on the line but no usable principal: never lose it, send it to review
+            self.agreements.append(ControlAgreement("fiduciary", h.id, h.id, comp.id, ref))
         if h.id == comp.id:
             return self._drop(row, "self_holding")
+        if basis in ("votes", "capital") and not VOTE_WORDS.search(fold(own)):
+            basis = "both"  # a vote-only or capital-only split must be written on the line
         self.holdings.append(Holding(h.id, comp.id, int(units) if units is not None else 0, basis or "both",
                                      principal, written, ref))
 
