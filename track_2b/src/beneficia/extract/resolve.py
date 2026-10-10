@@ -116,6 +116,18 @@ def name_full_on(name: str, text: str) -> bool:
     return bool(toks) and all(t in hay for t in toks)
 
 
+def document_title(doc, ref) -> str:
+    """The register title or first entity-naming line of the page, used when a line names no company."""
+    owner = register_owner(doc, ref)
+    if owner:
+        return owner
+    for n in range(1, min(ref.line, 6)):
+        line = doc.line(ref.page, n)
+        if line and _entity(line):
+            return line
+    return ""
+
+
 def register_owner(doc, ref) -> Optional[str]:
     """The nearest line above the cited one, on the same page, that titles a register or states a capital."""
     for n in range(ref.line - 1, 0, -1):
@@ -212,7 +224,7 @@ class Resolver:
             return self._drop(row, "total_missing")
         line = self.docs[ref.doc].line(ref.page, ref.line) or ""
         party = None
-        if company and (name_full_on(company, ctx) or name_full_on(company, register_owner(self.docs[ref.doc], ref) or "")):
+        if company and (name_full_on(company, line) or name_full_on(company, register_owner(self.docs[ref.doc], ref) or "")):
             party = self.reg.find(company) or self._target_alias(company)
             if party is None and _entity(company):
                 party = self.reg.get_or_create(company, ref, "legal_entity")
@@ -344,10 +356,10 @@ class Resolver:
         line = self.docs[ref.doc].line(ref.page, ref.line) or ""
         # company: only if written next to the role; a role line without a company refers to the document's company
         comp = None
-        if company and name_full_on(company, ctx):
+        if company and name_full_on(company, line):
             comp = self.reg.find(company) or self._target_alias(company)
         if comp is None:
-            comp = self._party_named_in(line)
+            comp = self._party_named_in(line) or self._party_named_in(document_title(self.docs[ref.doc], ref))
         # role: as written on the line; a translated or invented role is replaced by the line's own wording
         if not role_raw or not name_on(role_raw, ctx):
             role_raw = line
