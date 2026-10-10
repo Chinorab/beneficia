@@ -1,0 +1,17 @@
+[DOCUMENT DE TEST FICTIF. Tous les noms et chiffres sont inventés.]
+
+Page 1
+REGISTRE DES ACTIONS de Horlogerie du Jorat SA, siège à Lausanne
+Capital-actions : CHF 250'000, divisé en 2'500 actions nominatives de CHF 100.
+
+Actionnaire | Domicile | Nombre d'actions
+Jorat Participations Sàrl | Rue du Lac 11, 1003 Lausanne | 1'500
+Marc Dufour, né le 4 juin 1968, de nationalité suisse | Chemin des Vignes 3, 1095 Lutry | 600
+Élise Moret, née le 21 août 1990, de nationalité française | Avenue de la Gare 8, 1800 Vevey | 400
+
+Page 2
+Extrait du registre des parts sociales de Jorat Participations Sàrl :
+capital social de CHF 20'000, 200 parts sociales.
+Anne Rochat, Lausanne : 120 parts. Fiduciaire Léman SA, à titre fiduciaire pour le compte
+de Thomas Berger, Genève : 80 parts (convention de fiducie du 3 mars 2024).
+Président du conseil d'administration de Horlogerie du Jorat SA : Marc Dufour.

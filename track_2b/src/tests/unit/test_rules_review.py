@@ -88,3 +88,12 @@ def test_missing_identification_fields_are_requested():
     r = analyse(f)
     miss = [m for m in r.missing if m.what == "identification" and m.about == "a"]
     assert miss and miss[0].reason == "nationality,residence"
+
+
+def test_fiduciary_holding_without_control_is_still_reviewed():
+    f = facts("t", [company("t", 200), company("fid_sa"), person("berger"), person("rochat")],
+              [("rochat", "t", 160), ("fid_sa", "t", 40, "both", "berger")])
+    r = analyse(f)
+    assert "berger" not in by_person(r)
+    items = [i for i in r.review if i.reason == "fiduciary"]
+    assert items and set(items[0].parties) == {"berger", "fid_sa"}

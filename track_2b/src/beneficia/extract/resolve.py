@@ -13,6 +13,7 @@ from beneficia.parties import PartyRegistry, fold, normalise
 from beneficia.rules.fallback import normalise_role
 
 NUM_RE = re.compile(r"\d[\d'’ .  ]*\d|\d")
+NULLISH = {"null", "none", "", "n/a", "-", "unknown", "nicht angegeben", "inconnu"}
 STOP = {"und", "et", "e", "der", "die", "das", "de", "du", "des", "la", "le", "di", "del", "von", "van",
         "ag", "sa", "gmbh", "sarl", "sagl", "srl", "spa", "ltd", "inc", "holding"}
 
@@ -51,6 +52,24 @@ def percent_on(value: float, text: str) -> bool:
         if abs(float(m.group(1).replace(",", ".")) - float(value)) < 1e-9:
             return True
     return False
+
+
+UNIT_WORDS = r"(parts?|actions?|aktien|stammanteile?|anteile?|quote|azioni|shares|quotas)"
+
+
+def quantity_after(name: str, text: str) -> Optional[int]:
+    """Number of units written right after a name, e.g. 'pour le compte de Thomas Berger, Genève : 80 parts'."""
+    toks = _tokens(name)
+    if not toks:
+        return None
+    hay = fold(text)
+    pos = hay.rfind(toks[-1])
+    if pos < 0:
+        return None
+    m = re.match(r"[^\d]{0,40}?(\d[\d'’ ]*)\s*" + UNIT_WORDS + r"\b", hay[pos + len(toks[-1]):])
+    if not m:
+        return None
+    return int(re.sub(r"[^\d]", "", m.group(1)))
 
 
 def _tokens(name: str) -> list[str]:
@@ -93,6 +112,7 @@ class Resolver:
                              "reason": why})
 
     def add(self, row: RawRow) -> None:
+        row.values = [None if isinstance(v, str) and v.strip().lower() in NULLISH else v for v in row.values]
         ref = self._ref(row)
         if self.docs[ref.doc].line(ref.page, ref.line) is None:
             return self._drop(row, "line_not_found")
@@ -132,8 +152,21 @@ class Resolver:
         written = None
         if units is None:
             if percent is None or not (0 < percent <= 100) or not percent_on(percent, ctx):
-                return self._drop(row, "units_missing")
-            written = Fraction(str(percent)) / 100
+                after = quantity_after(held_for, ctx) if held_for else None
+                if after is not None and name_on(holder, ctx):
+                    units = after  # quantity written right after the principal's name (wrapped line)
+                elif held_for and name_on(held_for, ctx) and name_on(holder, ctx):
+                    # fiduciary holding without a readable quantity: keep it as a fiduciary item for review
+                    nominee = self.reg.get_or_create(holder, ref)
+                    principal = self.reg.get_or_create(held_for, ref)
+                    comp = self.reg.find(company) or self._target_alias(company)
+                    self.agreements.append(ControlAgreement("fiduciary", principal.id, nominee.id,
+                                                            comp.id if comp else None, ref))
+                    return None
+                else:
+                    return self._drop(row, "units_missing")
+            else:
+                written = Fraction(str(percent)) / 100
         if not name_on(holder, ctx):
             return self._drop(row, "holder_not_on_line")
         comp = self.reg.find(company) or self._target_alias(company)
@@ -213,7 +246,20 @@ class Resolver:
                 continue
             seen.add(key)
             unique.append(h)
-        facts = CaseFacts(target.id if target else "", self.reg.parties, unique, self.agreements, self.board)
+        # a voting agreement binds a shareholder; anything else is not a voting agreement we can use
+        agreements = []
+        for ag in self.agreements:
+            comp = ag.company or (target.id if target else None)
+            if ag.kind == "voting":
+                bound = {h.holder for h in unique if h.company == comp} | {h.held_for for h in unique
+                                                                           if h.company == comp and h.held_for}
+                if ag.controlled == comp or ag.controller == ag.controlled or ag.controlled not in bound:
+                    self.dropped.append({"pass": "agreements", "ref": str(ag.ref), "reason":
+                                         "controlled_party_not_shareholder",
+                                         "values": [ag.kind, ag.controller, ag.controlled, ag.company]})
+                    continue
+            agreements.append(ag)
+        facts = CaseFacts(target.id if target else "", self.reg.parties, unique, agreements, self.board)
         res = Resolution(facts, self.dropped, self.accepted)
         res.totals_seen = self.totals  # conflicting totals are checked by validate
         return res

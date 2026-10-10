@@ -177,6 +177,10 @@ def analyse(facts: CaseFacts) -> AnalysisResult:
         refs = [r for u, v in zip(cyc, cyc[1:] + cyc[:1]) for r in g.edge_refs.get((u, v), [])]
         result.add_review(ReviewItem("circular", A.TJPV_2, sorted(cyc), refs))
 
+    for (principal, company), nominees in sorted(g.fiduciary_edges.items()):
+        result.add_review(ReviewItem("fiduciary", A.TJPV_3_2_E, [principal, *nominees],
+                                     list(g.edge_refs.get((principal, company), [])), {"company": company}))
+
     for pid in sorted(p for p in facts.parties if g.is_person(p)):
         finding = _qualify(g, pid, target, result)
         if finding is not None:

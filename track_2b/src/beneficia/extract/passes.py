@@ -68,17 +68,7 @@ PASSES: tuple[Pass, ...] = (
          "basis is capital, votes or both (both when shares carry one vote each or nothing else is said). "
          "Sentences also count, for example 'the sole shareholder of Y is X', 'Y belongs 100 % to X', "
          "'X detient 40 % de Y'. Do not list the total share capital, addresses or board roles as holdings.",
-         (STR, STR, NINT, NNUM, NSTR, {"enum": ["capital", "votes", "both", None]}), SHARE_WORDS,
-         example=("\n".join([
-                      "P1.L1 Register of Muster Beispiel AG, 400 shares",
-                      "P1.L2 Anna Probe | Bern | 100",
-                      "P1.L3 Holz Invest GmbH | Basel | 300",
-                      "P1.L4 The sole partner of Holz Invest GmbH is Max Test, Thun.",
-                      "P1.L5 Treuhand Muster AG holds 20 quotas of Holz Invest GmbH for Lea Fiktiv."]),
-                  '{"h": [["Anna Probe", "Muster Beispiel AG", 100, null, null, "both", "P1.L2"], '
-                  '["Holz Invest GmbH", "Muster Beispiel AG", 300, null, null, "both", "P1.L3"], '
-                  '["Max Test", "Holz Invest GmbH", null, 100, null, "both", "P1.L4"], '
-                  '["Treuhand Muster AG", "Holz Invest GmbH", 20, null, "Lea Fiktiv", "both", "P1.L5"]]}')),
+         (STR, STR, NINT, NNUM, NSTR, {"enum": ["capital", "votes", "both", None]}), SHARE_WORDS),
     Pass("agreements", "a",
          "List agreements or clauses that give a person control over a company other than by holding "
          "shares: voting agreements (one shareholder must vote as another person instructs), fiduciary "
@@ -117,8 +107,36 @@ def _is_prose_holding(line: str) -> bool:
     return line.count("|") < 2 and bool(PROSE_HOLDING.search(line))
 
 
+PROSE_EXAMPLE = (
+    "\n".join([
+        "P1.L4 The sole partner of Holz Invest GmbH is Max Test, Thun.",
+        "P1.L5 Treuhand Muster AG holds 20 quotas of Holz Invest GmbH for Lea Fiktiv.",
+        "P1.L7 Muster Beispiel AG appartient a 35 % a Nora Exempel."]),
+    '{"h": [["Max Test", "Holz Invest GmbH", null, 100, null, "both", "P1.L4"], '
+    '["Treuhand Muster AG", "Holz Invest GmbH", 20, null, "Lea Fiktiv", "both", "P1.L5"], '
+    '["Nora Exempel", "Muster Beispiel AG", null, 35, null, "both", "P1.L7"]]}')
+
 _holdings = next(p for p in PASSES if p.name == "holdings")
-PASSES = PASSES[:2] + (replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding),)     + PASSES[2:]
+PASSES = PASSES[:2] + (replace(_holdings, name="holdings_prose", keywords=(), line_filter=_is_prose_holding,
+                               example=PROSE_EXAMPLE),) + PASSES[2:]
+
+
+def merge_continuations(numbered: list[str]) -> list[str]:
+    """Join a line that does not end a sentence with the next one, under the first line's id.
+
+    Line wraps split sentences ('... pour le compte de' / 'Thomas Berger : 80 parts'); the resolver checks
+    the cited line together with its neighbours, so the merged text stays verifiable."""
+    out: list[str] = []
+    i = 0
+    while i < len(numbered):
+        line = numbered[i]
+        if i + 1 < len(numbered) and not line.rstrip().endswith((".", ":", ";", "!", "?")):
+            nxt = numbered[i + 1].split(" ", 1)
+            line = line + " " + (nxt[1] if len(nxt) > 1 else "")
+            i += 1
+        out.append(line)
+        i += 1
+    return out
 
 
 @dataclass
@@ -143,7 +161,8 @@ def run_passes(doc: Document, complete: Callable[..., dict],
     for p in PASSES:
         for wi, (text, ids) in enumerate(windows):
             if p.line_filter is not None:
-                kept = [ln for ln in text.splitlines() if p.line_filter(ln.split(" ", 1)[1] if " " in ln else "")]
+                merged = merge_continuations(text.splitlines())
+                kept = [ln for ln in merged if p.line_filter(ln.split(" ", 1)[1] if " " in ln else "")]
                 if not kept:
                     continue
                 text, ids = "\n".join(kept), [ln.split(" ", 1)[0] for ln in kept]
