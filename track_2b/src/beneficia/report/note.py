@@ -63,7 +63,8 @@ def build_note(result: dict, lang: str) -> list[dict]:
         items.append({"kind": "none", "text": tpl["none"], "status": "pending_review", "articles": [], "refs": []})
     for r in result["review"]:
         parties = ", ".join(names.get(p, p) for p in r["parties"])
-        text = t(lang, "reason_" + r["reason"]) + (f": {parties}" if parties else "") + "."
+        colon = " : " if lang == "fr" else ": "
+        text = t(lang, "reason_" + r["reason"]) + (f"{colon}{parties}" if parties else "") + "."
         items.append({"kind": "review", "text": text, "status": "pending_review",
                       "articles": [article(r["article"], lang)], "refs": r["refs"]})
     return items

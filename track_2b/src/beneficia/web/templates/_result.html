@@ -72,7 +72,7 @@
   {% for m in result.missing %}
     <li>{{ icon("file-text", "icon item-icon") }}<div>
       <p class="item-title">{{ s["what_" + m.what] }}</p>
-      <p class="item-sub">{{ names[m.about].name if m.about in names else m.about }}{% if m.what == "identification" %}: {% for k in m.reason.split(",") %}{{ s["f_" + k] }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+      <p class="item-sub">{{ names[m.about].name if m.about in names else m.about }}{% if m.what == "identification" %}{{ " : " if lang == "fr" else ": " }}{% for k in m.reason.split(",") %}{{ s["f_" + k] }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
     </div></li>
   {% endfor %}
   </ul>
