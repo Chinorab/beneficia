@@ -59,6 +59,19 @@ make offline-test # same pipeline in a container started with --network none
 
 `make` works from the repository root and from `track_2b/`.
 
+Without `make` (for example on Windows), run the same commands from `track_2b/`:
+
+```bash
+docker build --load -t beneficia:latest .
+docker run --rm -p 127.0.0.1:8080:8080 -v "$PWD/data:/data" beneficia:latest web
+docker run --rm --network none beneficia:latest test
+docker run --rm --network none -v "$PWD/data:/data" beneficia:latest offline-check
+docker run --rm --network none -v "$PWD/data:/data" beneficia:latest replay
+```
+
+The first start of a fresh image takes a few minutes while Docker unpacks it. After that, the model loads
+in under a minute.
+
 The model file comes from the Hugging Face repository
 `Colby/apertus-v1.5-8b-text-Q4_K_M-GGUF` at a pinned revision and is checked against its SHA256. This
 repository is not gated, so judges need no account or token. Lineage, licence and the acceptable use
