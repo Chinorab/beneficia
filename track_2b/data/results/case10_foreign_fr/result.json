@@ -1,6 +1,6 @@
 {
  "case_id": "case10_foreign_fr",
- "generated_at": "2026-10-10T17:04:15",
+ "generated_at": "2026-10-11T10:28:28",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "montres_du_leman_sa",
@@ -233,19 +233,18 @@
    "companies": 2,
    "capital": 1,
    "holdings": 1,
-   "holdings_retry": 2,
-   "citation_reanchored": 1,
+   "holdings_retry": 1,
    "persons": 1
   }
  },
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 111.3
+   "D1": 153.3
   },
-  "total_s": 111.3,
+  "total_s": 153.3,
   "model_calls": 5,
-  "model_seconds": 111.3
+  "model_seconds": 153.3
  },
  "model_responses": [
   {
@@ -261,7 +260,7 @@
       "SA",
       "Genève",
       null,
-      "shares",
+      null,
       "P1.L2"
      ],
      [
@@ -324,15 +323,6 @@
       "Pacific Horizon Holdings Ltd",
       "Montres du Léman SA",
       700,
-      null,
-      null,
-      "both",
-      "P1.L4"
-     ],
-     [
-      "Claire Dubois",
-      "Montres du Léman SA",
-      300,
       null,
       null,
       "both",

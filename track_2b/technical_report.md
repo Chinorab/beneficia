@@ -20,7 +20,7 @@ id of the line it comes from. Deterministic, unit-tested Python checks every cit
 ownership graph and applies the law. Anything the text does not settle goes to a review list. The tool
 never files anything.
 
-**Headline result:** on 14 fictitious cases in German, French and Italian, the final pipeline identifies exactly the expected beneficial owners and review points in 13 cases. It produced **zero silent errors**: no wrong beneficial owner was ever marked as settled, in any run. **100 %** of the references shown resolve to a source line, and holdings extraction reaches 98 % precision and 94 % recall. The one failure is the scanned case, which needs the container's OCR.
+**Headline result:** on 14 fictitious cases in German, French and Italian, the final pipeline runs in a Docker container with **no network interface** and identifies exactly the expected beneficial owners and review points in **all 14 cases**, including a degraded scan read by OCR. It produced **zero silent errors**: no wrong beneficial owner was ever marked as settled, in any run. **100 %** of the references shown resolve to a source line, and holdings extraction reaches 98 % precision and 98 % recall. A case of 1 to 3 short documents takes 1 to 7.5 minutes on a 6-core desktop CPU without a GPU.
 
 ## 2. Architecture
 
@@ -140,34 +140,36 @@ That configuration was not tested.
 
 **Baseline.** A first full design used one large extraction schema with verbatim quotes. On one-page
 excerpts it took 511 to 1151 s per document on the development CPU and confused fields. The table below
-compares the first working pipeline (v1, run stopped after 6 complete cases), two intermediate runs and the
-final one. Only the code changed between runs: same cases, same model file, temperature 0.
+compares the first working pipeline (v1, run stopped after 6 complete cases), two intermediate runs, the final code run
+natively, and the same final code run in the Docker image with `--network none` (`make offline-test`, the reference). Only the code changed between runs: same cases, same model file, temperature 0.
 
-| Metric | v1 | v2 | v3 | final |
-|---|---|---|---|---|
-| Cases | 6 | 14 | 14 | 14 |
-| Cases fully correct (owners and review) | 1 / 6 | 6 / 14 | 7 / 14 | 13 / 14 |
-| Beneficial owners exactly right | 1 / 6 | 6 / 14 | 8 / 14 | 13 / 14 |
-| Expected review reasons all raised | 6 / 6 | 12 / 14 | 11 / 14 | 14 / 14 |
-| Silent errors (settled and wrong) | 0 | 0 | 0 | 0 |
-| Citation validity | 100 % | 100 % | 100 % | 100 % |
-| Holdings precision (all) | 84 % | 86 % | 95 % | 98 % |
-| Holdings recall (all) | 76 % | 79 % | 81 % | 94 % |
-| Holdings recall (DE) | 82 % | 83 % | 83 % | 92 % |
-| Holdings recall (FR) | 67 % | 71 % | 71 % | 94 % |
-| Holdings recall (IT) | 75 % | 83 % | 100 % | 100 % |
-| Seconds per case, mean | 124.9 | 110.5 | 148.5 | 174.3 |
-| Seconds per case, max | 148.7 | 226.8 | 238.8 | 316.8 |
+| Metric | v1 | v2 | v3 | final native | final, air-gapped container |
+|---|---|---|---|---|---|
+| Cases | 6 | 14 | 14 | 14 | 14 |
+| Cases fully correct (owners and review) | 1 / 6 | 6 / 14 | 7 / 14 | 13 / 14 | 14 / 14 |
+| Beneficial owners exactly right | 1 / 6 | 6 / 14 | 8 / 14 | 13 / 14 | 14 / 14 |
+| Expected review reasons all raised | 6 / 6 | 12 / 14 | 11 / 14 | 14 / 14 | 14 / 14 |
+| Silent errors (settled and wrong) | 0 | 0 | 0 | 0 | 0 |
+| Citation validity | 100 % | 100 % | 100 % | 100 % | 100 % |
+| Holdings precision (all) | 84 % | 86 % | 95 % | 98 % | 98 % |
+| Holdings recall (all) | 76 % | 79 % | 81 % | 94 % | 98 % |
+| Holdings recall (DE) | 82 % | 83 % | 83 % | 92 % | 100 % |
+| Holdings recall (FR) | 67 % | 71 % | 71 % | 94 % | 94 % |
+| Holdings recall (IT) | 75 % | 83 % | 100 % | 100 % | 100 % |
+| Seconds per case, mean | 124.9 | 110.5 | 148.5 | 174.3 | 246.2 |
+| Seconds per case, max | 148.7 | 226.8 | 238.8 | 316.8 | 449.4 |
 
 **Reading these numbers.**
 - *Tuned on the same cases.* Every error was diagnosed on these 14 cases and fixed in code, so the final
   figures describe a pipeline tuned on the cases it is scored on. A held-out set, ideally real anonymised
   folders, is the next step (section 8). The two properties that do not depend on tuning held in every
   run: zero silent errors and 100 % citation validity.
-- *Errors left.* case12 (the scan) fails in these native runs, because Tesseract was not installed on the
-  host. case14 has one wrong holding, which the checks routed to review without affecting the owner.
-- *Times.* Measured natively on a desktop that was also in use, after hours of continuous load. Generation
-  fell from about 5 to about 4 tokens per second as the CPU heated up, so these times are pessimistic.
+- *Native and container.* The scan (case12) fails natively, because Tesseract is installed only in the image.
+  In the container it passes (OCR confidence 93). case14 has one wrong holding in both runs. The checks routed it
+  to review, and the owner is still correct.
+- *Times.* All times were measured on a desktop after hours of continuous load, so generation fell from about 5
+  to about 4 tokens per second. The container runs inside the WSL2 virtual machine of Docker Desktop on Windows,
+  which made it about 40 % slower than the native build here. A Linux host would avoid that layer.
 - *Replay.* `make replay` recomputes every score from the recorded model outputs in `data/results/`, in
   seconds and without the model.
 
@@ -182,7 +184,9 @@ fully deterministic against hand-written expected answers.
 - **Small set.** 14 fictitious cases, written by the developer. Real share registers are messier
   (multi-page tables, handwritten annotations, several share classes).
 - **CPU speed.** 4 to 5 tokens per second on a 6-core desktop CPU. A case of 1 to 3 short documents took 98
-  to 317 s, and time grows linearly with the number of pages. Each document needs about 6 model calls.
+  to 317 s natively and 74 to 449 s in the container. Time grows linearly with the number of pages, and each
+  document needs about 6 model calls. A GPU or a larger CPU would cut this; long folders are a batch job, not
+  an interactive one.
 - **Duplicate merging.** Two identical lots held by the same person in the same company are merged into
   one, to avoid double counting the same row read by two passes.
 - **Not decided automatically.**
@@ -204,7 +208,11 @@ fully deterministic against hand-written expected answers.
 - **Numbers:** `make eval` reproduces the evaluation, and `make offline-test` proves the air gap.
 - **Determinism:** temperature 0 and the llama.cpp grammar. Small numeric differences across CPUs are
   possible.
-- **Hardware used for the reported numbers:** Intel Core i5-8400 (6 cores, AVX2), 32 GB RAM, no GPU, Windows 11, native llama.cpp b10549 with the container's model file and flags (container timings to be added).
+- **Hardware used for the reported numbers:** Intel Core i5-8400 (6 cores, AVX2), 32 GB RAM, no GPU, Windows 11.
+  - Reference run: Docker Desktop 29.8 on WSL2 (6 CPUs, 16.7 GB), image built from a clean clone, `--network none`.
+  - Native runs: llama.cpp b10549 with the same model file and flags.
+- **Recorded outputs:** `data/results/` holds the reference run. Inside the image, `make replay` reproduces
+  14/14 in seconds without the model. Natively it gives 13/14, because the scan needs OCR.
 
 ## 8. Next steps
 

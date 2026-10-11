@@ -1,6 +1,6 @@
 {
  "case_id": "case07_nobody_de",
- "generated_at": "2026-10-10T16:57:36",
+ "generated_at": "2026-10-11T10:19:03",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "software_kollektiv_ag",
@@ -408,14 +408,14 @@
   }
  },
  "timings": {
-  "ingest_s": 0.0,
+  "ingest_s": 0.1,
   "extract_per_doc_s": {
-   "D1": 127.3,
-   "D2": 64.8
+   "D1": 202.6,
+   "D2": 99.0
   },
-  "total_s": 192.1,
+  "total_s": 301.7,
   "model_calls": 7,
-  "model_seconds": 192.1
+  "model_seconds": 301.6
  },
  "model_responses": [
   {
@@ -567,9 +567,9 @@
      [
       "Software Kollektiv AG",
       "AG",
-      "Zürich",
       null,
-      "shares",
+      null,
+      null,
       "P1.L2"
      ]
     ]

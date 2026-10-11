@@ -1,6 +1,6 @@
 {
  "case_id": "case13_chain_pact_de",
- "generated_at": "2026-10-10T17:09:50",
+ "generated_at": "2026-10-11T10:36:20",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "alpenblick_holding_ag",
@@ -57,7 +57,7 @@
      "ref": "D1.P1.L6"
     },
     "residence": {
-     "value": "Luzern",
+     "value": "Seestrasse 4, 6006 Luzern",
      "ref": "D1.P1.L6"
     }
    },
@@ -97,7 +97,7 @@
      "ref": "D1.P1.L8"
     },
     "residence": {
-     "value": "Kriens",
+     "value": "Dorfweg 9, 6010 Kriens",
      "ref": "D1.P1.L8"
     }
    },
@@ -386,11 +386,11 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 205.8
+   "D1": 210.9
   },
-  "total_s": 205.8,
+  "total_s": 210.9,
   "model_calls": 7,
-  "model_seconds": 205.8
+  "model_seconds": 210.9
  },
  "model_responses": [
   {
@@ -546,14 +546,14 @@
       "Petra Imhof",
       "12.03.1971",
       "Schweizer Bürgerin",
-      "Luzern",
+      "Seestrasse 4, 6006 Luzern",
       "P1.L6"
      ],
      [
       "Lukas Ammann",
       "02.11.1985",
       "Schweizer Bürger",
-      "Kriens",
+      "Dorfweg 9, 6010 Kriens",
       "P1.L8"
      ]
     ]

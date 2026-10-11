@@ -1,6 +1,6 @@
 {
  "case_id": "case06_below_it",
- "generated_at": "2026-10-10T16:54:24",
+ "generated_at": "2026-10-11T10:14:01",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "pasticceria_ceresio_sa",
@@ -312,11 +312,11 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 139.7
+   "D1": 205.0
   },
-  "total_s": 139.7,
+  "total_s": 205.0,
   "model_calls": 4,
-  "model_seconds": 139.7
+  "model_seconds": 205.0
  },
  "model_responses": [
   {

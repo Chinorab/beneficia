@@ -1,6 +1,6 @@
 {
  "case_id": "case01_direct_de",
- "generated_at": "2026-10-10T16:36:34",
+ "generated_at": "2026-10-11T09:48:33",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "rigiblick_immobilien_ag",
@@ -290,13 +290,13 @@
   }
  },
  "timings": {
-  "ingest_s": 0.3,
+  "ingest_s": 0.2,
   "extract_per_doc_s": {
-   "D1": 173.5
+   "D1": 249.3
   },
-  "total_s": 173.8,
+  "total_s": 249.5,
   "model_calls": 5,
-  "model_seconds": 173.5
+  "model_seconds": 249.3
  },
  "model_responses": [
   {

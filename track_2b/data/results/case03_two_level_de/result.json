@@ -1,6 +1,6 @@
 {
  "case_id": "case03_two_level_de",
- "generated_at": "2026-10-10T16:46:05",
+ "generated_at": "2026-10-11T10:02:17",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "engelberg_bergbahnen_ag",
@@ -114,7 +114,6 @@
    "name": "Alpina Familienholding GmbH",
    "refs": [
     "D2.P1.L4",
-    "D3.P1.L3",
     "D3.P1.L2"
    ],
    "fields": {
@@ -424,7 +423,7 @@
      "GmbH",
      "Engelberg",
      650,
-     "quotas"
+     "shares"
     ],
     "reason": "total_not_on_capital_line"
    },
@@ -432,14 +431,14 @@
     "pass": "holdings_prose",
     "ref": "D3.P1.L2",
     "values": [
-     "Alpina Familienholding GmbH",
+     "Stammaktionäre",
      "Alpina Familienholding GmbH",
      200,
      null,
      null,
-     "capital"
+     "both"
     ],
-    "reason": "self_holding"
+    "reason": "holder_or_units_not_on_line"
    }
   ],
   "accepted": {
@@ -454,13 +453,13 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 107.8,
-   "D2": 106.3,
-   "D3": 102.8
+   "D1": 156.7,
+   "D2": 152.6,
+   "D3": 140.1
   },
-  "total_s": 316.8,
+  "total_s": 449.4,
   "model_calls": 15,
-  "model_seconds": 316.8
+  "model_seconds": 449.4
  },
  "model_responses": [
   {
@@ -475,7 +474,7 @@
       "Engelberg Bergbahnen AG",
       "AG",
       "Engelberg",
-      10000,
+      null,
       "shares",
       "P1.L2"
      ],
@@ -576,7 +575,7 @@
      [
       "Titlis Invest AG",
       "AG",
-      null,
+      "null",
       1000,
       "shares",
       "P1.L2"
@@ -586,7 +585,7 @@
       "GmbH",
       "Engelberg",
       650,
-      "quotas",
+      "shares",
       "P1.L4"
      ]
     ]
@@ -678,10 +677,10 @@
      [
       "Alpina Familienholding GmbH",
       "GmbH",
-      "null",
+      null,
       200,
       "quotas",
-      "P1.L3"
+      "P1.L2"
      ]
     ]
    }
@@ -732,12 +731,12 @@
    "output": {
     "h": [
      [
-      "Alpina Familienholding GmbH",
+      "Stammaktionäre",
       "Alpina Familienholding GmbH",
       200,
       null,
       null,
-      "capital",
+      "both",
       "P1.L2"
      ]
     ]

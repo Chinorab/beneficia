@@ -1,6 +1,6 @@
 {
  "case_id": "case11_docx_it",
- "generated_at": "2026-10-10T17:06:24",
+ "generated_at": "2026-10-11T10:31:34",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "costruzioni_ticino_sa",
@@ -249,13 +249,13 @@
   }
  },
  "timings": {
-  "ingest_s": 0.2,
+  "ingest_s": 0.9,
   "extract_per_doc_s": {
-   "D1": 128.5
+   "D1": 185.4
   },
-  "total_s": 128.7,
+  "total_s": 186.3,
   "model_calls": 6,
-  "model_seconds": 128.5
+  "model_seconds": 185.4
  },
  "model_responses": [
   {

@@ -47,39 +47,53 @@ Two properties held in **every** run, including the first:
 
 ## Results
 
-All runs: Intel Core i5-8400 (6 cores, AVX2), 32 GB RAM, no GPU, Windows 11, llama.cpp b10549 native, 6 threads, other applications closed only for the final run. v1 was stopped after 6 complete cases. The scan (case12) needs Tesseract, which is only installed in the Docker image; it is counted as a failure here.
+**Reference run: final code in the Docker image, started with `--network none`** (`make offline-test`).
+It is the last column. The per-case table below is from that run, and its outputs are recorded in
+`data/results/`.
 
-| Metric | v1 | v2 | v3 | final |
-|---|---|---|---|---|
-| Cases | 6 | 14 | 14 | 14 |
-| Cases fully correct (owners and review) | 1 / 6 | 6 / 14 | 7 / 14 | 13 / 14 |
-| Beneficial owners exactly right | 1 / 6 | 6 / 14 | 8 / 14 | 13 / 14 |
-| Expected review reasons all raised | 6 / 6 | 12 / 14 | 11 / 14 | 14 / 14 |
-| Silent errors (settled and wrong) | 0 | 0 | 0 | 0 |
-| Citation validity | 100 % | 100 % | 100 % | 100 % |
-| Holdings precision (all) | 84 % | 86 % | 95 % | 98 % |
-| Holdings recall (all) | 76 % | 79 % | 81 % | 94 % |
-| Holdings recall (DE) | 82 % | 83 % | 83 % | 92 % |
-| Holdings recall (FR) | 67 % | 71 % | 71 % | 94 % |
-| Holdings recall (IT) | 75 % | 83 % | 100 % | 100 % |
-| Seconds per case, mean | 124.9 | 110.5 | 148.5 | 174.3 |
-| Seconds per case, max | 148.7 | 226.8 | 238.8 | 316.8 |
+| Setup | Runtime |
+|---|---|
+| v1 to final native | Intel Core i5-8400 (6 cores, AVX2), 32 GB RAM, no GPU, Windows 11, llama.cpp b10549 native build, 6 threads |
+| Air-gapped container | Same machine. Docker Desktop on WSL2 with 6 CPUs and 16.7 GB RAM, official llama.cpp server image b10548, 6 threads, no network interface |
 
-**Per case (final)**
+- **v1** was stopped after 6 complete cases.
+- **The scan (case12)** needs Tesseract. Tesseract is installed only in the image, so the scan fails in the
+  native runs and passes in the container (OCR confidence 93).
+- **The container is slower** than the native build on this Windows host, because it runs inside the WSL2
+  virtual machine.
+- **All times** come from a desktop that had been running evaluations for hours.
+
+| Metric | v1 | v2 | v3 | final native | final, air-gapped container |
+|---|---|---|---|---|---|
+| Cases | 6 | 14 | 14 | 14 | 14 |
+| Cases fully correct (owners and review) | 1 / 6 | 6 / 14 | 7 / 14 | 13 / 14 | 14 / 14 |
+| Beneficial owners exactly right | 1 / 6 | 6 / 14 | 8 / 14 | 13 / 14 | 14 / 14 |
+| Expected review reasons all raised | 6 / 6 | 12 / 14 | 11 / 14 | 14 / 14 | 14 / 14 |
+| Silent errors (settled and wrong) | 0 | 0 | 0 | 0 | 0 |
+| Citation validity | 100 % | 100 % | 100 % | 100 % | 100 % |
+| Holdings precision (all) | 84 % | 86 % | 95 % | 98 % | 98 % |
+| Holdings recall (all) | 76 % | 79 % | 81 % | 94 % | 98 % |
+| Holdings recall (DE) | 82 % | 83 % | 83 % | 92 % | 100 % |
+| Holdings recall (FR) | 67 % | 71 % | 71 % | 94 % | 94 % |
+| Holdings recall (IT) | 75 % | 83 % | 100 % | 100 % | 100 % |
+| Seconds per case, mean | 124.9 | 110.5 | 148.5 | 174.3 | 246.2 |
+| Seconds per case, max | 148.7 | 226.8 | 238.8 | 316.8 | 449.4 |
+
+**Per case (final, air-gapped container)**
 
 | Case | Lang | Docs | Correct | Holdings found | Seconds | Errors |
 |---|---|---|---|---|---|---|
-| case01_direct_de | DE | 1 | yes | 3/3 (3 predicted) | 173.8 |  |
-| case02_indirect_fr | FR | 2 | yes | 4/4 (4 predicted) | 254.2 |  |
-| case03_two_level_de | DE | 3 | yes | 5/5 (5 predicted) | 316.8 |  |
-| case04_pact_de | DE | 2 | yes | 3/3 (3 predicted) | 204.2 |  |
-| case05_fiduciary_fr | FR | 1 | yes | 2/2 (2 predicted) | 154.8 |  |
-| case06_below_it | IT | 1 | yes | 4/4 (4 predicted) | 139.7 |  |
-| case07_nobody_de | DE | 2 | yes | 5/5 (5 predicted) | 192.1 |  |
-| case08_trap_fr | FR | 2 | yes | 4/4 (4 predicted) | 190.8 |  |
-| case09_inconsistent_de | DE | 1 | yes | 2/2 (2 predicted) | 97.6 |  |
-| case10_foreign_fr | FR | 1 | yes | 2/2 (2 predicted) | 111.3 |  |
-| case11_docx_it | IT | 1 | yes | 2/2 (2 predicted) | 128.7 |  |
-| case12_scan_de | DE | 1 | no | 0/2 (0 predicted) | 0.0 | missing Thomas Wenger; missing Monika Wenger |
-| case13_chain_pact_de | DE | 1 | yes | 4/4 (4 predicted) | 205.8 |  |
-| case14_chain_fiduciary_fr | FR | 1 | yes | 4/5 (5 predicted) | 269.8 |  |
+| case01_direct_de | DE | 1 | yes | 3/3 (3 predicted) | 249.5 |  |
+| case02_indirect_fr | FR | 2 | yes | 4/4 (4 predicted) | 374.4 |  |
+| case03_two_level_de | DE | 3 | yes | 5/5 (5 predicted) | 449.4 |  |
+| case04_pact_de | DE | 2 | yes | 3/3 (3 predicted) | 292.9 |  |
+| case05_fiduciary_fr | FR | 1 | yes | 2/2 (2 predicted) | 206.1 |  |
+| case06_below_it | IT | 1 | yes | 4/4 (4 predicted) | 205.0 |  |
+| case07_nobody_de | DE | 2 | yes | 5/5 (5 predicted) | 301.7 |  |
+| case08_trap_fr | FR | 2 | yes | 4/4 (4 predicted) | 273.8 |  |
+| case09_inconsistent_de | DE | 1 | yes | 2/2 (2 predicted) | 137.9 |  |
+| case10_foreign_fr | FR | 1 | yes | 2/2 (2 predicted) | 153.3 |  |
+| case11_docx_it | IT | 1 | yes | 2/2 (2 predicted) | 186.3 |  |
+| case12_scan_de | DE | 1 | yes | 2/2 (2 predicted) | 74.1 |  |
+| case13_chain_pact_de | DE | 1 | yes | 4/4 (4 predicted) | 210.9 |  |
+| case14_chain_fiduciary_fr | FR | 1 | yes | 4/5 (5 predicted) | 332.1 |  |

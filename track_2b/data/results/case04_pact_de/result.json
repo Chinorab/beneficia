@@ -1,6 +1,6 @@
 {
  "case_id": "case04_pact_de",
- "generated_at": "2026-10-10T16:49:29",
+ "generated_at": "2026-10-11T10:07:10",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "zurichsee_werft_ag",
@@ -334,7 +334,7 @@
   "items": [
    {
     "pass": "holdings",
-    "ref": "D2.P1.L6",
+    "ref": "D2.P1.L3",
     "values": [
      "Andrea Brunner",
      "Zürichsee Werft AG",
@@ -357,12 +357,12 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 116.2,
-   "D2": 88.0
+   "D1": 167.6,
+   "D2": 125.3
   },
-  "total_s": 204.2,
+  "total_s": 292.9,
   "model_calls": 9,
-  "model_seconds": 204.2
+  "model_seconds": 292.9
  },
  "model_responses": [
   {
@@ -482,7 +482,7 @@
      [
       "Zürichsee Werft AG",
       "AG",
-      null,
+      "null",
       null,
       "votes",
       "P1.L3"
@@ -505,7 +505,7 @@
       null,
       null,
       null,
-      "P1.L6"
+      "P1.L3"
      ]
     ]
    }

@@ -1,6 +1,6 @@
 {
  "case_id": "case12_scan_de",
- "generated_at": "2026-10-10T17:06:24",
+ "generated_at": "2026-10-11T10:32:49",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "garage_aaretal_ag",
@@ -9,11 +9,11 @@
    "id": "D1",
    "filename": "aktienbuch_scan.jpg",
    "kind": "image",
-   "language": "unknown",
-   "readable": false,
-   "error": "OCR engine not installed",
-   "pages": 0,
-   "min_ocr_confidence": null
+   "language": "de",
+   "readable": true,
+   "error": null,
+   "pages": 1,
+   "min_ocr_confidence": 93.4
   }
  ],
  "parties": [
@@ -21,7 +21,44 @@
    "id": "garage_aaretal_ag",
    "kind": "legal_entity",
    "name": "Garage Aaretal AG",
-   "refs": [],
+   "refs": [
+    "D1.P1.L2"
+   ],
+   "fields": {
+    "legal_form": {
+     "value": "AG",
+     "ref": "D1.P1.L2"
+    },
+    "seat": {
+     "value": "Thun",
+     "ref": "D1.P1.L2"
+    }
+   },
+   "total_capital": 100,
+   "total_votes": null,
+   "total_ref": "D1.P1.L3",
+   "special_kind": null
+  },
+  {
+   "id": "thomas_wenger",
+   "kind": "natural_person",
+   "name": "Thomas Wenger",
+   "refs": [
+    "D1.P1.L4"
+   ],
+   "fields": {},
+   "total_capital": null,
+   "total_votes": null,
+   "total_ref": null,
+   "special_kind": null
+  },
+  {
+   "id": "monika_wenger",
+   "kind": "natural_person",
+   "name": "Monika Wenger",
+   "refs": [
+    "D1.P1.L5"
+   ],
    "fields": {},
    "total_capital": null,
    "total_votes": null,
@@ -29,55 +66,236 @@
    "special_kind": null
   }
  ],
- "holdings": [],
- "agreements": [],
- "board": [],
- "findings": [],
- "review": [
+ "holdings": [
   {
-   "reason": "no_share_information",
-   "article": "TJPV art. 1",
-   "parties": [
-    "garage_aaretal_ag"
-   ],
-   "refs": [],
-   "detail": {}
+   "holder": "thomas_wenger",
+   "company": "garage_aaretal_ag",
+   "units_held": 70,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L4",
+   "capital_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   },
+   "vote_share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   }
   },
   {
-   "reason": "unreadable_document",
-   "article": "TJPG art. 7",
-   "parties": [],
-   "refs": [],
-   "detail": {
-    "doc": "aktienbuch_scan.jpg",
-    "error": "OCR engine not installed"
+   "holder": "monika_wenger",
+   "company": "garage_aaretal_ag",
+   "units_held": 30,
+   "basis": "both",
+   "held_for": null,
+   "ref": "D1.P1.L5",
+   "capital_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   },
+   "vote_share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
    }
   }
  ],
- "missing": [
+ "agreements": [],
+ "board": [],
+ "findings": [
   {
-   "what": "share_register",
-   "about": "garage_aaretal_ag",
-   "reason": "no_share_information"
+   "person": "thomas_wenger",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "50_75",
+   "chain": [
+    "thomas_wenger",
+    "garage_aaretal_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L4",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 7,
+    "den": 10,
+    "percent": 70.0
+   }
   },
   {
-   "what": "readable_copy",
-   "about": "D1",
-   "reason": "OCR engine not installed"
+   "person": "monika_wenger",
+   "basis": "direct",
+   "control_type": {
+    "alone_or_concert": "alone",
+    "direct_or_indirect": "direct",
+    "holding_or_other": "holding"
+   },
+   "band": "25_50",
+   "chain": [
+    "monika_wenger",
+    "garage_aaretal_ag"
+   ],
+   "chain_info_required": false,
+   "articles": [
+    "TJPG art. 4 para. 1",
+    "TJPV art. 1",
+    "TJPV art. 12",
+    "TJPV art. 13"
+   ],
+   "refs": [
+    "D1.P1.L5",
+    "D1.P1.L3"
+   ],
+   "status": "settled",
+   "share": {
+    "num": 3,
+    "den": 10,
+    "percent": 30.0
+   }
   }
  ],
- "sources": {},
+ "review": [],
+ "missing": [
+  {
+   "what": "identification",
+   "about": "monika_wenger",
+   "reason": "birth_date,nationality,residence"
+  },
+  {
+   "what": "identification",
+   "about": "thomas_wenger",
+   "reason": "birth_date,nationality,residence"
+  }
+ ],
+ "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "aktienbuch_scan.jpg",
+   "page": 1,
+   "line": 2,
+   "text": "Aktienbuch der Garage Aaretal AG, Thun"
+  },
+  "D1.P1.L3": {
+   "doc": "D1",
+   "filename": "aktienbuch_scan.jpg",
+   "page": 1,
+   "line": 3,
+   "text": "Aktienkapital eingeteilt in 100 Namenaktien."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "aktienbuch_scan.jpg",
+   "page": 1,
+   "line": 4,
+   "text": "Thomas Wenger, Thun 70 Aktien"
+  },
+  "D1.P1.L5": {
+   "doc": "D1",
+   "filename": "aktienbuch_scan.jpg",
+   "page": 1,
+   "line": 5,
+   "text": "Monika Wenger, Steffisburg 30 Aktien"
+  }
+ },
  "dropped_items": {
   "count": 0,
   "items": [],
-  "accepted": {}
+  "accepted": {
+   "companies": 1,
+   "capital": 1,
+   "holdings": 2
+  }
  },
  "timings": {
-  "ingest_s": 0.0,
-  "extract_per_doc_s": {},
-  "total_s": 0.0,
-  "model_calls": 0,
-  "model_seconds": 0
+  "ingest_s": 1.3,
+  "extract_per_doc_s": {
+   "D1": 72.8
+  },
+  "total_s": 74.1,
+  "model_calls": 3,
+  "model_seconds": 72.8
  },
- "model_responses": []
+ "model_responses": [
+  {
+   "doc": "D1",
+   "pass": "companies",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "c": [
+     [
+      "Garage Aaretal AG",
+      "AG",
+      "Thun",
+      null,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "capital",
+   "window": 1,
+   "first_line": "P1.L2",
+   "last_line": "P1.L2",
+   "output": {
+    "k": [
+     [
+      "Garage Aaretal AG",
+      100,
+      "shares",
+      "P1.L2"
+     ]
+    ]
+   }
+  },
+  {
+   "doc": "D1",
+   "pass": "holdings",
+   "window": 1,
+   "first_line": "P1.L1",
+   "last_line": "P1.L5",
+   "output": {
+    "h": [
+     [
+      "Thomas Wenger",
+      "Garage Aaretal AG",
+      70,
+      null,
+      null,
+      "capital",
+      "P1.L4"
+     ],
+     [
+      "Monika Wenger",
+      "Garage Aaretal AG",
+      30,
+      null,
+      null,
+      "capital",
+      "P1.L5"
+     ]
+    ]
+   }
+  }
+ ]
 }

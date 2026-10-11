@@ -1,6 +1,6 @@
 {
  "case_id": "case02_indirect_fr",
- "generated_at": "2026-10-10T16:40:48",
+ "generated_at": "2026-10-11T09:54:48",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "boulangerie_des_alpes_sa",
@@ -32,16 +32,16 @@
    "kind": "legal_entity",
    "name": "Boulangerie des Alpes SA",
    "refs": [
-    "D1.P1.L3"
+    "D1.P1.L2"
    ],
    "fields": {
     "legal_form": {
      "value": "SA",
-     "ref": "D1.P1.L3"
+     "ref": "D1.P1.L2"
     },
     "seat": {
      "value": "Bulle",
-     "ref": "D1.P1.L3"
+     "ref": "D1.P1.L2"
     }
    },
    "total_capital": 1000,
@@ -55,16 +55,17 @@
    "name": "Alpes Gourmet Holding SA",
    "refs": [
     "D1.P1.L5",
+    "D1.P1.L4",
     "D2.P1.L2"
    ],
    "fields": {
     "legal_form": {
      "value": "SA",
-     "ref": "D2.P1.L2"
+     "ref": "D1.P1.L5"
     },
     "seat": {
      "value": "Bulle",
-     "ref": "D2.P1.L2"
+     "ref": "D1.P1.L5"
     }
    },
    "total_capital": 500,
@@ -298,12 +299,26 @@
  "review": [],
  "missing": [],
  "sources": {
+  "D1.P1.L2": {
+   "doc": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "page": 1,
+   "line": 2,
+   "text": "Registre des actions de Boulangerie des Alpes SA, Bulle"
+  },
   "D1.P1.L3": {
    "doc": "D1",
    "filename": "01_registre_boulangerie.pdf",
    "page": 1,
    "line": 3,
    "text": "Capital-actions de CHF 100'000, divisé en 1'000 actions nominatives de CHF 100."
+  },
+  "D1.P1.L4": {
+   "doc": "D1",
+   "filename": "01_registre_boulangerie.pdf",
+   "page": 1,
+   "line": 4,
+   "text": "Actionnaire Domicile Nombre d'actions"
   },
   "D1.P1.L5": {
    "doc": "D1",
@@ -349,8 +364,20 @@
   }
  },
  "dropped_items": {
-  "count": 2,
+  "count": 3,
   "items": [
+   {
+    "pass": "companies",
+    "ref": "D1.P1.L5",
+    "values": [
+     "Alpes Gourmet Holding SA",
+     "SA",
+     "Bulle",
+     1630,
+     "shares"
+    ],
+    "reason": "total_not_on_capital_line"
+   },
    {
     "pass": "holdings",
     "ref": "D1.P1.L5",
@@ -370,16 +397,16 @@
     "values": [
      "Alpes Gourmet Holding SA",
      "Alpes Gourmet Holding SA",
-     1630,
+     700,
      null,
      null,
      "both"
     ],
-    "reason": "units_is_postal_code"
+    "reason": "self_holding"
    }
   ],
   "accepted": {
-   "companies": 2,
+   "companies": 3,
    "capital": 2,
    "holdings": 3,
    "holdings_prose": 1,
@@ -389,14 +416,14 @@
   }
  },
  "timings": {
-  "ingest_s": 0.0,
+  "ingest_s": 0.1,
   "extract_per_doc_s": {
-   "D1": 159.9,
-   "D2": 94.3
+   "D1": 229.3,
+   "D2": 145.0
   },
-  "total_s": 254.2,
+  "total_s": 374.4,
   "model_calls": 10,
-  "model_seconds": 254.2
+  "model_seconds": 374.3
  },
  "model_responses": [
   {
@@ -413,7 +440,15 @@
       "Bulle",
       1000,
       "shares",
-      "P1.L3"
+      "P1.L2"
+     ],
+     [
+      "Alpes Gourmet Holding SA",
+      "SA",
+      "Bulle",
+      1630,
+      "shares",
+      "P1.L5"
      ]
     ]
    }
@@ -466,7 +501,7 @@
      [
       "Alpes Gourmet Holding SA",
       "Alpes Gourmet Holding SA",
-      1630,
+      700,
       null,
       null,
       "both",

@@ -1,6 +1,6 @@
 {
  "case_id": "case09_inconsistent_de",
- "generated_at": "2026-10-10T17:02:24",
+ "generated_at": "2026-10-11T10:25:55",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "holzbau_emmental_ag",
@@ -255,11 +255,11 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 97.6
+   "D1": 137.9
   },
-  "total_s": 97.6,
+  "total_s": 137.9,
   "model_calls": 4,
-  "model_seconds": 97.6
+  "model_seconds": 137.9
  },
  "model_responses": [
   {

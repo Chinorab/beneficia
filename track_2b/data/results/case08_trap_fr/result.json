@@ -1,6 +1,6 @@
 {
  "case_id": "case08_trap_fr",
- "generated_at": "2026-10-10T17:00:47",
+ "generated_at": "2026-10-11T10:23:37",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "transports_jura_sa",
@@ -365,12 +365,12 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 115.5,
-   "D2": 75.3
+   "D1": 169.4,
+   "D2": 104.3
   },
-  "total_s": 190.8,
+  "total_s": 273.8,
   "model_calls": 9,
-  "model_seconds": 190.8
+  "model_seconds": 273.7
  },
  "model_responses": [
   {

@@ -1,6 +1,6 @@
 {
  "case_id": "case05_fiduciary_fr",
- "generated_at": "2026-10-10T16:52:04",
+ "generated_at": "2026-10-11T10:10:36",
  "model": "apertus-v1.5-8b-text-q4_k_m",
  "draft_label": "Draft for verification, not filed",
  "target": "cave_du_lavaux_sarl",
@@ -284,21 +284,8 @@
   }
  },
  "dropped_items": {
-  "count": 1,
-  "items": [
-   {
-    "pass": "companies",
-    "ref": "D1.P1.L5",
-    "values": [
-     "Fiduciaire Rhône SA",
-     "SA",
-     "Sion",
-     60,
-     "shares"
-    ],
-    "reason": "total_not_on_capital_line"
-   }
-  ],
+  "count": 0,
+  "items": [],
   "accepted": {
    "companies": 2,
    "capital": 1,
@@ -311,11 +298,11 @@
  "timings": {
   "ingest_s": 0.0,
   "extract_per_doc_s": {
-   "D1": 154.8
+   "D1": 206.1
   },
-  "total_s": 154.8,
+  "total_s": 206.1,
   "model_calls": 6,
-  "model_seconds": 154.8
+  "model_seconds": 206.1
  },
  "model_responses": [
   {
@@ -338,7 +325,7 @@
       "Fiduciaire Rhône SA",
       "SA",
       "Sion",
-      60,
+      null,
       "shares",
       "P1.L5"
      ]
