@@ -47,6 +47,11 @@
     if (t && t.dataset.ref) { e.preventDefault(); show(t.dataset.ref, t); }
   });
 
+  // submit buttons: disabled once the request starts, so a long analysis is not started twice
+  document.querySelectorAll("form").forEach((form) => form.addEventListener("submit", () => {
+    form.querySelectorAll("button[data-once]").forEach((b) => { b.disabled = true; b.setAttribute("aria-busy", "true"); });
+  }));
+
   const poll = document.querySelector("[data-poll]");
   if (poll) {
     const step = poll.querySelector("[data-step]");

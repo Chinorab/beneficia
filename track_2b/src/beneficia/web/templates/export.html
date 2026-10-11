@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ names[result.target].name if result.target in names else case_id }} | {{ s.draft_label }}</title>
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/app.css?v=3">
 </head>
 <body class="print">
 <main class="page">
   <header class="print-head">
     <p class="draft">{{ icon("info") }}{{ s.draft_label }}</p>
     <h1>{{ names[result.target].name if result.target in names else case_id }}</h1>
-    <p class="meta">{{ s.app_tagline }}. {{ s.generated }} {{ result.generated_at.replace("T", " ") }}.</p>
+    <p class="meta">{{ s.app_tagline }}. {{ s.generated }} {{ result.generated_at|when }}.</p>
   </header>
   {% include "_result.html" %}
   <section class="block">

@@ -1,6 +1,6 @@
 {# Result body shared by the case page and the printable export. Needs: result, names, svg, note, s, lang #}
 {% macro refs(list) -%}
-  {%- for r in list %}<button type="button" class="ref" data-ref="{{ r }}" title="{{ result.sources[r].filename if r in result.sources else r }}">{{ r }}</button>{% endfor -%}
+  {%- for r in list %}<button type="button" class="ref" translate="no" data-ref="{{ r }}" title="{{ result.sources[r].filename if r in result.sources else r }}">{{ r }}</button>{% endfor -%}
 {%- endmacro %}
 {% macro field(party, key, label) -%}
   <div class="kv"><dt>{{ label }}</dt><dd>

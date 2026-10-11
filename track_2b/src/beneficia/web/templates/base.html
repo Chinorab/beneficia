@@ -3,11 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121416" media="(prefers-color-scheme: dark)">
 <title>{% block title %}{{ s.app_name }}{% endblock %}</title>
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/app.css?v=3">
 </head>
 <body>
+<a class="skip" href="#main">{{ s.skip }}</a>
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">{{ icon("tree-structure", "brand-mark") }}<span>{{ s.app_name }}</span></a>
@@ -18,7 +21,7 @@
     </nav>
   </div>
 </header>
-<main class="page">
+<main class="page" id="main" tabindex="-1">
 {% block content %}{% endblock %}
 </main>
 <footer class="foot">
@@ -27,6 +30,6 @@
     <a href="/privacy">{{ icon("shield-check") }}{{ s.nav_privacy }}</a>
   </div>
 </footer>
-<script src="/static/app.js" defer></script>
+<script src="/static/app.js?v=3" defer></script>
 </body>
 </html>

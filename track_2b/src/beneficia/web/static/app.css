@@ -54,7 +54,10 @@ body {
   margin: 0; background: var(--bg); color: var(--text);
   font: 400 15px/1.5 "Plex Sans", system-ui, sans-serif; letter-spacing: 0.16px;
 }
-h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: 0; }
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: 0; text-wrap: balance; }
+.skip { position: absolute; left: var(--s4); top: -48px; padding: var(--s2) var(--s3); background: var(--accent); color: var(--accent-ink); z-index: 10; }
+.skip:focus { top: var(--s2); }
+main:focus { outline: none; }
 h1 { font-size: 28px; line-height: 1.25; }
 h2 { font-size: 18px; line-height: 1.35; display: flex; align-items: center; gap: var(--s2); }
 h3 { font-size: 16px; line-height: 1.4; display: flex; align-items: center; gap: var(--s2); }
@@ -84,7 +87,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .foot a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
 
 /* Buttons: square, one line */
-.btn { display: inline-flex; align-items: center; gap: var(--s2); padding: 10px var(--s4); border: 1px solid transparent; border-radius: 0; font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background-color .15s ease, transform .1s ease; }
+.btn { display: inline-flex; align-items: center; gap: var(--s2); padding: 10px var(--s4); border: 1px solid transparent; border-radius: 0; font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; white-space: nowrap; touch-action: manipulation; transition: background-color .15s ease, transform .1s ease; }
+.btn[disabled] { opacity: .6; cursor: progress; }
 .btn:active { transform: translateY(1px); }
 .btn-primary { background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover { filter: brightness(1.08); }
@@ -148,7 +152,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .kvs { margin: var(--s4) 0 0; display: grid; gap: var(--s2); }
 .kv { display: grid; grid-template-columns: 140px 1fr; gap: var(--s3); font-size: 14px; }
 .kv dt { color: var(--muted); }
-.kv dd { margin: 0; }
+.kv dd { margin: 0; overflow-wrap: anywhere; min-width: 0; }
 .note-inline { display: block; color: var(--warn); font-size: 13px; margin-top: var(--s1); }
 .articles { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); }
 .ref { display: inline-block; padding: 1px 6px; margin: 2px 4px 2px 0; border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--accent); cursor: pointer; border-radius: 0; }
@@ -169,6 +173,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .chain .label-bg { fill: var(--surface); stroke: var(--line); }
 .chain .label { font-size: 12px; text-anchor: middle; fill: var(--text-2); font-family: "Plex Mono", monospace; }
 .chain [data-ref] { cursor: pointer; }
+.chain [data-ref]:focus { outline: none; }
+.chain .node:focus-visible rect { stroke: var(--focus); stroke-width: 3; }
+.chain .edge:focus-visible path:first-child { stroke: var(--focus); stroke-width: 3; }
 .chain .node:hover rect, .chain .node.active rect { stroke: var(--accent); stroke-width: 2.5; }
 .chain .edge:hover path:first-child, .chain .edge.active path:first-child { stroke: var(--accent); stroke-width: 2.5; }
 

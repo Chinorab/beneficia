@@ -10,7 +10,7 @@
       <tbody>
       {% for c in cases %}
         <tr>
-          <td class="mono">{{ c.id }}</td>
+          <td class="mono" translate="no">{{ c.id }}</td>
           <td>{{ c.target }}</td>
           <td class="num">{{ c.documents }}</td>
           <td><span class="state state-{{ c.status }}">
@@ -43,7 +43,7 @@
         <input id="files" name="files" type="file" multiple required accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.tif,.tiff" aria-describedby="files-help">
         <p class="help" id="files-help">{{ s.upload_files_help }}</p>
       </div>
-      <button class="btn btn-primary" type="submit">{{ icon("upload-simple") }}{{ s.upload_submit }}</button>
+      <button class="btn btn-primary" type="submit" data-once>{{ icon("upload-simple") }}{{ s.upload_submit }}</button>
     </form>
   </aside>
 </div>

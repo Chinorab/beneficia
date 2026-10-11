@@ -47,6 +47,18 @@ def icon(name: str, cls: str = "icon") -> Markup:
 templates.env.globals.update(icon=icon, article=article)
 
 
+def when(iso: str) -> str:
+    """'2026-10-11T10:48:30' -> '11.10.2026 10:48' (Swiss format, same in German and French)."""
+    try:
+        from datetime import datetime as _dt
+        return _dt.fromisoformat(iso).strftime("%d.%m.%Y %H:%M")
+    except (TypeError, ValueError):
+        return iso
+
+
+templates.env.filters["when"] = when
+
+
 def lang_of(request: Request) -> str:
     q = request.query_params.get("lang")
     if q in LANGS:

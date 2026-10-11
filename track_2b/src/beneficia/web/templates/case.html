@@ -5,8 +5,8 @@
 <div class="case-head">
   <div>
     <h1>{{ meta.target or case_id }}</h1>
-    <p class="meta"><span class="mono">{{ case_id }}</span>
-      {% if result %}<span class="draft">{{ icon("info") }}{{ s.draft_label }}</span><span>{{ s.generated }} {{ result.generated_at.replace("T", " ") }}</span>{% endif %}</p>
+    <p class="meta"><span class="mono" translate="no">{{ case_id }}</span>
+      {% if result %}<span class="draft">{{ icon("info") }}{{ s.draft_label }}</span><span>{{ s.generated }} {{ result.generated_at|when }}</span>{% endif %}</p>
   </div>
   <div class="case-actions">
     {% if result %}
@@ -15,7 +15,7 @@
     {% endif %}
     {% if status != "running" %}
     <form method="post" action="/cases/{{ case_id }}/analyze">
-      <button class="btn btn-primary" type="submit">{% if result %}{{ icon("arrows-clockwise") }}{{ s.reanalyze }}{% else %}{{ icon("play") }}{{ s.analyze }}{% endif %}</button>
+      <button class="btn btn-primary" type="submit" data-once>{% if result %}{{ icon("arrows-clockwise") }}{{ s.reanalyze }}{% else %}{{ icon("play") }}{{ s.analyze }}{% endif %}</button>
     </form>
     {% endif %}
   </div>
@@ -25,7 +25,7 @@
 <section class="block running" data-poll="/cases/{{ case_id }}/status">
   <h2>{{ icon("clock") }}{{ s.running_title }}</h2>
   <p>{{ s.running_text }}</p>
-  <p class="help">{{ s.running_step }}: <span class="mono" data-step>{{ job.step }}</span></p>
+  <p class="help">{{ s.running_step }}: <span class="mono" data-step aria-live="polite" translate="no">{{ job.step }}</span></p>
   <div class="skeleton"><span></span><span></span><span></span></div>
 </section>
 {% elif status == "failed" %}
