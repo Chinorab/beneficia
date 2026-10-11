@@ -15,7 +15,7 @@ run: build
 	docker run --rm --name $(NAME) -p 127.0.0.1:$(PORT):8080 -v "$(DATA):/data" $(IMAGE) web
 
 build:
-	docker build -t $(IMAGE) .
+	docker build --load -t $(IMAGE) .
 
 # Unit and integration tests inside the image (no model needed).
 test: build
