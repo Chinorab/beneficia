@@ -65,7 +65,11 @@ def render(request: Request, name: str, **ctx) -> HTMLResponse:
 
 
 def _result_path(case_id: str) -> Path:
-    return config.OUTPUT_DIR / case_id / "result.json"
+    own = config.OUTPUT_DIR / case_id / "result.json"
+    if own.exists() or (case_id in _jobs):
+        return own
+    recorded = config.RESULTS_DIR / case_id / "result.json"
+    return recorded if recorded.exists() else own
 
 
 def _case_dir(case_id: str) -> Path:

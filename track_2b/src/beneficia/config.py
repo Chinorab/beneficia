@@ -10,3 +10,5 @@ _default_data = Path(__file__).resolve().parents[2] / "data"
 DATA_DIR = Path(os.environ.get("BENEFICIA_DATA_DIR", str(_default_data)))
 CASES_DIR = Path(os.environ.get("BENEFICIA_CASES_DIR", str(DATA_DIR / "cases")))
 OUTPUT_DIR = Path(os.environ.get("BENEFICIA_OUTPUT_DIR", str(DATA_DIR / "output")))
+# recorded reference results, shown in the interface until a case is analysed on this machine
+RESULTS_DIR = Path(os.environ.get("BENEFICIA_RESULTS_DIR", str(CASES_DIR.parent / "results")))
