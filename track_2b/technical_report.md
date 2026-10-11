@@ -5,7 +5,7 @@ Offline drafts of Swiss beneficial owner declarations, built with Apertus.
 - **Track:** Track 2B, Own Project
 - **Event:** Online
 - **Team:** Beneficia (solo)
-- **Demo:** `VIDEO_URL`
+- **Demo:** https://youtu.be/cDgRgegBRk0
 
 ## 1. Summary
 

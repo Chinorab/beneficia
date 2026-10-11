@@ -20,6 +20,7 @@ tested code applies the law. Everything the law does not settle is sent to a hum
 | Interface | German and French |
 | Input | One folder per company: PDF (text or scan), PNG/JPG/TIFF, DOCX, TXT |
 | Output | Draft declaration, ownership diagram with clickable sources, justification note, review list, documents to request, JSON |
+| Demo video | https://youtu.be/cDgRgegBRk0 (1 min 45 s) |
 
 ## How it works
 
