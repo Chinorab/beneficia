@@ -32,7 +32,6 @@ RUN chmod +x /usr/local/bin/beneficia-entrypoint
 
 ENV LLM_BASE_URL=http://127.0.0.1:8081/v1 \
     LLM_NAME=apertus-v1.5-8b-text-q4_k_m \
-    LLM_API_KEY=local-not-used \
     LLAMA_ARG_HOST=127.0.0.1 \
     BENEFICIA_CASES_DIR=/data/cases \
     BENEFICIA_OUTPUT_DIR=/data/output \
