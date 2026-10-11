@@ -25,7 +25,8 @@ fi
 mkdir -p "${BENEFICIA_OUTPUT_DIR}"
 
 THREADS="${LLM_THREADS:-$(nproc)}"
-/app/llama-server -m /models/apertus.gguf --host 127.0.0.1 --port 8081 --alias "$LLM_NAME" \
+# The upstream image keeps llama.cpp's shared libraries next to the binary in /app.
+cd /app && LD_LIBRARY_PATH=/app ./llama-server -m /models/apertus.gguf --host 127.0.0.1 --port 8081 --alias "$LLM_NAME" \
   --jinja --override-kv tokenizer.ggml.eos_token_id=int:68 \
   -c "${LLM_CTX:-4096}" -np 1 -t "$THREADS" > /tmp/llama-server.log 2>&1 &
 
