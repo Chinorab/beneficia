@@ -82,7 +82,8 @@ point to the model server inside the container. `LLM_THREADS` and `LLM_CTX` tune
 
 ## Measured speed
 
-See [docs/evaluation.md](docs/evaluation.md). All figures there were measured on the hardware stated
+See [docs/evaluation.md](docs/evaluation.md). The evaluation set, the model outputs and the metadata are
+published at https://huggingface.co/datasets/Chinorab/beneficia-cases. All figures there were measured on the hardware stated
 next to them. No figure in this repository is estimated.
 
 ## Privacy

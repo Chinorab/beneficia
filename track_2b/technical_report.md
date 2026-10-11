@@ -123,7 +123,7 @@ That configuration was not tested.
   - inconsistent figures and an undocumented foreign holder;
   - a DOCX table, a percentage written in prose, a wrapped sentence and a poor scan.
 - **Licence:** CC BY 4.0, also stated per instance in `expected.json`. Published on Hugging Face from the
-  HackApertus template: `DATASET_URL`.
+  HackApertus template: https://huggingface.co/datasets/Chinorab/beneficia-cases.
 - **Legal sources.** The TJPG final text (Federal Assembly, BBl 2025 2900) and the TJPV (AS 2026 364, DE
   and FR) were read from fedlex.admin.ch and parlament.ch. Each coded rule cites its article in code and
   in the output.
