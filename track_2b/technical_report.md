@@ -203,7 +203,7 @@ fully deterministic against hand-written expected answers.
 
 ## 7. Reproducibility
 
-- **Commit:** `COMMIT_SHA`.
+- **Code:** https://github.com/Chinorab/beneficia, tag `hackapertus-submission` (the commit that was submitted).
 - **Build:** `make run` builds the image (model download about 5 GB) and starts the interface.
 - **Numbers:** `make eval` reproduces the evaluation, and `make offline-test` proves the air gap.
 - **Determinism:** temperature 0 and the llama.cpp grammar. Small numeric differences across CPUs are
